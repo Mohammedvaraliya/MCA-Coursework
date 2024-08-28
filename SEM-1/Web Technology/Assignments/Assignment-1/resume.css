@@ -1,0 +1,89 @@
+p {
+    font: Arial;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.main_div {
+    margin: auto;
+    width: 70%;
+    border: 3px solid #070a03;
+    padding: 10px;
+}
+
+.name {
+    font-size: 40px;
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.personal_data_div {
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+}
+
+.personal_info {
+    display: inline-block;
+    margin-left: 30px;
+    margin-bottom: 50px;
+}
+
+.profile_summary_div,
+.education_div,
+.experience_div,
+.projects_div,
+.skills_div,
+.profiles_div {
+    margin-bottom: 20px;
+}
+
+.summary_label,
+.education_label,
+.experience_label,
+.projects_label,
+.skills_label,
+.profile_label {
+    font-size: 23px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.profile_summary {
+    margin-bottom: 15px;
+}
+
+.education_section,
+.experience_section,
+.project_section {
+    margin-left: 15px;
+    margin-bottom: 10px;
+}
+
+.project_link {
+    color: #070a03;
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 7px;
+}
+
+.skills_ul_tag {
+    display: inline-block;
+    width: 40%;
+}
+
+.skill_li {
+    margin-bottom: 10px;
+}
+
+.profile_link {
+    font-size: 20px;
+    color: #070a03;
+    text-decoration: none;
+    margin-left: 20px;
+    text-align: center;
+}
