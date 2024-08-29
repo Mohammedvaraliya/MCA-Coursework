@@ -8,7 +8,7 @@ XYZ hospital is a multi specialty hospital that includes a number of departments
 
 In hospital, there are many departments like Orthopedic, Pathology, Emergency, Dental, Gynaecology, Anesthetic, I.C.U., Blood Bank, Operation Theater, Laboratory, M.R.I., Neurology, Cardiology, Cancer Department, Corpse, etc. There is an OPD where patients come and get a card (that is, entry card of the patient) for check up from the concerned doctor. After making entry in the card, they go to the concerned doctor's room and the doctor checks up their ailments. According to the ailments, the doctor either prescribes medicine or admits the patient in the concerned department. The patient may choose either private or general room according to his/her need. But before getting admission in the hospital, the patient has to fulfill certain formalities of the hospital like room charges, etc. After the treatment is completed, the doctor discharges the patient. Before discharging from the hospital, the patient again has to complete certain formalities of the hospital like balance charges, test charges operation charges (if any), blood charges, doctor's charges etc. Next we talk about the doctors of the hospital. There are two types of the doctors in the hospital, namely, regular doctors and call on doctors. Regular doctors are those doctors who come to the hospital daily. Calls on doctors are those doctors who are called by the hospital if the concerned doctor is not available.
 
-### Identify the Entities:
+### Entities:
 
 1.  **Hospital**
 2.  **Department**
@@ -20,7 +20,7 @@ In hospital, there are many departments like Orthopedic, Pathology, Emergency, D
 8.  **Treatment**
 9.  **Discharge**
 
-### Identify the Attributes for Each Entity:
+### Attributes for Each Entity:
 
 1.  **Hospital**: Hospital_ID, Name, Address, Contact_Number
 2.  **Department**: Department_ID, Name, Location
@@ -32,7 +32,7 @@ In hospital, there are many departments like Orthopedic, Pathology, Emergency, D
 8.  **Treatment**: Treatment_ID, Treatment_Type, Medicine_Prescribed, Operation_Details, Doctor_ID, Patient_ID
 9.  **Discharge**: Discharge_ID, Date, Final_Bill, Patient_ID, Doctor_ID, Treatment_ID
 
-### Identify the Relationships Between Entities:
+### The Relationships Between Entities:
 
 1. **Hospital to Department:**
 
