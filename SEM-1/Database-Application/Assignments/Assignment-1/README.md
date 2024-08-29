@@ -29,48 +29,93 @@ In hospital, there are many departments like Orthopedic, Pathology, Emergency, D
    8. **Treatment**: Treatment_ID, Treatment_Type, Medicine_Prescribed, Operation_Details, Doctor_ID, Patient_ID
    9. **Discharge**: Discharge_ID, Date, Final_Bill, Patient_ID, Doctor_ID, Treatment_ID
 3. **Identify the Relationships Between Entities:**
-   1. **Hospital to Department:**
-      1. **Relationship Line:** **Hospital** — (1) ⟶ (Many) — **Department**
-      2. **Description:** A hospital contains multiple departments.
-   2. **Department to Doctor:**
-      1. **Relationship Line:** **Department** — (1) ⟶ (Many) — **Doctor**
-      2. **Description:** Each department has multiple doctors.
-   3. **Department to Room:**
-      1. **Relationship Line:** **Department** — (1) ⟶ (Many) — **Room**
-      2. **Description:** Each department has multiple rooms.
-   4. **Patient to Checkup:**
-      1. **Relationship Line:** **Patient** — (1) ⟶ (Many) — **Checkup**
-      2. **Description:** A patient can have multiple checkups.
-   5. **Doctor to Checkup:**
-      1. **Relationship Line:** **Doctor** — (1) ⟶ (Many) — **Checkup**
-      2. **Description:** A doctor can perform multiple checkups.
-   6. **Patient to Admission:**
-      1. **Relationship Line:** **Patient** — (1) ⟶ (Many) — **Admission**
-      2. **Description:** A patient can have multiple admissions.
-   7. **Admission to Room:**
-      1. **Relationship Line:** **Admission** — (Many) ⟶ (1) — **Room**
-      2. **Description:** An admission is linked to one room.
-   8. **Admission to Doctor:**
-      1. **Relationship Line:** **Admission** — (Many) ⟶ (1) — **Doctor**
-      2. **Description:** An admission is associated with one doctor.
-   9. **Patient to Treatment:**
-      1. **Relationship Line:** **Patient** — (1) ⟶ (Many) — **Treatment**
-      2. **Description:** A patient can receive multiple treatments.
-   10. **Doctor to Treatment:**
-       1. **Relationship Line:** **Doctor** — (1) ⟶ (Many) — **Treatment**
-       2. **Description:** A doctor can provide multiple treatments.
-   11. **Patient to Discharge:**
-       1. **Relationship Line:** **Patient** — (1) ⟶ (1) — **Discharge**
-       2. **Description:** A patient has one discharge per admission.
-   12. **Treatment to Discharge:**
-       1. **Relationship Line:** **Treatment** — (Many) ⟶ (1) — **Discharge**
-       2. **Description:** A discharge references one treatment.
-   13. **Hospital to Room:**
-       1. **Relationship Line:** **Hospital** — (1) ⟶ (Many) — **Room**
-       2. **Description:** A hospital can have many rooms, but each room is associated with one hospital.
-   14. **Hospital to Patient:**
-       1. **Relationship Line:** **Hospital** — (1) ⟶ (Many) — **Patient**
-       2. **Description:** A hospital can admit multiple patients.
-   15. **Hospital to Doctor:**
-       1. **Relationship Line:** **Hospital** — (1) ⟶ (Many) — **Doctor**
-       2. **Description:** A hospital employs or contracts with multiple doctors.
+
+### 1. **Hospital to Department:**
+
+- **Entities:** Hospital — Department
+- **Relationship Diamond:** **Contains**
+- **Relationship Line:** **Hospital** — (1) ⟶ (Contains) ⟶ (Many) — **Department**
+
+### 2. **Department to Doctor:**
+
+- **Entities:** Department — Doctor
+- **Relationship Diamond:** **Employs/Assigns**
+- **Relationship Line:** **Department** — (1) ⟶ (Employs/Assigns) ⟶ (Many) — **Doctor**
+
+### 3. **Department to Room:**
+
+- **Entities:** Department — Room
+- **Relationship Diamond:** **Allocates**
+- **Relationship Line:** **Department** — (1) ⟶ (Allocates) ⟶ (Many) — **Room**
+
+### 4. **Patient to Checkup:**
+
+- **Entities:** Patient — Checkup
+- **Relationship Diamond:** **Undergoes**
+- **Relationship Line:** **Patient** — (1) ⟶ (Undergoes) ⟶ (Many) — **Checkup**
+
+### 5. **Doctor to Checkup:**
+
+- **Entities:** Doctor — Checkup
+- **Relationship Diamond:** **Performs**
+- **Relationship Line:** **Doctor** — (1) ⟶ (Performs) ⟶ (Many) — **Checkup**
+
+### 6. **Patient to Admission:**
+
+- **Entities:** Patient — Admission
+- **Relationship Diamond:** **Admits**
+- **Relationship Line:** **Patient** — (1) ⟶ (Admits) ⟶ (Many) — **Admission**
+
+### 7. **Admission to Room:**
+
+- **Entities:** Admission — Room
+- **Relationship Diamond:** **Occupies**
+- **Relationship Line:** **Admission** — (Many) ⟶ (Occupies) ⟶ (1) — **Room**
+
+### 8. **Admission to Doctor:**
+
+- **Entities:** Admission — Doctor
+- **Relationship Diamond:** **Consults**
+- **Relationship Line:** **Admission** — (Many) ⟶ (Consults) ⟶ (1) — **Doctor**
+
+### 9. **Patient to Treatment:**
+
+- **Entities:** Patient — Treatment
+- **Relationship Diamond:** **Receives**
+- **Relationship Line:** **Patient** — (1) ⟶ (Receives) ⟶ (Many) — **Treatment**
+
+### 10. **Doctor to Treatment:**
+
+- **Entities:** Doctor — Treatment
+- **Relationship Diamond:** **Administers**
+- **Relationship Line:** **Doctor** — (1) ⟶ (Administers) ⟶ (Many) — **Treatment**
+
+### 11. **Patient to Discharge:**
+
+- **Entities:** Patient — Discharge
+- **Relationship Diamond:** **Discharged**
+- **Relationship Line:** **Patient** — (1) ⟶ (Discharged) ⟶ (1) — **Discharge**
+
+### 12. **Treatment to Discharge:**
+
+- **Entities:** Treatment — Discharge
+- **Relationship Diamond:** **Finalizes**
+- **Relationship Line:** **Treatment** — (Many) ⟶ (Finalizes) ⟶ (1) — **Discharge**
+
+### 13. **Hospital to Room:**
+
+- **Entities:** Hospital — Room
+- **Relationship Diamond:** **Contains**
+- **Relationship Line:** **Hospital** — (1) ⟶ (Contains) ⟶ (Many) — **Room**
+
+### 14. **Hospital to Patient:**
+
+- **Entities:** Hospital — Patient
+- **Relationship Diamond:** **Treats**
+- **Relationship Line:** **Hospital** — (1) ⟶ (Treats) ⟶ (Many) — **Patient**
+
+### 15. **Hospital to Doctor:**
+
+- **Entities:** Hospital — Doctor
+- **Relationship Diamond:** **Hires/Contracts**
+- **Relationship Line:** **Hospital** — (1) ⟶ (Hires/Contracts) ⟶ (Many) — **Doctor**
