@@ -268,8 +268,10 @@
         <mxCell id="qJj_PIesuQT_neQn-OG3-122" value="&lt;span&gt;Contains&lt;/span&gt;" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;align=center;fontStyle=1" vertex="1" parent="1">
           <mxGeometry x="335" y="650" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="qJj_PIesuQT_neQn-OG3-125" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.019;entryY=0.167;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="qJj_PIesuQT_neQn-OG3-122" target="qJj_PIesuQT_neQn-OG3-30">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="qJj_PIesuQT_neQn-OG3-125" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="qJj_PIesuQT_neQn-OG3-122">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="540" y="680" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
         <mxCell id="qJj_PIesuQT_neQn-OG3-128" value="Employs/&lt;div&gt;Assigns&lt;br&gt;&lt;/div&gt;" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;align=center;fontStyle=1" vertex="1" parent="1">
           <mxGeometry x="520" y="790" width="120" height="60" as="geometry" />
