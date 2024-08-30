@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 2 Form</title>
+
+    <style>
+      div {
+        background-color: antiquewhite;
+        width: 600px;
+        margin: auto;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div
+      style="
+        background-color: bisque;
+        width: 600px;
+        height: auto;
+        margin-bottom: 10px;
+        padding-bottom: 15px;
+        padding-left: 15px;
+      "
+    >
+      <h1 contenteditable="true">Global Attribute</h1>
+      <h2>
+        Style - The ability to add styles to elements of a web page, such as
+        their color, font, and size
+      </h2>
+      <h2>Id - The id attribute specifies a unique id for an HTML element</h2>
+      <h2>Class - It specifies one or more class names for an element</h2>
+      <h2 draggable="true">
+        Draggable Content - It specifies whether an element is draggable or not
+      </h2>
+      <h2 hidden>
+        Hidden - Used to indicate that the content of an element should not be
+        presented to the user.
+      </h2>
+
+      <img src="assets/KJ-SIM.gif" alt="kjsim" hidden accesskey="a" />
+      <h2 title="this acts as a tooltip text" accesskey="t">Title</h2>
+
+      <h2>
+        Accesskey - It specifies a shortcut key to activate/focus an element
+      </h2>
+      <h2>Spellcheck - Makes the content eligible for spellcheck</h2>
+      <h2>Inputmode - Changes the keyboard as per input type like numeric</h2>
+      <h2>Inert - It will disable the default functionality of the tag</h2>
+
+      <a href="https://www.google.com" accesskey="g">Google</a>
+      <input type="email" accesskey="e" placeholder="abc@gmail.com" inert />
+      <br />
+      <pre contenteditable="true" spellcheck="true">
+                    Hello, my name is Mohammed Varaliya
+                </pre
+      >
+
+      <input type="text" inputmode="email" inert />
+      <a href="https://www.google.com" accesskey="g" inert>Google</a>
+
+      <h1 popover id="wish">Hello MCA (2024-26)</h1>
+      <button popovertarget="wish">Click Me</button>
+    </div>
+
+    <div>
+      <form action="">
+        <fieldset style="border: 1px solid brown">
+          <legend>* Registration Form *</legend>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Enter your name"
+          /><br /><br />
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Enter your email address"
+          /><br /><br />
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Enter your password"
+          /><br /><br />
+
+          <label for="dob">DOB: </label>
+          <input type="date" name="dob" id="dob" /><br /><br />
+
+          <input
+            type="file"
+            name="profile-pict"
+            id="profile-pict"
+          /><br /><br />
+
+          <label for="favcolor">Select your favorite color:</label>
+          <input
+            type="color"
+            id="favcolor"
+            name="favcolor"
+            value="#000000"
+          /><br /><br />
+
+          <label for="profile-pict">Profile Picture: </label>
+          <input
+            type="image"
+            src="assets/simsr-college-logo.png"
+            alt="profile-pict"
+          /><br /><br />
+
+          <label for="mca">MCA: </label>
+          <input type="checkbox" name="course" id="mca" value="mca" />
+
+          <label for="mba">MBA: </label>
+          <input type="checkbox" name="course" id="mba" value="mba" />
+
+          <label for="mim">MIM: </label>
+          <input type="checkbox" name="course" id="mim" value="mim" />
+          <br /><br />
+
+          <label for="gender-male">Male: </label>
+          <input type="radio" name="gender" id="gender-male" value="male" />
+
+          <label for="gender-female">Female: </label>
+          <input type="radio" name="gender" id="gender-female" value="female" />
+          <br /><br />
+
+          <label for="db">Debugging Scale: </label>
+          <input type="range" name="db" id="db" min="0" max="5" value="2" />
+          <br /><br />
+
+          <hr />
+
+          <button type="submit">Submit</button>
+          <button type="button">Button</button>
+          <button type="reset">Reset</button>
+        </fieldset>
+      </form>
+    </div>
+  </body>
+</html>
