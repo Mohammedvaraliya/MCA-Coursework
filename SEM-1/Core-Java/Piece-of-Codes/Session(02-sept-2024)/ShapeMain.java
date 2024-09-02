@@ -4,7 +4,7 @@ abstract class Shape {
     public abstract double volume();
 }
 
-// Derived class
+// Derived class for Sphere
 class Sphere extends Shape {
 	private double radius;
 	
@@ -23,7 +23,7 @@ class Sphere extends Shape {
 	}
 }
 
-// Derived class
+// Derived class for Cube
 class Cube extends Shape {
 	private double side;
 	
@@ -42,7 +42,7 @@ class Cube extends Shape {
 	}
 }
 
-// Derived class
+// Derived class for Rectangular Prism (Box)
 class RectangularPrism extends Shape {
 	private double length;
 	private double width;
@@ -65,7 +65,7 @@ class RectangularPrism extends Shape {
 	}
 }
 
-// Derived class
+// Derived class for Right Circular Cylinder
 class RightCircularCylinder extends Shape {
 	private double radius;
 	private double height;
