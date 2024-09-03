@@ -94,7 +94,7 @@ public class ShapeMainWithScanner {
 		
 		// Sphere With User input
 		Scanner scan = new Scanner(System.in);
-		System.out.println("\nEnter the radius value for Sphere:");
+		System.out.println("Enter the radius value for Sphere:");
 		double radius1 = scan.nextDouble();
 		Shape sphere = new Sphere(radius1);
 		System.out.println("Sphere:");
@@ -127,7 +127,7 @@ public class ShapeMainWithScanner {
 		System.out.println("\nEnter the height value for Right Circular Cylinder:");
 		double hieght2 = scan.nextDouble();
 		Shape cylinder = new RightCircularCylinder(radius2, hieght2);
-		System.out.println("\nRight Circular Cylinder with User Input:");
+		System.out.println("\nRight Circular Cylinder:");
 		System.out.println("Surface Area: " + cylinder.surfaceArea());
 		System.out.println("Volume: " + cylinder.volume());
 	}

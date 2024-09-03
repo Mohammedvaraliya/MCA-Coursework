@@ -61,7 +61,7 @@ public class InterestMain {
         InterestCalculator compoundInterestCalculator = new CompoundInterestCalculator(principal, compoundInterestRate, time, numberOfTimesCompounded);
         double compoundInterest = compoundInterestCalculator.calculateInterest();
         
-        // Output the results
+        // Print the results
         System.out.println("Deposit Amount: Rs " + principal);
         System.out.println("Time Period: " + time + " years");
         
