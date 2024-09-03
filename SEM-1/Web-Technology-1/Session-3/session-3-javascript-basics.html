@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Session 3 JavaScript Basics</title>
+    <script src="session-3-external-js-1.js" ></script>
+    <script src="session-3-external-js-2.js" ></script>
+    
+</head>
+<body>
+    <!-- Internal Javascript -->
+    <script>
+        document.write("Hello from Javascript");
+    
+        function showAlert() {
+            alert("showAlert() called...!");
+        }
+    </script>
+    <br>
+    <br>
+
+    <!-- Inline Javascript -->
+    <button onclick="document.getElementById('output').innerHTML=Date()">Click Me</button>
+    <br>
+    <p id="output">Date will appear here...</p>
+    <br>
+    <br>
+
+    <!-- Trigger -->
+    <button onclick="window.print()">Print this entire page</button>
+    <button ondblclick="showAlert()">Generate Alert</button>
+    <br>
+    <br>
+
+    <!-- Use External Javascript Functions -->
+    <button onclick="showDateAlert()">Show Date and Time from External js file</button>
+    <button onclick="sayHi()">Say Hi from External js file</button>
+</body>
+</html>

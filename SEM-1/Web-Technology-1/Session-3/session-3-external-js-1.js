@@ -1,0 +1,3 @@
+function showDateAlert() {
+    alert(Date());
+}
