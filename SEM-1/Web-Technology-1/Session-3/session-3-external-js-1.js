@@ -1,3 +1,3 @@
 function showDateAlert() {
-    alert(Date());
+  alert(Date());
 }
