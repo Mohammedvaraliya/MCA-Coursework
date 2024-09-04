@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 4 Javascript Popup Functions</title>
+  </head>
+
+  <body onload="" onbeforeprint="beforePrint()" onresize="resizeAlert()">
+    <script>
+      function onLoad() {
+        alert("Onload Triggered....");
+      }
+
+      function beforePrint() {
+        window.confirm("Are you sure, you want to print?");
+      }
+
+      function resizeAlert() {
+        alert("Window recized!!!");
+      }
+
+      function keyUp() {
+        document.getElementById("ip1").style.color = "green";
+      }
+
+      function keyDown() {
+        document.getElementById("ip1").style.color = "blue";
+      }
+
+      function keyPressed() {
+        document.getElementById("ip1").style.color = "chocolate";
+      }
+
+      function mouseEnter() {
+        document.getElementById("msg").innerHTML = "Mouse entered the div area";
+      }
+
+      function mouseLeave() {
+        document.getElementById("msg").innerHTML = "Mouse left the div area";
+      }
+
+      function mouseOver() {
+        document.getElementById("door").src = "assets/door-open.jpg";
+      }
+
+      function mouseOut() {
+        document.getElementById("door").src = "assets/door-closed.jpg";
+      }
+    </script>
+
+    <input
+      type="text"
+      name="ip1"
+      id="ip1"
+      onkeyup="keyUp()"
+      onkeydown="keyDown()"
+      onkeypress="keyPressed()"
+    />
+
+    <h1>
+      To Explore mouse events, take your mouse to below div and you'll get
+      surprised with text
+    </h1>
+    <div
+      style="background-color: antiquewhite; height: 300px; width: 300px"
+      onmouseenter="mouseEnter()"
+      onmouseleave="mouseLeave()"
+    >
+      <p id="msg"></p>
+      <img
+        src=""
+        alt="Door"
+        id="door"
+        height="200px"
+        width="300px"
+        style="border: 1px solid grey"
+      />
+      <br />
+      <br />
+    </div>
+
+    <button id="btn" onmouseover="mouseOver()" onmouseout="mouseOut()">
+      Open/Close Door
+    </button>
+  </body>
+</html>

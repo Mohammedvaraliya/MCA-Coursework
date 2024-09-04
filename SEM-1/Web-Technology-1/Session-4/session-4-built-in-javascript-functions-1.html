@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 4 Javascript Functions</title>
+  </head>
+  <body>
+    <script>
+      function openConfirm() {
+        window.confirm("Are you sure you want to exit.");
+      }
+
+      function openOnTimeout() {
+        window.setTimeout(() => {
+          window.open("http://www.google.com");
+        }, 5000);
+      }
+
+      function openAlertOnTimeout() {
+        window.setTimeout(() => {
+          window.alert("Hi");
+        }, 5000);
+      }
+
+      function openAlertAfterFiveSeconds() {
+        window.alert("Hi");
+      }
+    </script>
+
+    <!-- To Open Confirm Prompt -->
+    <button onclick="openConfirm()">Exit-Confirm</button>
+    <br />
+    <br />
+
+    <!-- To Open Google after 5 Seconds -->
+    <button onclick="openOnTimeout()">Open Google after 5 Second</button>
+    <br />
+    <br />
+
+    <!-- To Open Alert Prompt after 5 Seconds -->
+    <button onclick="openAlertOnTimeout()">
+      Open Alert Prompt after 5 Second
+    </button>
+    <br />
+    <br />
+
+    <!-- To Open Basic Alert Prompt after 5 Seconds without Using setTimeOut -->
+    <button onclick="openAlertAfterFiveSeconds">
+      Open Alert Prompt after 5 Second
+    </button>
+  </body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 4 JavaScript Mouse Events</title>
+    <style>
+      .center {
+        width: 50%;
+        border: 3px solid black;
+        padding: 10px;
+        text-align: center;
+      }
+
+      .inner-div {
+        display: inline-block;
+        margin: 10px;
+        height: 300px;
+        width: 300px;
+        background-color: cadetblue;
+        vertical-align: top;
+      }
+
+      #cords {
+        font-size: 24px;
+        display: block;
+        margin: 10px 0;
+      }
+    </style>
+    <script>
+      function mouseMove(event) {
+        let x = event.clientX;
+        let y = event.clientY;
+        let z = "Coordinates (x: " + x + ", y: " + y + ")";
+        document.getElementById("cords").innerHTML = z;
+        document.getElementById("cords").style.fontSize = "24px";
+      }
+
+      function mouseWheel(event) {
+        let z = "Wheel event detected";
+        document.getElementById("cords").innerHTML = z;
+        document.getElementById("cords").style.fontSize = "24px";
+      }
+
+      function mouseOver() {
+        let debugScale = "My debugging scale is 2.5 out of 5";
+        document.getElementById("cords").innerHTML = debugScale;
+        document.getElementById("cords").style.fontSize = "24px";
+      }
+    </script>
+  </head>
+
+  <body>
+    <div class="center">
+      <div
+        class="inner-div"
+        onmousemove="mouseMove(event)"
+        onmousewheel="mouseWheel(event)"
+      ></div>
+      <div class="inner-div" onmouseover="mouseOver()"></div>
+    </div>
+    <br />
+    <p id="cords"></p>
+  </body>
+</html>
