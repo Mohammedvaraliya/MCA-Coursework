@@ -24,20 +24,30 @@
       const user_search = document.getElementById("user-search");
       const search_result = document.getElementById("search-result");
 
-      function handleCopy() {
-        const copied_text = input_text.value;
+      // Function to get the selected text in the input field
+      function getSelectedText() {
+        return input_text.value.substring(
+          input_text.selectionStart,
+          input_text.selectionEnd
+        );
+      }
+
+      function handleCopy(event) {
+        const copied_text = getSelectedText();
         paste_text.innerHTML =
           "Copy (ctrl + c) has been triggered: " + copied_text;
       }
 
-      function handleCut() {
-        const cut_text = input_text.value;
+      function handleCut(event) {
+        const cut_text = getSelectedText();
         paste_text.innerHTML = "Cut (ctrl + x) has been triggered: " + cut_text;
       }
 
-      function handleSelect() {
-        const selected_text = input_text.value;
-        paste_text.innerHTML = "Text has been selected: " + selected_text;
+      function handleSelect(event) {
+        const selected_text = getSelectedText();
+        if (selected_text) {
+          paste_text.innerHTML = "Text has been selected: " + selected_text;
+        }
       }
 
       function handleUserInput() {
@@ -54,7 +64,9 @@
       input_text.addEventListener("cut", handleCut);
       input_text.addEventListener("select", handleSelect);
       input_text.addEventListener("input", handleUserInput);
-      input_text.addEventListener("search", handleUserSearch);
+
+      //   user_search.addEventListener("input", handleUserSearch);
+      user_search.addEventListener("search", handleUserSearch);
     </script>
   </body>
 </html>
