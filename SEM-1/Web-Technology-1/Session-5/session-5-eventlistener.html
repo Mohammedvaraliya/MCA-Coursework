@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Session 5 Event Listeners</title>
+</head>
+
+<body>
+  <button id="trigger">Trigger</button>
+  <br />
+  <br />
+
+  <script>
+    // Adding event listener property
+
+    // Single Clicked
+    document
+      .getElementById("trigger")
+      .addEventListener("click", btnSingleClicked);
+
+    // Double Clicked
+    document
+      .getElementById("trigger")
+      .addEventListener("dblclick", btnDblClicked);
+
+    // Scroll event
+    document
+      .getElementById("trigger")
+      .addEventListener("mousewheel", btnScrolled);
+
+    function btnSingleClicked() {
+      alert("You just single clicked the button");
+    }
+
+    function btnDblClicked() {
+      alert("You just double clicked the button");
+    }
+
+    function btnScrolled() {
+      alert("You just scrolled the button");
+    }
+  </script>
+</body>
+
+</html>

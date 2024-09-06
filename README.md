@@ -6,7 +6,7 @@
 
 ---
 
-## Notion Notes for the different courses in MCA
+## Notion Notes
 
 [Notion - Mohammed-Varaliya.notion.site/MCA-Course](https://mohammed-varaliya.notion.site/MCA-Course-db935195d4ba4f739c1a27de922e22c7)
 

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 5 Dropdown</title>
+  </head>
+
+  <body>
+    <select name="country" id="countries">
+      <option value="">Select</option>
+      <option value="India">India</option>
+      <option value="Australia">Australia</option>
+      <option value="West Indies">West Indies</option>
+      <option value="United State of America">United State of America</option>
+    </select>
+    <br />
+
+    <p id="user-selected"></p>
+
+    <script>
+      const countries = document.getElementById("countries");
+      const user_selected = document.getElementById("user-selected");
+
+      function handleUserSelectedCountry() {
+        const user_selected_country = countries.value;
+        if (user_selected_country === "") {
+          user_selected.innerHTML = "";
+        } else {
+          user_selected.innerHTML =
+            "User has selected: " + user_selected_country;
+        }
+      }
+
+      countries.addEventListener("change", handleUserSelectedCountry);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 5 Text Functions</title>
+  </head>
+
+  <body>
+    <input type="text" name="text" id="some-text" />
+    <p id="paste-text">Nothing has been triggered yet!</p>
+    <p id="user-input">Nothing has been entered yet!</p>
+    <br />
+    <br />
+
+    <label for="search">Search here: </label>
+    <input id="user-search" type="search" />
+    <p id="search-result">Nothing has been searched yet!</p>
+
+    <script>
+      const input_text = document.getElementById("some-text");
+      const paste_text = document.getElementById("paste-text");
+      const user_input = document.getElementById("user-input");
+      const user_search = document.getElementById("user-search");
+      const search_result = document.getElementById("search-result");
+
+      function handleCopy() {
+        const copied_text = input_text.value;
+        paste_text.innerHTML =
+          "Copy (ctrl + c) has been triggered: " + copied_text;
+      }
+
+      function handleCut() {
+        const cut_text = input_text.value;
+        paste_text.innerHTML = "Cut (ctrl + x) has been triggered: " + cut_text;
+      }
+
+      function handleSelect() {
+        const selected_text = input_text.value;
+        paste_text.innerHTML = "Text has been selected: " + selected_text;
+      }
+
+      function handleUserInput() {
+        const user_text = input_text.value;
+        user_input.innerHTML = "User Entered: " + user_text;
+      }
+
+      function handleUserSearch() {
+        const searched_text = user_search.value;
+        search_result.innerHTML = "User is searching for: " + searched_text;
+      }
+
+      input_text.addEventListener("copy", handleCopy);
+      input_text.addEventListener("cut", handleCut);
+      input_text.addEventListener("select", handleSelect);
+      input_text.addEventListener("input", handleUserInput);
+      input_text.addEventListener("search", handleUserSearch);
+    </script>
+  </body>
+</html>
