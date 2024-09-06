@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assignment - 2 (Event Handling)</title>
+
+    <style>
+      #highlight-div {
+        width: 200px;
+        height: 200px;
+        background-color: lightblue;
+        border: 2px solid #000;
+        margin-bottom: 10px;
+      }
+
+      #random-number {
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+
+      #remove-event-btn {
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="highlight-div"></div>
+    <div id="random-number"></div>
+    <button id="remove-event-btn">Remove Event</button>
+
+    <script>
+      const highlightDiv = document.getElementById("highlight-div");
+      const randomNumberDiv = document.getElementById("random-number");
+      const removeEventBtn = document.getElementById("remove-event-btn");
+
+      function handleMouseOver() {
+        const randomNumber = Math.floor(Math.random() * 1000);
+        randomNumberDiv.innerHTML = randomNumber;
+      }
+
+      function removeMouseOverEvent() {
+        highlightDiv.removeEventListener("mouseover", handleMouseOver);
+        randomNumberDiv.innerHTML = "Event has been removed";
+      }
+
+      highlightDiv.addEventListener("mouseover", handleMouseOver);
+
+      removeEventBtn.addEventListener("click", removeMouseOverEvent);
+    </script>
+  </body>
+</html>
