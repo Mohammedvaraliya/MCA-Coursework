@@ -7,11 +7,11 @@
 2. To create the class file of a program
 
    ```
-   javac -d "Class-Files" .\FileName.java
+   javac -d "Class-Files" FileName.java
    ```
 
 3. To run the Java File
 
    ```
-   java -cp Class-Files .\FileName.java
+   java -cp Class-Files FileName
    ```
