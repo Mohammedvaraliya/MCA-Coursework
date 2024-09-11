@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 6 Contextmenu</title>
+    <style>
+      #context-off {
+        height: 200px;
+        border: 1px solid black;
+        background-color: bisque;
+      }
+
+      #context-on {
+        height: 200px;
+        border: 1px solid black;
+        background-color: cadetblue;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="context-off">
+      <pre>Context Menu Disabled</pre>
+    </div>
+    <br />
+
+    <div id="context-on">
+      <pre>Context Menu Enabled</pre>
+    </div>
+
+    <script>
+      const contextOffDiv = document.getElementById("context-off");
+      const contextOnDiv = document.getElementById("context-on");
+
+      contextOffDiv.addEventListener("contextmenu", function (event) {
+        event.preventDefault();
+        alert("Context menu is disabled on this div");
+      });
+
+      // The contextmenu's default behavious is, that it will show contextmenu on right click, so that's why no need of creating explicit function to enable it.
+    </script>
+  </body>
+</html>

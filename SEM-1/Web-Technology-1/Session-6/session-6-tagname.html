@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 6 Tag Name</title>
+  </head>
+
+  <body>
+    <!-- Have to return the tag name whenever user clicked on any object in the body, use onclick method to implement this. -->
+
+    <h1>Click to know which tag is this!</h1>
+    <h2>Click to know which tag is this!</h2>
+    <h3>Click to know which tag is this!</h3>
+    <p>Click to know which tag is this!</p>
+    <div>Click to know which tag is this!</div>
+    <br />
+    <button>Click to know which tag is this!</button>
+    <br />
+    <br />
+    <a href="#">Click to know which tag is this!</a>
+    <br />
+    <br />
+    <small>Click to know which tag is this!</small>
+    <br />
+    <br />
+    <strong>Click to know which tag is this!</strong>
+
+    <script>
+      function handleClick(event) {
+        const tagName = event.target.tagName;
+        alert(`Clicked element's tag name: ${tagName}`);
+      }
+
+      document.body.addEventListener("click", handleClick);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 6 Propagation</title>
+    <style>
+      #parent-div {
+        height: 200px;
+        border: 1px solid black;
+        background-color: bisque;
+      }
+
+      #child-div {
+        height: 130px;
+        width: 130px;
+        border: 1px solid black;
+        background-color: cadetblue;
+        margin: auto;
+      }
+
+      #grand-child-div {
+        height: 50px;
+        width: 50px;
+        border: 1px solid black;
+        background-color: chocolate;
+        margin: auto;
+        font-size: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="parent-div">
+      <p>Parent Div</p>
+      <div id="child-div">
+        <p>Child Div</p>
+        <div id="grand-child-div">
+          <p>Grand child Div</p>
+        </div>
+      </div>
+    </div>
+    <br />
+
+    <label for="sp">stopPropagation</label><input type="checkbox" id="sp" />
+
+    <script>
+      const parentDiv = document.getElementById("parent-div");
+      const childDiv = document.getElementById("child-div");
+      const grandChildDiv = document.getElementById("grand-child-div");
+
+      parentDiv.addEventListener("click", function () {
+        alert("Parent Div");
+      });
+
+      childDiv.addEventListener("click", function (event) {
+        alert("Child Div");
+        if (document.getElementById("sp").checked) {
+          event.stopPropagation();
+        }
+      });
+
+      grandChildDiv.addEventListener("click", function (event) {
+        alert("Grand Child Div");
+        if (document.getElementById("sp").checked) {
+          event.stopPropagation();
+        }
+      });
+    </script>
+  </body>
+</html>
