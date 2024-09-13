@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 7 Click Event with Alt and Ctrl Key</title>
+  </head>
+
+  <body>
+    <div id="result"></div>
+    <h1 id="h1">Heading 1</h1>
+    <h2 id="h2-1">Heading 2</h2>
+    <h3 id="h3">Heading 3</h3>
+    <h2 id="h2-2">Heading 2 - Another</h2>
+    <h2 id="h2-3">Heading 2 - Third</h2>
+
+    <script>
+      document.querySelector("#h1").addEventListener("click", (event) => {
+        if (event.altKey) {
+          document.getElementById("result").innerHTML =
+            "You've clicked Alt key on " + event.target.tagName;
+          document.getElementById("h1").style.backgroundColor = "blue";
+          document.getElementById("h1").style.color = "white";
+          document.getElementById("result").style.color = "blue";
+        } else if (event.ctrlKey) {
+          document.getElementById("result").innerHTML =
+            "You've clicked Ctrl key on " + event.target.tagName;
+          document.getElementById("h1").style.backgroundColor = "green";
+          document.getElementById("h1").style.color = "white";
+          document.getElementById("result").style.color = "green";
+        }
+      });
+
+      // Adding unique listeners for each h2 tag
+      document.querySelector("#h2-1").addEventListener("click", (event) => {
+        if (event.altKey) {
+          document.getElementById("result").innerHTML =
+            "You've clicked Alt key on " + event.target.tagName;
+          document.getElementById("h2-1").style.backgroundColor = "blue";
+          document.getElementById("h2-1").style.color = "white";
+          document.getElementById("result").style.color = "blue";
+        } else if (event.ctrlKey) {
+          document.getElementById("result").innerHTML =
+            "You've clicked Ctrl key on " + event.target.tagName;
+          document.getElementById("h2-1").style.backgroundColor = "green";
+          document.getElementById("h2-1").style.color = "white";
+          document.getElementById("result").style.color = "green";
+        }
+      });
+
+      document.querySelector("#h3").addEventListener("click", (event) => {
+        if (event.altKey) {
+          document.getElementById("result").innerHTML =
+            "You've clicked Alt key on " + event.target.tagName;
+          document.getElementById("h3").style.backgroundColor = "blue";
+          document.getElementById("h3").style.color = "white";
+          document.getElementById("result").style.color = "blue";
+        }
+      });
+
+      // // Global click event
+      // document.addEventListener("click", (event) => {
+      //   if (event.altKey) {
+      //     document.getElementById("result").innerHTML =
+      //       "You've clicked Alt key.";
+      //     document.getElementById("result").style.backgroundColor = "blue";
+      //     document.getElementById("result").style.color = "white";
+      //   } else if (event.ctrlKey) {
+      //     document.getElementById("result").innerHTML =
+      //       "You've clicked Ctrl key.";
+      //     document.getElementById("result").style.backgroundColor = "green";
+      //     document.getElementById("result").style.color = "white";
+      //   } else {
+      //     document.getElementById("result").innerHTML = "User just clicked.";
+      //     document.getElementById("result").style.backgroundColor = "red";
+      //     document.getElementById("result").style.color = "white";
+      //   }
+      // });
+    </script>
+  </body>
+</html>

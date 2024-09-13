@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 7 Event Propagation and Modifier States</title>
+  </head>
+  <body>
+    <br /><br />
+    <button id="both"><h1>Trigger Both</h1></button>
+    <br /><br />
+    <button id="wm"><h1>Trigger 1</h1></button>
+    <br /><br />
+    <button id="test"><h1>Trigger 2</h1></button>
+    <br /><br />
+    <button id="c1"><h1>Check CapsLock and NumLock</h1></button>
+
+    <p id="output" style="color: rgb(0, 159, 61)">Hello</p>
+    <p id="output1"></p>
+
+    <script>
+      // Checking CapsLock and NumLock state
+      document.getElementById("c1").addEventListener("click", (e) => {
+        document.getElementById("output").innerHTML =
+          "CapsLock: " +
+          e.getModifierState("CapsLock") +
+          " | NumLock: " +
+          e.getModifierState("NumLock");
+      });
+
+      // Multiple event listeners for 'both' button
+      document.getElementById("both").addEventListener("click", (e) => {
+        alert("Hey Mohammed");
+      });
+      document.getElementById("both").addEventListener("click", (e) => {
+        alert("Hey John Doe");
+      });
+
+      // Preventing second event using stopImmediatePropagation for 'wm' button
+      document.getElementById("wm").addEventListener("click", (e) => {
+        alert("Hey Mohammed");
+        e.stopImmediatePropagation(); // Prevent next listener from firing
+      });
+
+      document.getElementById("wm").addEventListener("click", (e) => {
+        alert("Hey John Doe");
+      });
+
+      // Preventing second event using stopImmediatePropagation for 'test' button
+      document.getElementById("test").addEventListener("click", (e) => {
+        alert("Hey John Doe");
+        e.stopImmediatePropagation(); // Prevent next listener from firing
+      });
+
+      document.getElementById("test").addEventListener("click", (e) => {
+        alert("Hey Mohammed");
+      });
+    </script>
+  </body>
+</html>

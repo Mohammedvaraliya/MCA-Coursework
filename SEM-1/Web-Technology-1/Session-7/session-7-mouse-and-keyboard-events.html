@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 7 Mouse and Keyboard Events</title>
+    <style>
+      div {
+        background-color: #0096ff;
+        margin: auto;
+        height: 300px;
+        width: 300px;
+        margin-top: 30px;
+      }
+
+      #output,
+      #output1,
+      #output2 {
+        padding: 10px;
+        margin-top: 10px;
+      }
+
+      #output {
+        background-color: #eb7a7a;
+      }
+
+      #output1 {
+        background-color: #dcb05f;
+      }
+
+      #output2 {
+        background-color: #f5e255;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Checking Mouse-Click Events Using MouseDown</h1>
+    <h2>The Mouse Button Codes</h2>
+    <pre>
+    If using e.buttons property:
+        - 1 = Left Click
+        - 2 = Right Click
+        - 4 = Middle Click
+    
+    If using e.button property:
+        - 0 = Left Click
+        - 1 = Right Click
+        - 2 = Middle Click
+    </pre>
+
+    <div id="mydiv">
+      <input type="text" id="ip" placeholder="Type here..." />
+      <p id="output"></p>
+      <p id="output1"></p>
+      <p id="output2"></p>
+    </div>
+
+    <script>
+      const output = document.getElementById("output");
+      const output1 = document.getElementById("output1");
+      const output2 = document.getElementById("output2");
+      const inputField = document.getElementById("ip");
+      const myDiv = document.getElementById("mydiv");
+
+      // Mousedown Event Listener
+      myDiv.addEventListener("mousedown", (e) => {
+        output2.innerHTML = "Mouse button pressed: e.buttons = " + e.button;
+      });
+
+      // Input Event Listener
+      inputField.addEventListener("input", (e) => {
+        output1.innerHTML = "Input Type: " + e.inputType;
+        output2.innerHTML = "User pressed key: " + e.code;
+      });
+
+      // Click Event Listener
+      myDiv.addEventListener("click", (e) => {
+        if (e.altKey) {
+          output.innerHTML = 'User clicked left mouse button with "Alt key".';
+        } else if (e.ctrlKey) {
+          output.innerHTML = 'User clicked left mouse button with "Ctrl key".';
+        } else if (e.shiftKey) {
+          output.innerHTML = 'User clicked left mouse button with "Shift key".';
+        } else {
+          output.innerHTML = "User just clicked!";
+        }
+      });
+    </script>
+  </body>
+</html>

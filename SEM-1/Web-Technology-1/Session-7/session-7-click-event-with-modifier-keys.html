@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 7 Click Event with Modifier Keys</title>
+    <style>
+      div {
+        background-color: antiquewhite;
+        margin: auto;
+        height: 300px;
+        width: 300px;
+        margin-top: 30px;
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="mydiv">
+      <p>Click inside the box!</p>
+      <input type="text" id="ip" placeholder="Type something..." />
+      <br /><br />
+      <p id="output"></p>
+    </div>
+
+    <script>
+      document.getElementById("mydiv").addEventListener("click", (e) => {
+        const output = document.getElementById("output");
+        if (e.altKey) {
+          output.innerHTML = "User clicked while holding the Alt key.";
+        } else if (e.ctrlKey) {
+          output.innerHTML = "User clicked while holding the Ctrl key.";
+        } else if (e.shiftKey) {
+          output.innerHTML = "User clicked while holding the Shift key.";
+        } else {
+          output.innerHTML = "User just clicked without any modifier keys.";
+        }
+      });
+    </script>
+  </body>
+</html>
