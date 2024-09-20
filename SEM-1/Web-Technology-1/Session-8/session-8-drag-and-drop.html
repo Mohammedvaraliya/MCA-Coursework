@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 8 Drag and Drop</title>
+
+    <style>
+      div {
+        height: 300px;
+        width: 400px;
+        background-color: blanchedalmond;
+        margin: auto;
+        position: relative;
+      }
+
+      .draggable {
+        cursor: grab;
+      }
+
+      #output {
+        text-align: center;
+        font-size: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="div1" ondragover="allowDrop(event)" ondrop="drop(event)">
+      <p
+        id="textToMove"
+        class="draggable"
+        draggable="true"
+        ondrag="dragging(event)"
+        ondragstart="onDragStart(event)"
+      >
+        Drag me to the other div!
+      </p>
+      <img
+        class="draggable"
+        id="imgToMove"
+        class="draggable"
+        draggable="true"
+        src="assets/img1.jpg"
+        alt=""
+        height="200px"
+        width="200px"
+        ondragstart="onDragStart(event)"
+        ondrag="dragging(event)"
+      />
+    </div>
+    <hr />
+
+    <div id="div2" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+    <hr />
+
+    <p id="output"></p>
+
+    <script>
+      function dragging(event) {
+        document.getElementById("output").innerHTML = "User dragging elements";
+      }
+
+      function onDragStart(event) {
+        event.dataTransfer.setData("Text", event.target.id);
+        event.dataTransfer.setData("Image", event.target.id);
+      }
+
+      function allowDrop(event) {
+        event.preventDefault();
+      }
+
+      function drop(event) {
+        event.preventDefault();
+        const data1 = event.dataTransfer.getData("Text");
+        const data2 = event.dataTransfer.getData("Image");
+        const element1 = document.getElementById(data1);
+        const element2 = document.getElementById(data2);
+        if (element1) {
+          event.target.appendChild(element1);
+        } else if (element2) {
+          event.target.appendChild(element2);
+        }
+        document.getElementById("output").innerHTML =
+          "User has dropped the element";
+      }
+    </script>
+  </body>
+</html>

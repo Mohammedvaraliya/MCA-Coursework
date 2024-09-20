@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 8 Creating HTML Tags with Script</title>
+
+    <style>
+      div {
+        height: 300px;
+        width: 500px;
+        background-color: blanchedalmond;
+        margin: auto;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="div1"></div>
+    <h1 id="heading">This is an independent heading</h1>
+
+    <script>
+      const heading1 = document.createElement("h1");
+      heading1.innerHTML =
+        "This tag is created using `document.createElement('h1')`";
+
+      const styleForH1 = document.createAttribute("Style");
+      styleForH1.value = "color: red; background-color: black;";
+
+      document.getElementById("heading").setAttributeNode(styleForH1);
+
+      document.getElementById("div1").appendChild(heading1);
+
+      // Creating div through script
+      const division2 = document.createElement("div");
+      const divId = "divId";
+      division2.setAttribute("id", divId);
+      division2.setAttribute(
+        "style",
+        "background-color: cadetblue; height: 300px; width: 400px"
+      );
+      document.body.appendChild(division2);
+
+      // Creating image through script and putting it into div
+      const image = document.createElement("img");
+      image.setAttribute("src", "assets/img1.jpg");
+      image.setAttribute("alt", "Image");
+      image.setAttribute("height", "200px");
+      image.setAttribute("width", "200px");
+      division2.appendChild(image);
+    </script>
+  </body>
+</html>
