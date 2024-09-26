@@ -1,5 +1,7 @@
 public class DestructorDemo {
 
+    private String x;
+
     public DestructorDemo() {
         System.out.println("Object created.");
     }
@@ -7,7 +9,9 @@ public class DestructorDemo {
     public static void main(String[] args) {
         DestructorDemo demo = new DestructorDemo();
 
-        demo = null;
+        demo.x = "Hello World";
+
+        System.out.println(demo.x);
 
         // Suggesting the Garbage Collector to run (not guaranteed to run immediately)
         System.gc();
