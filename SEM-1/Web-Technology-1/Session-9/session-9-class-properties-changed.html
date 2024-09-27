@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 9 DOM Methods on class</title>
+    <style>
+      .style1 {
+        color: red;
+        font-weight: bold;
+      }
+      .style2 {
+        color: blue;
+        font-style: italic;
+      }
+      .style3 {
+        color: green;
+        text-decoration: underline;
+      }
+      .style4 {
+        color: orange;
+        background-color: yellow;
+      }
+      .style5 {
+        color: purple;
+        text-transform: uppercase;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1 class="heading1">Heading 1 : 1</h1>
+    <h1 class="heading1">Heading 1 : 2</h1>
+    <h1 class="heading1">Heading 1 : 3</h1>
+    <h1 class="heading1">Heading 1 : 4</h1>
+    <h1 class="heading1">Heading 1 : 5</h1>
+
+    <script>
+      const headings = document.getElementsByClassName("heading1");
+
+      for (let i = 0; i < headings.length; i++) {
+        headings[i].addEventListener("click", function () {
+          headings[i].classList.add(`style${i + 1}`);
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 9 Query Selector</title>
+  </head>
+
+  <body>
+    <h1 class="Heading1">Heading1</h1>
+    <h1>Heading1</h1>
+    <h1>Heading1</h1>
+    <br />
+
+    <button onclick="qs()">Check</button>
+
+    <script>
+      // const allHeadingTags = document.querySelectorAll("h1");
+
+      function qs() {
+        const styleHeading1 = document.querySelector(".Heading1");
+        styleHeading1.style.backgroundColor = "yellow";
+        // for (let i = 0; i < allHeadingTags.length; i++) {
+        //     allHeadingTags[i].style.backgroundColor="blue";
+        // }
+      }
+    </script>
+  </body>
+</html>

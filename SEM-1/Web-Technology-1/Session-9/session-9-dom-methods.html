@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 9 DOM Methods</title>
+  </head>
+
+  <body>
+    <h1>DOM Methods</h1>
+
+    <input type="email" name="email" id="email" /><br /><br />
+    <input type="password" name="pwd" id="pwd" /><br /><br />
+
+    <h3>Select Your Course:</h3>
+    <input type="checkbox" name="courses" value="MCA" /> MCA<br />
+    <input type="checkbox" name="courses" value="MBA" /> MBA<br />
+    <input type="checkbox" name="courses" value="MS" /> MS<br />
+    <input type="checkbox" name="courses" value="Polytechnic" />
+    Polytechnic<br /><br />
+
+    <button onclick="login()">Login</button><br /><br />
+
+    <script>
+      function login() {
+        const email = document.getElementsByName("email");
+        const password = document.getElementsByName("pwd");
+
+        const checkboxes = document.getElementsByName("courses");
+        let selectedCourses = [];
+
+        for (let checkbox of checkboxes) {
+          if (checkbox.checked) {
+            selectedCourses.push(checkbox.value);
+          }
+        }
+
+        alert(
+          "Email: " +
+            email[0].value +
+            "\nPassword: " +
+            password[0].value +
+            "\nCourses: " +
+            selectedCourses
+        );
+      }
+    </script>
+  </body>
+</html>
