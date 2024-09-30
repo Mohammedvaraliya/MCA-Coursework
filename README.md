@@ -1,6 +1,6 @@
 # 📘 **MCA Coursework Repository**
 
-Welcome to my **MCA Coursework Repository**, a collection of all the code I've written while attending my Master of Computer Applications (MCA) degree. This repository will evolve over time as I progress through the semesters, adding new directories and code for each subject.
+Welcome to my **MCA Coursework Repository**, where I am documenting all the code, projects, and practical work as I progress through my Master of Computer Applications (MCA) degree. Currently, I am in the first year, first semester, and I will keep updating this repository with more material as I continue to learn and evolve.
 
 > **"If you really believe in what you’re doing, work hard, take nothing personally, and if something blocks one route, find another. Never give up."**  
 > — **Laurie Notaro**
@@ -13,7 +13,7 @@ This repository is organized by semesters, with each semester containing directo
 
 ### 🔹 **Current Semester: SEM-1**
 
-Here are the subjects I've completed code and practicals for in my **first semester**:
+These are the subjects for which I’m currently uploading code and practicals:
 
 - **Business Statistics**  
   _📊 Statistical concepts and problem-solving using real-world datasets._
