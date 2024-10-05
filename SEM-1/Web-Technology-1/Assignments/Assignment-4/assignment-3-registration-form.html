@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assignment - 3 (Registration Form)</title>
+
+    <style>
+      div {
+        background-color: antiquewhite;
+        width: 600px;
+        margin: auto;
+        border-radius: 5px;
+      }
+
+      h1,
+      p,
+      img {
+        padding-left: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <form id="registrationForm">
+          <fieldset style="border: 1px solid brown">
+              <legend>* Registration Form *</legend>
+              <input type="text" name="name" id="name" placeholder="Enter your name" /><br /><br />
+              <input type="email" name="email" id="email" placeholder="Enter your email address" /><br /><br />
+              <input type="password" name="password" id="password" placeholder="Enter your password" /><br /><br />
+              
+              <label for="dob">DOB: </label>
+              <input type="date" name="dob" id="dob" /><br /><br />
+              
+              <label for="favcolor">Select your favorite color:</label>
+              <input type="color" id="favcolor" name="favcolor" /><br /><br />
+              
+              <label for="mca">MCA: </label>
+              <input type="checkbox" name="courses" id="mca" value="mca" />
+              
+              <label for="mba">MBA: </label>
+              <input type="checkbox" name="courses" id="mba" value="mba" />
+              
+              <label for="mim">MIM: </label>
+              <input type="checkbox" name="courses" id="mim" value="mim" /><br /><br />
+              
+              <label for="male">Male: </label>
+              <input type="radio" name="gender" id="male" value="male" />
+              
+              <label for="female">Female: </label>
+              <input type="radio" name="gender" id="female" value="female" /><br /><br />
+              
+              <label for="debuggingScale">Debugging Scale: </label>
+              <input type="range" name="debuggingScale" id="debuggingScale" min="0" max="5" value="2" /><br /><br />
+
+              <label for="profilePicture">Profile Picture: </label>
+                <input type="file" name="profilePicture" id="profilePicture" class="profilePicture"><br /><br />
+              <hr />
+              
+              <button type="submit">Submit</button>
+              <button type="reset">Reset</button>
+          </fieldset>
+      </form>
+  </div>
+
+  <div>
+    <h1 class="outputHeading">Output will be shown here</h1>
+      <p id="output"></p>
+      <img id="profileImage" style="max-width: 200px; display: none;" alt="Profile Picture" />
+  </div>
+
+    <script>
+      const form = document.getElementById("registrationForm");
+        const output = document.getElementById("output");
+        const profileImage = document.getElementById("profileImage");
+
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const outputHeading = document.getElementsByClassName("outputHeading")[0];
+            outputHeading.innerHTML = "Your Submitted Values are";
+
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const dateOfBirth = document.getElementById("dob").value;
+            const favColor = document.getElementById("favcolor").value;
+
+            let selectedCourses = [];
+            const coursesCheckboxes = document.getElementsByName("courses");
+            for (let checkbox of coursesCheckboxes) {
+                if (checkbox.checked) {
+                    selectedCourses.push(checkbox.value);
+                }
+            }
+
+            const genderRadios = document.getElementsByName("gender");
+            let selectedGender;
+            for (let radio of genderRadios) {
+                if (radio.checked) {
+                    selectedGender = radio.value;
+                }
+            }
+
+            const debuggingScale = document.getElementById("debuggingScale").value;
+
+            const profilePictureInput = document.querySelector(".profilePicture");
+            const profilePictureFile = profilePictureInput.files[0];
+
+            const outputText = `
+                Name: ${name}<br>
+                Email: ${email}<br>
+                Password: ${password}<br>
+                DOB: ${dateOfBirth}<br>
+                Favorite Color: ${favColor}<br>
+                Selected Courses: ${selectedCourses.join(", ") || "None"}<br>
+                Gender: ${selectedGender || "Not specified"}<br>
+                Debugging Scale: ${debuggingScale}
+            `;
+
+            output.innerHTML = outputText;
+
+            if (profilePictureFile) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    profileImage.src = e.target.result;
+                    profileImage.style.display = 'block';
+                };
+                reader.readAsDataURL(profilePictureFile);
+            } else {
+                profileImage.style.display = 'none';
+            }
+        });
+    </script>
+  </body>
+</html>
