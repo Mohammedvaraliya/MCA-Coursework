@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Session 10 - Introduction to jQuery</title>
@@ -9,53 +8,52 @@
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> -->
 
     <style>
-        div {
-            height: 200px;
-            width: 200px;
-            background-color: bisque;
-        }
+      div {
+        height: 200px;
+        width: 200px;
+        background-color: bisque;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <button id="btn" class="btn">Click here to trigger the event</button>
     <br />
     <br />
     <div class="divArea"></div>
 
     <script>
-        // Traditional way
-        // $(document).click(function() {
-        //     alert("User just clicked on the document");
-        // })
+      // Traditional way
+      // $(document).click(function() {
+      //     alert("User just clicked on the document");
+      // })
 
-        // With arrow func
-        // $(document).click(() => {
-        //     alert("User just clicked on the document");
-        // })
+      // With arrow func
+      // $(document).click(() => {
+      //     alert("User just clicked on the document");
+      // })
 
-        // Complete anonymous func
-        // $(() => {
-        //     alert("User just clicked on the document");
-        // })
+      // Complete anonymous func
+      // $(() => {
+      //     alert("User just clicked on the document");
+      // })
 
-        $(function () {
-            // For the button
-            $('#btn').click(() => {
-                alert("User just clicked on the button");
-            });
-
-            // For the div area
-            $(".divArea").mouseenter(() => {
-                alert("Mouse has been entered in the div area");
-            });
-
-            // When this html page has loaded on the browser
-            $().ready(() => {
-                alert("Page has been loded Successfully");
-            });
+      $(function () {
+        // For the button
+        $("#btn").click(() => {
+          alert("User just clicked on the button");
         });
-    </script>
-</body>
 
+        // For the div area
+        $(".divArea").mouseenter(() => {
+          alert("Mouse has been entered in the div area");
+        });
+
+        // When this html page has loaded on the browser
+        $().ready(() => {
+          alert("Page has been loded Successfully");
+        });
+      });
+    </script>
+  </body>
 </html>
