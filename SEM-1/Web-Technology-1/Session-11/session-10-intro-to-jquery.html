@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 11 - jQuery Methods</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  </head>
+
+  <body>
+    <p class="prgph">This is paragraph tag</p>
+    <br />
+    <br />
+
+    <button id="btn1" class="btn1">Click here to do something.</button>
+    <br />
+    <br />
+
+    <p id="prgph1">This is paragraph tag with id 1</p>
+    <p id="prgph2">This is paragraph tag with id 2</p>
+    <p id="prgph3">This is paragraph tag with id 3</p>
+    <p id="prgph4">This is paragraph tag with id 4</p>
+    <p id="prgph5">This is paragraph tag with id 5</p>
+    <p id="prgph6">This is paragraph tag with id 6</p>
+    <br />
+    <br />
+
+    <button class="btn2">
+      Click here to change the color of first paragraph with id.</button
+    ><br />
+    <button class="btn3">
+      Click here to change the color of odd paragraphs with id.</button
+    ><br />
+    <button class="btn4">
+      Click here to change the color of even paragraph with id.</button
+    ><br />
+    <button class="btn5">
+      Click here to change the color of last paragraph with id.
+    </button>
+
+    <script>
+      $(function () {
+        $(".btn1").on({
+          mouseenter: function () {
+            $(this).css("background-color", "pink");
+          },
+
+          mouseleave: function () {
+            $(this).css("background-color", "Yellow");
+          },
+
+          click: function () {
+            alert("User clicked on button");
+          },
+        });
+
+        $(".prgph").click(function () {
+          $(this).html("The paragraph content has been changed!");
+        });
+
+        $("p[id]").click(function () {
+          $(this).css("background-color", "cyan");
+          $(this).html("This paragraph has been clicked!");
+        });
+
+        // Resetting function to default styles for paragraphs
+        function resetParagraphColors() {
+          $("p[id]").css("background-color", "");
+        }
+
+        $(".btn2").click(function () {
+          resetParagraphColors();
+          $("p[id]:first").css("background-color", "orange");
+        });
+
+        $(".btn3").click(function () {
+          resetParagraphColors();
+          $("p[id]:odd").css("background-color", "orange");
+        });
+
+        $(".btn4").click(function () {
+          resetParagraphColors();
+          $("p[id]:even").css("background-color", "orange");
+        });
+
+        $(".btn5").click(function () {
+          resetParagraphColors();
+          $("p[id]:last").css("background-color", "orange");
+        });
+      });
+    </script>
+  </body>
+</html>
