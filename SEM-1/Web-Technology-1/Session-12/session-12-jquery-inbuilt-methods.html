@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 12 - jQuery Methods</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  </head>
+
+  <body>
+    <h1>This is Heading 1</h1>
+    <button id="hide">Hide</button>
+    <button id="show">Show</button>
+    <br /><br />
+
+    <button id="toggleButton">Toggle</button>
+    <br />
+    <hr />
+
+    <div>
+      <img
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTc9APxkj0xClmrU3PpMZglHQkx446nQPG6lA&s"
+        alt="Camera"
+      />
+    </div>
+    <button id="fadeout">FadeOut</button>
+    <button id="fadein">FadeIn</button>
+    <button id="fadetoggle">FadeInOutToggle</button>
+    <button id="fadeto">FadeTo</button>
+    <br />
+    <hr />
+
+    <button id="slideup">Slide Up</button>
+    <button id="slidedown">Slide Down</button>
+    <button id="slidetoggle">Slide Toggle</button>
+    <br />
+    <hr />
+
+    <button id="animate">Animate</button>
+
+    <script>
+      $(() => {
+        $("#hide").click(function () {
+          // $("h1").hide();
+          // $("h1").hide("slow");
+          $("h1").hide(5000);
+          // $("h1").hide(5000, alert("Hiding now in 5 seconds..."));
+        });
+
+        $("#show").click(function () {
+          // $("h1").show();
+          $("h1").show("slow");
+        });
+
+        $("#fadeout").click(function () {
+          $("img").fadeOut(5000);
+        });
+
+        $("#fadein").click(function () {
+          $("img").fadeIn(5000);
+        });
+
+        $("#fadetoggle").click(function () {
+          $("div:has(img)").fadeToggle(5000);
+        });
+
+        $("#fadeto").click(function () {
+          $("div:has(img)").fadeTo(5000, 0.5);
+        });
+
+        $("#slideup").click(function () {
+          $("div:has(img)").slideUp(5000);
+        });
+
+        $("#slidedown").click(function () {
+          $("div:has(img)").slideDown(5000);
+        });
+
+        $("#slidetoggle").click(function () {
+          $("div:has(img)").slideToggle(5000);
+        });
+
+        $("#animate").mousedown(function () {
+          $("div").animate({
+            left: "550px",
+            opacity: "0.30",
+            marginLeft: "-=50px",
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

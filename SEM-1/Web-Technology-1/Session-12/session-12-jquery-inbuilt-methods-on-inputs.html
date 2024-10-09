@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 12 - jQuery Methods on Form</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  </head>
+
+  <body>
+    <p>Hello Everyone from <b>MCA 2024-26</b>, <i>to the webtechnology-1</i></p>
+    <hr />
+    <label for="username"></label>
+    <input type="text" name="username" id="username" placeholder="username" />
+    <br />
+
+    <label for="email"></label>
+    <input type="email" name="email" id="email" placeholder="email" />
+    <br />
+
+    <label for="pasword"></label>
+    <input
+      type="password"
+      name="password"
+      id="password"
+      placeholder="password"
+    />
+    <br />
+
+    <button id="login" type="submit">Login</button>
+    <br />
+    <hr />
+
+    <button id="setusername">Set Username</button>
+    <button id="setemail">Set Email</button>
+    <button id="setpassword">Set Password</button>
+
+    <script>
+      $(() => {
+        $("#login").click(function () {
+          var username = $("#username").val();
+          var email = $("#email").val();
+          var password = $("#password").val();
+
+          alert(
+            "Username: " +
+              username +
+              "\n" +
+              "Email: " +
+              email +
+              "\n" +
+              "Password: " +
+              password
+          );
+        });
+
+        $("#setusername").click(function () {
+          $("#username").val("exampleUsername");
+        });
+
+        $("#setemail").click(function () {
+          $("#email").val("example@example.com");
+        });
+
+        $("#setpassword").click(function () {
+          $("#password").val("examplePassword");
+        });
+      });
+    </script>
+  </body>
+</html>
