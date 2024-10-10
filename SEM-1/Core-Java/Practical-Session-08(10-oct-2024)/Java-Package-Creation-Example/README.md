@@ -1,6 +1,6 @@
 ### Step 1: Directory Structure
 
-Ensure the directory structure should looks like this:
+The below would be the directory structure:
 
 ```
 Java-Package-Creation-Example/
@@ -75,7 +75,7 @@ Class-Files/ (This folder will be created for compiled classes)
 
 ### Step 3: Open Terminal/Command Prompt
 
-Navigate to the `Java-Package-Creation-Example` directory where all the newly package created package related Java files are located.
+Navigate to the `Java-Package-Creation-Example` directory where all the newly created package related Java files are located.
 
 ```bash
 cd path\to\Java-Package-Creation-Example
@@ -83,7 +83,7 @@ cd path\to\Java-Package-Creation-Example
 
 ### Step 4: Compile the Java Files
 
-You need to compile the Java files while ensuring the output goes to the `Class-Files` directory.
+Need to compile the Java files while ensuring the output goes to the `Class-Files` directory.
 
 ```bash
 javac -d "Class-Files" university/UniversityPackageFile.java university/department/DepartmentGoal.java university/department/Staffs.java MyOwnPackageExample.java
@@ -91,7 +91,7 @@ javac -d "Class-Files" university/UniversityPackageFile.java university/departme
 
 ### Step 5: Verify Compiled Files
 
-Check that the `Class-Files` directory now contains the compiled `.class` files. You can list the contents using:
+Check that the `Class-Files` directory now contains the compiled `.class` files. list the contents using:
 
 ```bash
 dir Class-Files
