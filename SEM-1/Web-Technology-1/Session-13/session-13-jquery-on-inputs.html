@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 13 - jQuery Methods on Form</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <label for="Web Technology">Web Technology</label>
+    <input type="radio" name="subject" id="" value="Web Technology">
+    <label for="Android Applications">Android Applications</label>
+    <input type="radio" name="subject" id="" value="Android Applications">
+    <label for="Database Applications">Database Applications</label>
+    <input type="radio" name="subject" id="" value="Database Applications">
+    <br>
+    <br>
+
+    <label for="MCA">MCA</label>
+    <input type="checkbox" name="course" id="" value="MCA">
+    <label for="MBA">MBA</label>
+    <input type="checkbox" name="course" id="" value="MBA">
+    <label for="M. Arts">M. Arts</label>
+    <input type="checkbox" name="course" id="" value="M. Arts">
+    <br>
+    <br>
+
+    <select name="cities" id="city" multiple="true">
+        <option value="Mumbai">Mumbai</option>
+        <option value="Pune">Pune</option>
+        <option value="Delhi">Delhi</option>
+    </select>
+    <br>
+    <br>
+
+    <button>getInfo</button>
+
+    <script>
+        $(() => {
+            $("button").click(function () {
+                output = "User selected subjects: \n"
+                $(":radio").each(function () {
+                    if ($(this).is(":checked")) {
+                        output += $(this).val() + "\n";
+                    }
+                });
+
+                output += "\nUser selected Courses: \n"
+                $(":checkbox").each(function () {
+                    if ($(this).is(":checked")) {
+                        output += $(this).val() + "\n";
+                    }
+                });
+
+                output += "\nUser selected Cities: \n"
+                $("#city option:selected").each(function () {
+                    output += $(this).val() + "\n";
+                });
+                alert(output);
+            });
+        });
+    </script>
+</body>
+
+</html>

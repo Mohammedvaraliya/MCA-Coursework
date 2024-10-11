@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 13 - jQuery Methods</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <style>
+      .newClass {
+        background-color: yellow;
+        color: blue;
+      }
+
+      .mca {
+        font-size: 30px;
+      }
+
+      #mydiv {
+        border: 1px solid black;
+        padding: 10px;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div>Hello Welcome to the div</div>
+    <br />
+    <a>This is not a link yet</a>
+    <br /><br />
+
+    <button id="changeAttr">attr()</button>
+    <button id="addClassesBtn">Add classes</button>
+    <button id="removeClassesBtn">Remove classes</button>
+
+    <div id="mydiv">This is a div with an ID</div>
+
+    <script>
+      $(() => {
+        $("#changeAttr").click(function () {
+          $("div:first").attr("style", "background-color:black; color:white;");
+          $("a").attr({
+            href: "https://google.com",
+            title: "Google",
+            style: "font-size: 50px",
+          });
+          $("a").text("It is now Link");
+          $("div:first").height("200px").width("300px");
+          $("button").css({
+            "background-color": "orange",
+            "font-size": "50px",
+          });
+        });
+
+        $("#addClassesBtn").click(function () {
+          $("#mydiv").addClass("newClass mca");
+          alert(
+            "Classes added. div.hasClass(newClass): " +
+              $("#mydiv").hasClass("newClass")
+          );
+        });
+
+        $("#removeClassesBtn").click(function () {
+          $("#mydiv").removeClass("newClass mca");
+          alert(
+            "Classes removed. div.hasClass(newClass): " +
+              $("#mydiv").hasClass("newClass")
+          );
+        });
+      });
+    </script>
+  </body>
+</html>

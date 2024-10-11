@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assignment - 6 (CSS Selectors)</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+
+  <body>
+    <center>
+      <div id="header">CSS Selectors</div>
+
+      <h1>Main Heading</h1>
+      <p>
+        This is a paragraph after the heading. <br />
+        This is the PS text.
+      </p>
+      <p>This is another paragraph.</p>
+
+      <h2>Subheading</h2>
+      <p>This paragraph is in red because it is a descendant of a div.</p>
+
+      <ul>
+        <li>First item</li>
+        <li>Second item</li>
+        <li>Third item</li>
+      </ul>
+
+      <a href="https://kjsim.somaiya.edu/en/"
+        >This link starts with https, that's why it is styled with CSS</a
+      >
+      <a href="http://kjsim.somaiya.edu/en/"
+        >This link starts with http, that's why it is styled with CSS</a
+      >
+
+      <div class="highlight">This div has a highlight class.</div>
+      <div>This div does not have a highlight class.</div>
+
+      <button class="btn">Click Me</button>
+
+      <h1>Another Heading</h1>
+      <p>This is another paragraph that is a sibling to the heading above.</p>
+      <p>This is a sibling paragraph that comes after the first.</p>
+    </center>
+
+    <script>
+      $(document).ready(function () {
+        // Universal Selector
+        $("*").css({
+          "margin-right": "auto",
+          "margin-left": "auto",
+          padding: "0",
+        });
+
+        // Type Selector
+        $("p").css("color", "blue");
+
+        // Class Selector
+        $(".btn").css({
+          "margin-top": "10px",
+          "background-color": "rgb(0, 159, 199)",
+          color: "white",
+          padding: "10px",
+        });
+
+        // ID Selector
+        $("#header").css({
+          "font-size": "24px",
+          "text-align": "center",
+        });
+
+        // Attribute Selector
+        $("[type='text']").css("border", "1px solid black");
+
+        // Descendant Selector
+        $("div p").css("color", "red");
+
+        // Child Selector
+        $("ul > li").css({
+          "list-style": "none",
+          color: "purple",
+        });
+
+        // Adjacent Sibling Selector
+        $("h1 + p").css("margin-top", "0");
+
+        // General Sibling Selector
+        $("h1 ~ p").css("color", "rgb(243, 98, 30)");
+
+        // Group Selector
+        $("h1, h2, h3").css("margin-bottom", "20px");
+
+        // Pseudo-classes
+        $("a").hover(function () {
+          $(this).css("text-decoration", "underline");
+        });
+
+        // Pseudo-elements cannot be selected directly with jQuery
+
+        // Attribute Substring Selectors
+        $("[href^='https']").css({
+          color: "green",
+          "background-color": "aqua",
+        });
+
+        // Nth-child Selector
+        $("li:nth-child(2)").css("color", "rgb(30, 255, 0)");
+
+        // Not Selector
+        $("div:not(.highlight)").css({
+          "background-color": "black",
+          padding: "20px",
+          color: "white",
+        });
+      });
+    </script>
+  </body>
+</html>

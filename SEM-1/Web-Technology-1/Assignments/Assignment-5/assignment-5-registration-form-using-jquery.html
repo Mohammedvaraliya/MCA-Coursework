@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Assignment - 5 (Registration Form using jQuery)</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    div {
+      background-color: antiquewhite;
+      width: 600px;
+      margin: auto;
+      border-radius: 5px;
+    }
+
+    h1,
+    p,
+    img {
+      padding-left: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <form id="registrationForm">
+      <fieldset style="border: 1px solid brown">
+        <legend>* Registration Form *</legend>
+        <input type="text" name="name" id="name" placeholder="Enter your name" /><br /><br />
+        <input type="email" name="email" id="email" placeholder="Enter your email address" /><br /><br />
+        <input type="password" name="password" id="password" placeholder="Enter your password" /><br /><br />
+
+        <label for="dob">DOB: </label>
+        <input type="date" name="dob" id="dob" /><br /><br />
+
+        <label for="favcolor">Select your favorite color:</label>
+        <input type="color" id="favcolor" name="favcolor" /><br /><br />
+
+        <label for="mca">MCA: </label>
+        <input type="checkbox" name="courses" id="mca" value="mca" />
+
+        <label for="mba">MBA: </label>
+        <input type="checkbox" name="courses" id="mba" value="mba" />
+
+        <label for="mim">MIM: </label>
+        <input type="checkbox" name="courses" id="mim" value="mim" /><br /><br />
+
+        <label for="male">Male: </label>
+        <input type="radio" name="gender" id="male" value="male" />
+
+        <label for="female">Female: </label>
+        <input type="radio" name="gender" id="female" value="female" /><br /><br />
+
+        <label for="debuggingScale">Debugging Scale: </label>
+        <input type="range" name="debuggingScale" id="debuggingScale" min="0" max="5" value="2" /><br /><br />
+
+        <label for="profilePicture">Profile Picture: </label>
+        <input type="file" name="profilePicture" id="profilePicture" class="profilePicture"><br /><br />
+        <hr />
+
+        <button type="submit">Submit</button>
+        <button type="reset">Reset</button>
+      </fieldset>
+    </form>
+  </div>
+
+  <div>
+    <h1 class="outputHeading">Output will be shown here</h1>
+    <p id="output"></p>
+    <img id="profileImage" style="max-width: 200px; display: none;" alt="Profile Picture" />
+  </div>
+
+  <script>
+    $(document).ready(function () {
+      $("#registrationForm").submit(function (event) {
+        event.preventDefault();
+
+        $(".outputHeading").text("Your Submitted Values are");
+
+        const name = $("#name").val();
+        const email = $("#email").val();
+        const password = $("#password").val();
+        const dateOfBirth = $("#dob").val();
+        const favColor = $("#favcolor").val();
+
+        const selectedCourses = $("input[name='courses']:checked").map(function () {
+          return this.value;
+        }).get();
+
+        const selectedGender = $("input[name='gender']:checked").val() || "Not specified";
+
+        const debuggingScale = $("#debuggingScale").val();
+
+        const profilePictureFile = $("#profilePicture")[0].files[0];
+
+        let outputText = `
+                    Name: ${name}\n
+                    Email: ${email}\n
+                    Password: ${password}\n
+                    DOB: ${dateOfBirth}\n
+                    Favorite Color: ${favColor}\n
+                    Selected Courses: ${selectedCourses.join(", ") || "None"}\n
+                    Gender: ${selectedGender}\n
+                    Debugging Scale: ${debuggingScale}
+                `;
+
+        $("#output").html(outputText.replace(/\n/g, '<br>'));
+
+        alert(outputText.replace(/\n/g, '\n'));
+
+        if (profilePictureFile) {
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            $("#profileImage").attr("src", e.target.result).show();
+          };
+          reader.readAsDataURL(profilePictureFile);
+        } else {
+          $("#profileImage").hide();
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
