@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 14 - jQuery Append Function</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <style>
+      div {
+        margin: auto;
+        width: 30%;
+        height: 150px;
+        background-color: bisque;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div>
+      <h1>Header</h1>
+      <h2>Body</h2>
+      <h3>Footer</h3>
+    </div>
+    <br />
+
+    <button id="empty">Empty</button>
+    <button id="remove">Remove</button>
+    <button id="clone">Clone</button>
+    <button id="detach">Detach</button>
+    <button id="restore">Restore</button>
+
+    <script>
+      $(() => {
+        $("#empty").click(function () {
+          $("div").empty();
+        });
+
+        $("#remove").click(function () {
+          $("div").remove();
+        });
+
+        $("#clone").click(function () {
+          $("div").clone().appendTo("body");
+        });
+
+        $("#detach").click(function () {
+          x = $("div").detach();
+        });
+
+        $("#restore").click(function () {
+          $("body").append(x);
+        });
+      });
+    </script>
+  </body>
+</html>

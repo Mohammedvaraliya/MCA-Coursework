@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 14 - jQuery Append Function</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  </head>
+
+  <body>
+    <h1>Welcome to KJSIM</h1>
+
+    <ol id="subject-list">
+      <li>Web Tech</li>
+      <li>DS Using Python</li>
+      <li>Core JAVA</li>
+    </ol>
+    <br />
+
+    <img
+      id="svu"
+      src="https://timespro.com/_next/image?url=https%3A%2F%2Ftimesproweb-static-backend-prod.s3.ap-south-1.amazonaws.com%2F15_logo_cdfab9cbe6.webp&w=3840&q=75"
+      alt="somaiya"
+      height="300px"
+      width="300px"
+    />
+    <hr />
+    <button id="append">Click to append something</button>
+    <button id="prepend">Click to prepend something</button>
+    <button id="after">Click to add something after image</button>
+    <button id="before">Click to add something before image</button>
+
+    <script>
+      $(() => {
+        $("#append").click(function () {
+          $("h1").append("<h2>We are MCA</h2>");
+          $("#subject-list").append("<li>Another Subj</li>");
+        });
+
+        $("#prepend").click(function () {
+          $("h1").prepend("<h2>We are MCA</h2>");
+          $("#subject-list").prepend("<li>Another Subj</li>");
+        });
+
+        $("#after").click(function () {
+          $("#svu").after("&nbsp; <span>somaiya vidyavihar</span> &nbsp;");
+        });
+
+        $("#before").click(function () {
+          $("#svu").before("&nbsp; <span>somaiya vidyavihar</span> &nbsp;");
+        });
+      });
+    </script>
+  </body>
+</html>

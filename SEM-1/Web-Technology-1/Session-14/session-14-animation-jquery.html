@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 14 - Animation jQuery</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <style>
+      div {
+        margin: auto;
+        width: 60%;
+        background-color: bisque;
+      }
+    </style>
+  </head>
+
+  <body>
+    <p id="p1">This is p Tag</p>
+    <p id="p2">This is another p Tag</p>
+    <br />
+
+    <hr />
+    <button id="detach">Detach</button>
+    <button id="remove">Remove</button>
+    <button id="replaceAll">Replace All</button>
+    <button id="wrap">Wrap</button>
+    <button id="wrapAll">Wrap All</button>
+
+    <script>
+      $(() => {
+        $("p").click(function () {
+          $(this).animate({
+            "font-size": "+=1",
+          });
+        });
+
+        $("#detach").click(function () {
+          $("body").append($("#p1").detach());
+        });
+
+        $("#remove").click(function () {
+          $("body").append($("#p2").remove());
+        });
+
+        $("#replaceAll").click(function () {
+          $("<h2>HEHEHE<h2>").replaceAll("p");
+        });
+
+        $("#wrap").click(function () {
+          $("p").wrap("<div class='wrapper'></div>");
+        });
+
+        $("#wrapAll").click(function () {
+          $("p").wrapAll("<div class='wrapper-all'></div>");
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assignment - 7 (Append and Prepend from User jQuery)</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      .dropdown {
+        margin: 10px 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h2>Welcome to KJSIM</h2>
+
+    <div>
+      <p>
+        This is a paragraph element. You can modify it using the options below.
+      </p>
+      <h2>This is a heading.</h2>
+      <ul id="item-list">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+      </ul>
+    </div>
+
+    <hr />
+
+    <div class="dropdown">
+      <label for="operation">Choose an operation:</label>
+      <select id="operation">
+        <option value="append">Append</option>
+        <option value="prepend">Prepend</option>
+      </select>
+    </div>
+
+    <div class="dropdown">
+      <label for="target-element">Select target element:</label>
+      <select id="target-element">
+        <option value="p">Paragraph</option>
+        <option value="h2">Heading</option>
+        <option value="#item-list">List</option>
+      </select>
+    </div>
+
+    <div class="dropdown">
+      <label for="tag-name">Select HTML tag to create:</label>
+      <!-- <select id="tag-name">
+            <option value="h3">H3</option>
+            <option value="p">Paragraph</option>
+            <option value="li">List Item</option>
+            <option value="span">Span</option>
+        </select> -->
+      <input type="text" id="tag-name" />
+    </div>
+
+    <div class="dropdown">
+      <label for="text-content">Enter text for the new tag:</label>
+      <input type="text" id="text-content" placeholder="Enter text here" />
+    </div>
+
+    <button id="submit">Submit</button>
+
+    <script>
+      $(() => {
+        $("#submit").click(function () {
+          const operation = $("#operation").val();
+          const targetElement = $("#target-element").val();
+          const tagName = $("#tag-name").val();
+          const textContent = $("#text-content").val();
+
+          const newElement = `<${tagName}>${textContent}</${tagName}>`;
+
+          if (operation === "append") {
+            $(targetElement).append(newElement);
+          } else if (operation === "prepend") {
+            $(targetElement).prepend(newElement);
+          } else {
+            alert("Invalid operation! Please select 'Append' or 'Prepend'.");
+          }
+
+          $("#text-content").val("");
+        });
+      });
+    </script>
+  </body>
+</html>
