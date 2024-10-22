@@ -4,7 +4,7 @@
 
     echo "<h1 style='background-color:red; text-align:center; color:white'> Magic Constant </h1>";
     // Inbuilt constants use to fetch some information about program and code
-    // __CONSTANT__ format used to access them two underscores before and after constant name
+    // __CONSTANT__ format used to access them with two underscores before and after constant name
     
     echo "<BR><h2> You are at line no: ", __LINE__;
     echo "<BR><h2> You are in directory: ", __DIR__;
