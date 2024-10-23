@@ -65,6 +65,10 @@ public class ArithmeticOperation {
 
     public static void main(String[] args) {
         try {
+            if (args.length != 3) {
+                System.out.println("Please provide num1, operator, and num2 as command-line arguments.");
+                return;
+            }
             performOperation(args);
         } catch (IllegalNumberOfArgumentsException | InvalidOperatorException | NegativeResultException e) {
             System.out.println(e.getMessage());
