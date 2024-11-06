@@ -2,13 +2,13 @@
 
 ## Problem Statement
 
-> The **Tower of Hanoi** is a mathematical puzzle where we have three towers (pegs) and a certain number of disks of different sizes. The goal is to move all disks from the source tower to the destination tower with the help of an auxiliary tower, following these rules:
+The **Tower of Hanoi** is a mathematical puzzle where we have three towers (pegs) and a certain number of disks of different sizes. The goal is to move all disks from the source tower to the destination tower with the help of an auxiliary tower, following these rules:
 
 1. Only one disk can be moved at a time.
 2. A larger disk cannot be placed on top of a smaller disk.
 3. Only the top disk of a tower can be moved at any time.
 
-> For $n$ disks, the solution requires moving the disks in a specific sequence. This puzzle is commonly solved using **recursion** due to its repetitive nature.
+For $n$ disks, the solution requires moving the disks in a specific sequence. This puzzle is commonly solved using **recursion** due to its repetitive nature.
 
 ### **Approach 1 (`tower_of_hanoi_approach1`)**
 
