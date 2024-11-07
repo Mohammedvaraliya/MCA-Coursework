@@ -159,13 +159,12 @@ At the end of this pass, **no swaps were made**, and since `swapped = False`, we
 
 1. **Why `swapped` is used**:
 
-   a. The `swapped` variable tracks whether any swaps were made in a particular pass. If no swaps are made, it means the array is already sorted, and further passes are unnecessary.
+   1. The `swapped` variable tracks whether any swaps were made in a particular pass. If no swaps are made, it means the array is already sorted, and further passes are unnecessary.
 
 2. **Why the `break` is used**:
 
-   a. If `swapped` is `False` at the end of a pass, the `break` statement terminates the outer loop early, avoiding redundant passes.
-
-   b. This improves the efficiency of the algorithm, especially in the best case where the array is already sorted.
+   1. If `swapped` is `False` at the end of a pass, the `break` statement terminates the outer loop early, avoiding redundant passes.
+   2. This improves the efficiency of the algorithm, especially in the best case where the array is already sorted.
 
 ### In Essense:
 
