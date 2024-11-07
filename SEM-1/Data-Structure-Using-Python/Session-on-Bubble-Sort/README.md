@@ -1,14 +1,12 @@
-# Tower of Hanoi Explanation
+# Bubble Sort Explanation
 
 ## Problem Statement
 
-The **Tower of Hanoi** is a mathematical puzzle where we have three towers (pegs) and a certain number of disks of different sizes. The goal is to move all disks from the source tower to the destination tower with the help of an auxiliary tower, following these rules:
+To implement Bubble Sort in Python to sort a list of elements in ascending order by repeatedly swapping adjacent elements if they are in the wrong order.
 
-1. Only one disk can be moved at a time.
-2. A larger disk cannot be placed on top of a smaller disk.
-3. Only the top disk of a tower can be moved at any time.
+Bubble Sort is a simple comparison-based sorting algorithm that repeatedly steps through the list, compares adjacent elements, and swaps them if they are out of order. This process continues until no swaps are needed, indicating that the list is sorted. The algorithm gets its name because smaller elements "bubble" to the top of the list, while larger elements "sink" to the end.
 
-For $n$ disks, the solution requires moving the disks in a specific sequence. This puzzle is commonly solved using **recursion** due to its repetitive nature.
+Each pass through the list places the next largest element in its correct position, making the list more sorted with each iteration. However, due to its high time complexity of $O(n^2)$, Bubble Sort is primarily used for educational purposes or for small datasets where simplicity is more important than efficiency.
 
 ### Initial Setup:
 
