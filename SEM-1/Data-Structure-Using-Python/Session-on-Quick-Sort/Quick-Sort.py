@@ -30,9 +30,12 @@ def quick_sort(arr, start, end):
 if __name__ == "__main__":
 
     array1 = [10, 5, 8, 12, 15, 6, 3, 9, 16]
+    print("Original array:", array1)
     quick_sort(arr = array1, start = 0, end = len(array1) - 1)
-    print(array1)
+    print("Sorted array:", array1)
+    print("\n")
 
     array2 = [56, 61, 54, 64, 59, 53, 58, 56, 52, 60, 51]
+    print("Original array:", array2)
     quick_sort(arr = array2, start = 0, end = len(array2) - 1)
-    print(array2)
+    print("Sorted array:", array2)
