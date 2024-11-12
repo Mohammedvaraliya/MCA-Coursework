@@ -4,11 +4,11 @@
 
 ---
 
-1. **Code of Recursive function for counting number of nodes present in a link list.**
-2. **Code of Recursive function for calculating total of all node values in a link list.**
+1. **Code of Recursive function for displaying/traversing all nodes of a link list.**
+2. **Time & Space Complexity of above program.**
 
 ---
 
 ## Solution (Notion URL)
 
-[Assignment-8 (Linked List)](https://mohammed-varaliya.notion.site/Assignment-8-Linked-List-13c9033ff7158037a2cad6818b536ed8?pvs=4)
+[Assignment-8 (Linked List)](https://mohammed-varaliya.notion.site/Assignment-9-Linked-List-13c9033ff71580e9a0dcccc42d703130?pvs=4)
