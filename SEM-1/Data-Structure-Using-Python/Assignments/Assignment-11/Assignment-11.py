@@ -46,6 +46,7 @@ class SinglyLinkedList:
                 nxt = cur_node.next
                 new_node.next = nxt
                 cur_node.next = new_node
+                return
             cur_node = cur_node.next
 
         if cur_node is None:
