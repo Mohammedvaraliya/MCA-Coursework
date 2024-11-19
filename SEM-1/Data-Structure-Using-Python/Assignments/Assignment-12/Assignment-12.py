@@ -74,13 +74,13 @@ if __name__ == "__main__":
     # Cheking whether the list is sorted or not
     print(llist.check_sorted())
 
-    # Cheking whether the list is sorted or not
+    # Removing duplicate nodes from sorted list
     llist.removing_duplicates_from_sorted()
 
     # A method display() to print all elements in the list.
     llist.display_list_iterative()
 
-    # Cheking whether the list is sorted or not
+    # Reversing the entire list
     llist.reversing_list()
 
     # A method display() to print all elements in the list.
