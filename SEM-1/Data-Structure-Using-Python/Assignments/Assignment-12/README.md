@@ -101,12 +101,12 @@ The goal of this function is to check if the linked list is sorted in **non-decr
 - **Variables:**
 
   - `cur_node` starts at the head of the list (`1`).
-  - `prev_data` is initialized to `0` (to make sure the first node is greater than or equal to `prev_data`).
+  - `prev_data` is initialized to `float('-inf')` (negative infinity), which ensures that the first node's value is always greater than prev_data.
 
 - **Iteration 1:**
 
   - `cur_node` points to `1`.
-  - `prev_data` is `0`. Since `1 >= 0`, we update `prev_data` to `1` and move to the next node (`cur_node = cur_node.next`).
+  - `prev_data` is `-inf`. Since `1 >= -inf`, we update `prev_data` to `1` and move to the next node (`cur_node = cur_node.next`).
 
 - **Iteration 2:**
 

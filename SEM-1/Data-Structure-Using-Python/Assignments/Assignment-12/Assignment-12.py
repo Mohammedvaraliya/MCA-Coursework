@@ -21,7 +21,7 @@ class SinglyLinkedList:
     
     def check_sorted(self):
         cur_node = self.head
-        prev_data = 0
+        prev_data = float('-inf') # Use negative infinity as initial value
         while cur_node:
             if cur_node.data >= prev_data:
                 prev_data = cur_node.data
