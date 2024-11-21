@@ -12,7 +12,7 @@
 
 ## Solution (Notion URL)
 
-[Assignment-12 (Linked List)]()
+[Assignment-12 (Linked List)](https://mohammed-varaliya.notion.site/Assignment-12-Linked-List-1439033ff715809384baf7c990a507ef?pvs=4)
 
 ## Explanation
 
