@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 22 Bootstrap Navigation Bar</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <div class="container mt-5 bg-light rounded-4 p-5">
+      <div class="h1">
+        <p class="bg-warning rounded-4 p-3">
+          <span class="bg-primary badge">Bootstrap-5</span> Navbar
+        </p>
+      </div>
+
+      <div
+        class="nav nav-tabs bg-dark rounded-4"
+        data-bs-theme="dark"
+        id="myTab"
+        role="tablist"
+      >
+        <li class="nav-item show" role="presentation">
+          <button
+            class="nav-link active"
+            id="HTML-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#html"
+            type="button"
+            role="tab"
+            aria-controls="html"
+            aria-selected="true"
+          >
+            HTML
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            id="css-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#css"
+            type="button"
+            role="tab"
+            aria-controls="css"
+            aria-selected="false"
+          >
+            CSS
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            id="react-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#react"
+            type="button"
+            role="tab"
+            aria-controls="react"
+            aria-selected="false"
+          >
+            React
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            id="angular-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#angular"
+            type="button"
+            role="tab"
+            aria-controls="angular"
+            aria-selected="false"
+          >
+            Angular
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            id="bootsrap-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#bootsrap"
+            type="button"
+            role="tab"
+            aria-controls="bootsrap"
+            aria-selected="false"
+          >
+            Bootstrap
+          </button>
+        </li>
+      </div>
+
+      <div class="tab-content">
+        <div
+          class="tab-pane container active mt-4"
+          id="html"
+          role="tabpanel"
+          aria-labelledby="html-tab"
+        >
+        Welcome to HTML Blog <br>
+        Welcome to HTML Blog <br>
+        Welcome to HTML Blog <br>
+        Welcome to HTML Blog <br>
+        Welcome to HTML Blog <br>
+        Welcome to HTML Blog
+        </div>
+        <div
+          class="tab-pane container mt-4"
+          id="css"
+          role="tabpanel"
+          aria-labelledby="css-tab"
+        >
+          Welcome to CSS Blog <br>
+          Welcome to CSS Blog <br>
+          Welcome to CSS Blog <br>
+          Welcome to CSS Blog <br>
+          Welcome to CSS Blog <br>
+          Welcome to CSS Blog
+        </div>
+        <div
+          class="tab-pane container mt-4"
+          id="react"
+          role="tabpanel"
+          aria-labelledby="react-tab"
+        >
+        Welcome to React Blog <br>
+        Welcome to React Blog <br>
+        Welcome to React Blog <br>
+        Welcome to React Blog <br>
+        Welcome to React Blog <br>
+        Welcome to React Blog
+        </div>
+        <div
+          class="tab-pane container mt-4"
+          id="angular"
+          role="tabpanel"
+          aria-labelledby="angular-tab"
+        >
+        Welcome to Angular Blog <br>
+        Welcome to Angular Blog <br>
+        Welcome to Angular Blog <br>
+        Welcome to Angular Blog <br>
+        Welcome to Angular Blog <br>
+        Welcome to Angular Blog
+        </div>
+        <div
+          class="tab-pane container mt-4"
+          id="bootsrap"
+          role="tabpanel"
+          aria-labelledby="bootsrap-tab"
+        >
+        Welcome to Bootstrap Blog <br>
+        Welcome to Bootstrap Blog <br>
+        Welcome to Bootstrap Blog <br>
+        Welcome to Bootstrap Blog <br>
+        Welcome to Bootstrap Blog <br>
+        Welcome to Bootstrap Blog
+        </div>
+      </div>
+    </div>
+
+    <br />
+    <br />
+    <hr class="border border-dark border-3 opacity-75" />
+    <br />
+    <br />
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
