@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 24 AngularJS Array</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  </head>
+
+  <body>
+    <div
+      ng-app=""
+      ng-init="subjects = ['Web Technolgy', 'Python', 'Java', 'DBMS']"
+    >
+      <div>
+        <h1>AngularJS Array</h1>
+
+        <h1>{{subjects[1]}}</h1>
+        <h1 ng-bind="subjects[2]"></h1>
+
+        <ul>
+          <li ng-repeat="sub in subjects">{{sub}}</li>
+        </ul>
+      </div>
+
+      <div
+        ng-init="professorsAndSubj = [['Sudarshan Sirsat', 'Krantee ma\'am', 'Jaya Ma\'am', 'Sangeeta ma\'am'], ['Web Technology', 'Python', 'Java', 'DBMS']]"
+      >
+        <h1>AngularJS Multidimensional Array</h1>
+
+        <ul>
+          <li ng-repeat="(index, prof) in professorsAndSubj[0]">
+            Professor: {{prof}} - Subject: {{professorsAndSubj[1][index]}}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

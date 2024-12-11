@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 24 AngularJS</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  </head>
+
+  <body>
+    <div ng-app="" ng-init="a = 5; b = 6">
+      <h1>AngularJS Expression on Numbers</h1>
+
+      <input type="number" ng-model="a" />
+      <input type="number" ng-model="b" />
+
+      <h3>SUM({{a}} and {{b}}) : {{ a + b }}</h3>
+
+      <div ng-init="uname=''; pwd=''">
+        <h1>AngularJS Expression on Username and Password</h1>
+
+        <input type="text" ng-model="uname" />
+        <input type="password" ng-model="pwd" />
+
+        <h3>Username : <span ng-bind="uname"></span></h3>
+        <h3>Password : <span ng-bind="pwd"></span></h3>
+      </div>
+    </div>
+  </body>
+</html>
