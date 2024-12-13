@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 26 AngularJS Filters</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  </head>
+
+  <body>
+    <div ng-app="">
+      <div
+        ng-init="subjects1 = ['Web Technolgy', 'Python', 'Programming', 'Java', 'DBMS']"
+      >
+        <h1 style="text-decoration: underline">AngularJS Filter 'p'</h1>
+        <div ng-repeat="subj in subjects1 | filter: 'p'">
+          <ul>
+            <li>{{subj}}</li>
+          </ul>
+        </div>
+      </div>
+      <br />
+      <br />
+      <hr />
+
+      <div
+        ng-init="subjects2 = ['Web Technolgy', 'Python', 'Programming', 'Java', 'DBMS']"
+      >
+        <h1 style="text-decoration: underline">
+          AngularJS Filter From User Input
+        </h1>
+        <input type="text" ng-model="sub" />
+        <div ng-repeat="sub in subjects2 | filter: sub">
+          <ul>
+            <li>{{sub}}</li>
+          </ul>
+        </div>
+      </div>
+      <br />
+      <br />
+      <hr />
+    </div>
+  </body>
+</html>

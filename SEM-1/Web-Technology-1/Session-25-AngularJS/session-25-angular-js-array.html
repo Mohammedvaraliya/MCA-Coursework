@@ -1,34 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 25 AngularJS Object</title>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Session 25 AngularJS Object</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  </head>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-
-</head>
-
-<body>
-
-  <div ng-app="">
-
-    <div ng-init="student1 = {
+  <body>
+    <div ng-app="">
+      <div
+        ng-init="student1 = {
       rollno: 11,
       name: 'Mohammed Varaliya'
-    }">
-      <h1 style="text-decoration: underline;"> AngularJS Object (Key Value Pair) </h1>
+    }"
+      >
+        <h1 style="text-decoration: underline">
+          AngularJS Object (Key Value Pair)
+        </h1>
 
-      <h1> {{"RollNo: " + student1.rollno}} </h1>
-      <h1> {{"Name: " + student1.name}} </h1>
+        <h1>{{"RollNo: " + student1.rollno}}</h1>
+        <h1>{{"Name: " + student1.name}}</h1>
+      </div>
+      <br />
+      <br />
+      <hr />
 
-    </div>
-    <br>
-    <br>
-    <hr>
-
-    <div ng-init="student2 = [
+      <div
+        ng-init="student2 = [
     {
       rollno: 101,
       name: 'Mohammed Varaliya'
@@ -41,16 +41,19 @@
       rollno: 103,
       name: 'Ben'
     }
-    ]">
-      <h1 style="text-decoration: underline;"> AngularJS List (Key Value Pair) </h1>
+    ]"
+      >
+        <h1 style="text-decoration: underline">
+          AngularJS List (Key Value Pair)
+        </h1>
 
-      <h1 ng-repeat="stud in student2">{{"RollNo: " + stud.rollno + " Name: " + stud.name}}</h1>
+        <h1 ng-repeat="stud in student2">
+          {{"RollNo: " + stud.rollno + " Name: " + stud.name}}
+        </h1>
+      </div>
+      <br />
+      <br />
+      <hr />
     </div>
-    <br>
-    <br>
-    <hr>
-
-  </div>
-</body>
-
+  </body>
 </html>

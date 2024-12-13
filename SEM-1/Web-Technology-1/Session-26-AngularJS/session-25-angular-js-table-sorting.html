@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 26 AngularJS Sorting</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <script src="Javascript/session-26-angular-js-sorting.js"></script>
+  </head>
+
+  <body>
+    <div ng-app="app">
+      <div ng-controller="sortTable">
+        <h1 style="text-decoration: underline">AngularJS Table Sorting</h1>
+
+        <table border="20">
+          <thead>
+            <tr>
+              <th ng-click="orderByColumn('rollno')">Roll No</th>
+              <th ng-click="orderByColumn('name')">Name</th>
+              <th ng-click="orderByColumn('city')">City</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              ng-repeat="studObj in studentObjects | orderBy:studentObjectOrder"
+            >
+              <td>{{studObj.rollno}}</td>
+              <td>{{studObj.name}}</td>
+              <td>{{studObj.city}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <br />
+      <br />
+      <hr />
+
+      <div ng-controller="sortTable">
+        <h1 style="text-decoration: underline">AngularJS Table Filter</h1>
+
+        <label for="stud">Search Student here: </label>
+        <input type="text" ng-model="stud" />
+        <br />
+        <br />
+        <table border="20">
+          <thead>
+            <tr>
+              <th ng-click="orderByColumn('rollno')">Roll No</th>
+              <th ng-click="orderByColumn('name')">Name</th>
+              <th ng-click="orderByColumn('city')">City</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="stud in studentObjects | filter:stud">
+              <td>{{stud.rollno}}</td>
+              <td>{{stud.name}}</td>
+              <td>{{stud.city}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <br />
+      <br />
+      <hr />
+    </div>
+  </body>
+</html>

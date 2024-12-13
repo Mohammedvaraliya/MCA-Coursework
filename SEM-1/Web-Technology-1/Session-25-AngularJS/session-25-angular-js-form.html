@@ -1,74 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 25 AngularJS Form</title>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Session 25 AngularJS Form</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+      input {
+        width: 300px;
+      }
 
-  <style>
-    input {
-      width: 300px;
-    }
+      input.ng-invalid {
+        background-color: lightcoral;
+      }
 
-    input.ng-invalid {
-      background-color: lightcoral;
-    }
+      input.ng-valid {
+        background-color: lightgreen;
+      }
 
-    input.ng-valid {
-      background-color: lightgreen;
-    }
+      input.ng-empty {
+        background-color: lightgray;
+      }
+    </style>
+  </head>
 
-    input.ng-empty {
-      background-color: lightgray;
-    }
-  </style>
-</head>
-
-<body>
-
-  <div ng-app="">
-
-    <div>
-      <h1 style="text-decoration: underline;"> AngularJS Form </h1>
-      <form name="loginForm">
-        <input type="email" name="userName" ng-model="email" required>
-        <hr>
-
-        <p><strong>Invalid:</strong> {{loginForm.userName.$error}}</p>
-        <p><strong>Valid:</strong> {{loginForm.userName.$valid}}</p>
-        <p><strong>Touched:</strong> {{loginForm.userName.$touched}}</p>
-        <p><strong>Dirty:</strong> {{loginForm.userName.$dirty}}</p>
-        <p><strong>Pending:</strong> {{loginForm.userName.$pending}}</p>
-
-        <p ng-show="loginForm.userName.$error.email">Invalid Email ID</p>
-        <p ng-show="loginForm.userName.$dirty && !loginForm.userName.$valid">Please enter a valid email</p>
-        <p ng-show="loginForm.userName.$pristine">Email field is pristine (not modified)</p>
-        <p ng-show="loginForm.userName.$touched">Email field is touched</p>
-        <p ng-show="loginForm.userName.$dirty">Email field is dirty (modified)</p>
-
-        <p ng-bind="email"></p>
-      </form>
-    </div>
-    <br>
-    <br>
-    <hr>
-
-    <div ng-init="subjects = ['Web Technolgy', 'Python', 'Java', 'DBMS']">
-
+  <body>
+    <div ng-app="">
       <div>
-        <h1> AngularJS Filtering </h1>
-  
-        <h1> {{subjects[1] | uppercase}} </h1>
-        <h1> {{subjects[1] | lowercase}} </h1>
-  
-        <ul>
-          <li ng-repeat="sub in subjects | orderBy:toString">{{sub}}</li>
-        </ul>
-      </div>
-  </div>
-</body>
+        <h1 style="text-decoration: underline">AngularJS Form</h1>
+        <form name="loginForm">
+          <input type="email" name="userName" ng-model="email" required />
+          <hr />
 
+          <p><strong>Invalid:</strong> {{loginForm.userName.$error}}</p>
+          <p><strong>Valid:</strong> {{loginForm.userName.$valid}}</p>
+          <p><strong>Touched:</strong> {{loginForm.userName.$touched}}</p>
+          <p><strong>Dirty:</strong> {{loginForm.userName.$dirty}}</p>
+          <p><strong>Pending:</strong> {{loginForm.userName.$pending}}</p>
+
+          <p ng-show="loginForm.userName.$error.email">Invalid Email ID</p>
+          <p ng-show="loginForm.userName.$dirty && !loginForm.userName.$valid">
+            Please enter a valid email
+          </p>
+          <p ng-show="loginForm.userName.$pristine">
+            Email field is pristine (not modified)
+          </p>
+          <p ng-show="loginForm.userName.$touched">Email field is touched</p>
+          <p ng-show="loginForm.userName.$dirty">
+            Email field is dirty (modified)
+          </p>
+
+          <p ng-bind="email"></p>
+        </form>
+      </div>
+      <br />
+      <br />
+      <hr />
+
+      <div ng-init="subjects = ['Web Technolgy', 'Python', 'Java', 'DBMS']">
+        <div>
+          <h1>AngularJS Filtering</h1>
+
+          <h1>{{subjects[1] | uppercase}}</h1>
+          <h1>{{subjects[1] | lowercase}}</h1>
+
+          <ul>
+            <li ng-repeat="sub in subjects | orderBy:toString">{{sub}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

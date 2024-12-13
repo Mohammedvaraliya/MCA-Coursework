@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 26 AngularJS Object</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  </head>
+
+  <body>
+    <div ng-app="">
+      <div
+        ng-init="studentObjects = [
+      { rollno: 101, name: 'Mohammed Varaliya', city: 'Mumbai' },
+      { rollno: 102, name: 'Jayesh', city: 'Pune' },
+      { rollno: 103, name: 'Ben', city: 'Delhi' }
+    ]"
+      >
+        <h1 style="text-decoration: underline">
+          AngularJS List (Key Value Pair)
+        </h1>
+
+        <div ng-repeat="stud in studentObjects | orderBy: 'city'">
+          <h2>{{"RollNo: " + stud.rollno}}</h2>
+          <h2>{{"Name: " + stud.name}}</h2>
+          <h2>{{"City: " + stud.city}}</h2>
+          <br />
+          <br />
+          <hr />
+        </div>
+      </div>
+      <br />
+      <br />
+      <hr />
+
+      <div>
+        <h1 style="text-decoration: underline">AngularJS Data Binding</h1>
+        <label for="price">INR: </label>
+        <input type="number" ng-model="price" /><br /><br />
+        <h2>Price in USD: <span ng-bind=" price | currency "></span></h2>
+        <h2>
+          Price in INR: <span ng-bind=" price | currency : '₹' : 0 "></span>
+        </h2>
+      </div>
+      <br />
+      <br />
+      <hr />
+    </div>
+  </body>
+</html>
