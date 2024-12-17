@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Session 27 AngularJS</title>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+  <script src="Javascript/session-27-angular-js.js"></script>
+
+</head>
+
+<body>
+
+  <div ng-app="myapp">
+
+    <div ng-controller="controller">
+      <h1 style="text-decoration: underline;"> AngularJS module controller </h1>
+      
+      <div>
+        <ul>
+          <li ng-repeat="s in subjects">{{s | caplist}}</li>
+        </ul>
+      </div>
+
+    </div>
+    <br>
+    <br>
+    <hr>
+
+    <div>
+      <!-- directive as HTML element/tag -->
+      <kjsim></kjsim>
+
+      <!-- directive as HTML attribute -->
+      <p kjsim=""></p>
+
+      <!-- directive as classname -->
+      <p class="kjsim"></p>
+
+      <!-- directive as comment -->
+      <mycomment></mycomment>
+ 
+    </div>
+
+  </div>
+</body>
+
+</html>
