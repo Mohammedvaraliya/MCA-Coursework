@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 28 AngularJS Controllers</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <script>
+      var app = angular.module("app", []);
+
+      app.controller("myctlr1", function ($scope) {
+        $scope.msg = "Message from controller 1";
+      });
+
+      app.controller("myctlr2", function ($scope) {
+        $scope.msg = "Message from controller 2";
+      });
+
+      app.controller("myctlr3", function ($scope) {
+        $scope.msg = "Message from controller 3";
+      });
+    </script>
+  </head>
+
+  <body>
+    <div ng-app="app">
+      <div>
+        <h1 style="text-decoration: underline">
+          AngularJS Multiple Controllers
+        </h1>
+
+        <div ng-controller="myctlr1">
+          <h1>{{msg}}</h1>
+        </div>
+        <br />
+        <br />
+        <hr />
+
+        <div ng-controller="myctlr2">
+          <h1>{{msg}}</h1>
+        </div>
+        <br />
+        <br />
+        <hr />
+
+        <div ng-controller="myctlr3">
+          <h1>{{msg}}</h1>
+        </div>
+        <br />
+        <br />
+        <hr />
+      </div>
+    </div>
+  </body>
+</html>

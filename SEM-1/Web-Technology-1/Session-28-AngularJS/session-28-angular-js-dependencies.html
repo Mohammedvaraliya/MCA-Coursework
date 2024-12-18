@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 28 AngularJS Dependencies</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <script>
+      var msgeApp = angular.module("globalMessage", []);
+      msgeApp.value("message1", "Message from the globalMessage1 Module/App");
+      msgeApp.value("message2", "Message from the globalMessage2 Module/App");
+      msgeApp.service("gb", function () {
+        this.showMessage = function () {
+          return "This Message is in return of service call and showMessage service method.";
+        };
+      });
+
+      var app = angular.module("myApp", ["globalMessage"]);
+      app.controller("myController", function ($scope, message1, message2, gb) {
+        $scope.msg1 = message1;
+        $scope.msg2 = message2;
+        $scope.gb = gb.showMessage();
+        $scope.locMsg = "This is from myapp-module";
+      });
+    </script>
+  </head>
+
+  <body>
+    <div>
+      <div>
+        <h1 style="text-decoration: underline">AngularJS Dependencies</h1>
+
+        <div ng-app="myApp" ng-controller="myController">
+          <h1>{{msg1}}</h1>
+          <h1>{{msg2}}</h1>
+          <h1>{{gb}}</h1>
+          <h1>{{locMsg}}</h1>
+        </div>
+        <br />
+        <br />
+        <hr />
+      </div>
+    </div>
+  </body>
+</html>

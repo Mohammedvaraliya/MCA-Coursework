@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 28 AngularJS Services</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <script>
+      var app = angular.module("myApp", []);
+      app.controller("myController", function ($scope, $location, $timeout) {
+        $scope.url = $location.absUrl();
+        $scope.msg = "This message is time stipulated";
+
+        $timeout(function () {
+          $scope.msg = "This message shown after timeout service executed!!!";
+        }, 3000);
+      });
+    </script>
+  </head>
+
+  <body>
+    <div>
+      <div>
+        <h1 style="text-decoration: underline">AngularJS Services</h1>
+
+        <div ng-app="myApp" ng-controller="myController">
+          <h1>{{url}}</h1>
+          <h1>{{msg}}</h1>
+        </div>
+        <br />
+        <br />
+        <hr />
+      </div>
+    </div>
+  </body>
+</html>

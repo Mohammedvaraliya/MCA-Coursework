@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 28 AngularJS Scope</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <script>
+      var app = angular.module("app", []);
+      app.run(function ($rootScope) {
+        $rootScope.msg = "msg: From Global Scope";
+        $rootScope.count = 55;
+      });
+
+      app.controller("myctlr", function ($scope) {
+        $scope.msg = "msg: From local Scope";
+        $scope.count = 5;
+      });
+    </script>
+  </head>
+
+  <body>
+    <div ng-app="app">
+      <div>
+        <h1 style="text-decoration: underline">AngularJS Scope</h1>
+
+        <div ng-controller="myctlr">
+          <h1>{{msg}}</h1>
+          <h1>{{count}}</h1>
+        </div>
+
+        <br />
+        <br />
+        <hr />
+
+        <div>
+          <h1>Global msg: {{msg}}</h1>
+          <h1>Global count: {{count}}</h1>
+        </div>
+      </div>
+      <br />
+      <br />
+      <hr />
+    </div>
+  </body>
+</html>

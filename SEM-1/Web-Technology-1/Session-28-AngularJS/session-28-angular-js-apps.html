@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 28 AngularJS Apps</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-sanitize.js"></script>
+
+    <script>
+      var MCAApp = angular.module("MCA", []);
+
+      MCAApp.controller("mcaContrl", function ($scope) {
+        $scope.msg = "MCA: Master of Computer Application";
+      });
+
+      var MBAApp = angular.module("MBAApp", []);
+
+      MBAApp.controller("mbaContrl", function ($scope) {
+        $scope.msg = "MBA: Master in Business Analytics";
+      });
+
+      angular.element(document).ready(function () {
+        angular.bootstrap(document.getElementById("MBA"), ["MBAApp"]);
+      });
+    </script>
+  </head>
+
+  <body>
+    <div>
+      <div>
+        <h1 style="text-decoration: underline">
+          AngularJS Multiple Apps in One File
+        </h1>
+
+        <div ng-app="MCA" ng-controller="mcaContrl">
+          <h1>{{msg}}</h1>
+        </div>
+        <br />
+        <br />
+        <hr />
+
+        <div id="MBA" ng-controller="mbaContrl">
+          <h1>{{msg}}</h1>
+        </div>
+        <br />
+        <br />
+        <hr />
+      </div>
+    </div>
+  </body>
+</html>
