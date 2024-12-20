@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session 29 AngularJS Routing</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
+
+    <script src="Javascript/session-29-angular-js-routing.js"></script>
+  </head>
+
+  <body ng-app="app">
+    <div>
+      <h1 style="text-decoration: underline">AngularJS Routing</h1>
+
+      <div>
+        <p><a href="#!">Home</a></p>
+        <p><a href="#!menu">Menu</a></p>
+        <p><a href="#!content">Content</a></p>
+        <p><a href="#!sorting">Table Sorting</a></p>
+        <p><a href="#!about">About</a></p>
+        <p><a href="#!help">Help</a></p>
+      </div>
+
+      <div ng-view></div>
+    </div>
+  </body>
+</html>
