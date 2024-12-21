@@ -14,7 +14,7 @@ public class NameInBothLanguages extends Application {
     public void start(Stage primaryStage) {
 
         // Create a text element for your name in English
-        Text englishText = new Text("Your Name");
+        Text englishText = new Text("Mohammed Varaliya");
         englishText.setFont(Font.font("Verdana", 50)); // Set font and size
         englishText.setFill(Color.DARKBLUE); // Text color
         DropShadow dropShadow = new DropShadow();
