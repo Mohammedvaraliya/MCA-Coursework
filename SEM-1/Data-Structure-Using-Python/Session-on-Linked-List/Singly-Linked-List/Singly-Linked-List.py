@@ -114,9 +114,17 @@ class SinglyLinkedList:
 if __name__ == "__main__":
 
     llist = SinglyLinkedList()
-    llist.append(1)
     llist.append(2)
     llist.append(3)
     llist.append(4)
 
+    llist.print_list()
+
+    llist.prepend(1)
+    llist.print_list()
+
+    llist.insert_after(4, 5)
+    llist.print_list()
+
+    llist.delete_node(5)
     llist.print_list()
