@@ -52,5 +52,5 @@ if __name__ == "__main__":
     queue.enqueue(30)
     queue.display()
 
-    print(queue.dequeue())
+    print("Dequeued element: ", queue.dequeue())
     queue.display()

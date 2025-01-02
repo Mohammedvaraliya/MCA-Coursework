@@ -37,5 +37,5 @@ if __name__ == "__main__":
     pq.insert("Task3", 3)
     pq.display()
 
-    print(pq.delete())
+    print("Deleted Data: ", pq.delete())
     pq.display()
