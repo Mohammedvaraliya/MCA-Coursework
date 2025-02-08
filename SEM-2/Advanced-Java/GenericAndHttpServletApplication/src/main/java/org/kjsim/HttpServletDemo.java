@@ -6,24 +6,33 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Enumeration;
 
-@WebServlet("/HttpServlet-Page")
+@WebServlet("/http")
 public class HttpServletDemo extends HttpServlet {
 
     @Override
-    public void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
+    protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        PrintWriter out = res.getWriter();
+        Enumeration<String> headers = req.getHeaderNames();
+        while (headers.hasMoreElements()) {
+            String headerName = headers.nextElement();
+            String headerValue = req.getHeader(headerName);
+            out.println("<b>"+headerName+"</b>");
+            out.println(headerValue+"<br>");
+        }
 
-        resp.getWriter().println("<html>");
-        resp.getWriter().println("<head>");
-        resp.getWriter().println("<title>HTTP Servlet Demo</title>");
-        resp.getWriter().println("</head>");
-        resp.getWriter().println("<body>");
-        resp.getWriter().println("<h1>This is a simple HTTP Servlet Demo</h1>");
-        resp.getWriter().println("<p>This servlet extends the HttpServlet class and overrides the service method.</p>");
-        resp.getWriter().println("<p>It demonstrates how to handle HTTP-specific requests (GET, POST, etc.) and send responses.</p>");
-        resp.getWriter().println("<p>Request Method: " + req.getMethod() + "</p>");
-        resp.getWriter().println("</body>");
-        resp.getWriter().println("</html>");
+        res.setContentType("text/html");
+
+        out.println("<html><body>");
+        out.println("<h1>Welcome to the Second HTTP Servlet!</h1>");
+        res.getWriter().println("<a href='/GenericAndHttpServletApplication/generic'>Go back to Generic Servlet</a>");
+        out.println("</body></html>");
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        doGet(req, res);
     }
 }
