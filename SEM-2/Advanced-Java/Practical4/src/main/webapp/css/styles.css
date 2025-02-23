@@ -1,0 +1,234 @@
+html, body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    color: #333;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    max-width: 50%;
+    width: 50%;
+    margin: 160px auto 100px;
+    padding: 20px;
+}
+
+header {
+    background-color: #ff0000;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+header .logo h1 {
+    margin: 0;
+    font-size: 2em;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1em;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #ffdd57;
+    text-decoration: underline;
+}
+
+main {
+    text-align: center;
+    background-color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    width: 100%;
+    font-size: 1em;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    bottom: 0;
+}
+
+h1 {
+    font-size: 2em;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 1.8em;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+p {
+    font-size: 1.2em;
+    color: #555;
+    margin-bottom: 20px;
+    line-height: 1.8;
+}
+
+a {
+    color: #ff0000;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #ff0082;
+    text-decoration: underline;
+}
+
+form {
+    margin: 30px auto;
+    padding: 25px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+    font-weight: 500;
+    color: #333;
+    text-align: start;
+}
+
+form input[type="text"],
+form input[type="email"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1em;
+    transition: border-color 0.3s ease;
+}
+
+form input[type="text"]:focus,
+form input[type="email"]:focus {
+    border-color: #ff0000;
+    outline: none;
+}
+
+form button {
+    width: 100%;
+    padding: 14px;
+    font-size: 1.2em;
+    font-weight: 600;
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #0080ff;
+}
+
+button {
+    width: 35%;
+    padding: 14px;
+    margin: 4px;
+    font-size: 1.2em;
+    font-weight: 600;
+    background-color: #ff0000;
+    color: white;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0080ff;
+}
+
+table {
+    width: 100%;
+    margin: 30px auto;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+table th,
+table td {
+    padding: 15px 20px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #ff0000;
+    color: white;
+    font-weight: 600;
+    font-size: 1.1em;
+}
+
+table td {
+    background-color: #f9f9f9;
+    font-size: 1em;
+    color: #555;
+}
+
+table tr:hover td {
+    background-color: #f1f1f1;
+}
+
+div.message {
+    text-align: center;
+    font-size: 1.5em;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 5px;
+}
+
+div.success {
+    color: green;
+    background-color: #d4edda;
+}
+
+div.error {
+    color: red;
+    background-color: #f8d7da;
+}
