@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  java-app:
+    build: ./java-image
+    container_name: java-container
+    command: ["java", "Student"]
+
+  python-app:
+    build: ./py-image
+    container_name: python-container
+    command: ["python", "app.py"]
+
+  js-app:
+    build: ./js-image
+    container_name: js-container
+    command: ["node", "index.js"]
+
+  html-app:
+    build: ./html-image
+    container_name: html-container
+    ports:
+      - "8081:80"
