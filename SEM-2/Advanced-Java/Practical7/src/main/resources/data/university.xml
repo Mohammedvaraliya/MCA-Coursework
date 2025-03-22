@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<university name="K.J.Sim">
+    <department id="CS" name="Computer Science">
+        <department_head faculty_id="F101"/>
+        <courses>
+            <course code="CS101" credits="3"/>
+            <course code="CS102" credits="4"/>
+        </courses>
+    </department>
+    <faculty>
+        <faculty_member id="F101"/>
+        <faculty_member id="F102"/>
+        <faculty_member id="F103"/>
+    </faculty>
+</university>
