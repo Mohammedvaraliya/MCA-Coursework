@@ -14,8 +14,8 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Student Registration"
-        android:textSize="30dp"
+        android:text="Users CRUD Operation"
+        android:textSize="20dp"
         android:textColor="#333333"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
@@ -86,41 +86,92 @@
         android:background="@drawable/edit_text_background"
         android:textColor="#333333"/>
 
-    <!-- Horizontal LinearLayout for buttons -->
+    <!-- Vertical LinearLayout to hold two rows -->
     <LinearLayout
         android:id="@+id/button_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/uType"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_marginTop="30dp"
         android:gravity="center">
 
-        <!-- Insert Record Button -->
-        <Button
-            android:id="@+id/insert_record_button"
-            android:layout_width="0dp"
+        <!-- First Row (3 Buttons) -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="20dp"
-            android:text="Insert Record"
-            android:textColor="#FFFFFF"
-            android:background="@drawable/button_background"
-            android:padding="12dp"
-            android:textSize="16sp"/>
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="10dp">
 
-        <!-- Show Records Button -->
-        <Button
-            android:id="@+id/show_record_button"
-            android:layout_width="0dp"
+            <Button
+                android:id="@+id/insert_record_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="8dp"
+                android:text="Insert Record"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/button_background"
+                android:padding="10dp"
+                android:textSize="14sp"/>
+
+            <Button
+                android:id="@+id/show_record_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="8dp"
+                android:text="Show Records"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/button_background"
+                android:padding="10dp"
+                android:textSize="14sp"/>
+
+            <Button
+                android:id="@+id/search_record_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="8dp"
+                android:text="Search Record"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/button_background"
+                android:padding="10dp"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+        <!-- Second Row (2 Buttons) -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="20dp"
-            android:text="Show Records"
-            android:textColor="#FFFFFF"
-            android:background="@drawable/button_background"
-            android:padding="12dp"
-            android:textSize="16sp"/>
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/update_record_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="8dp"
+                android:text="Update Record"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/button_background"
+                android:padding="10dp"
+                android:textSize="14sp"/>
+
+            <Button
+                android:id="@+id/delete_record_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="8dp"
+                android:text="Delete Record"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/button_background"
+                android:padding="10dp"
+                android:textSize="14sp"/>
+        </LinearLayout>
     </LinearLayout>
 
     <!-- TextView to show records -->
@@ -133,6 +184,6 @@
         android:text="User records will appear here."
         android:textSize="16sp"
         android:textColor="#333333"
-        android:padding="16dp"/>
+        android:padding="13sp"/>
 
 </RelativeLayout>

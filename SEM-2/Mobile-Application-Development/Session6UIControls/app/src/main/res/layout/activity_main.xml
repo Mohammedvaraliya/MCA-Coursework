@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="50dp"
+    android:layout_marginBottom="10dp"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/name_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Your Name"
+        android:layout_margin="16dp" />
+
+    <CheckBox
+        android:id="@+id/svu_checkBox"
+        android:layout_width="123dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/name_edittext"
+        android:layout_marginStart="16dp"
+        android:text="SVU" />
+
+    <CheckBox
+        android:id="@+id/ayurvihar_checkbox"
+        android:layout_width="119dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/name_edittext"
+        android:layout_marginStart="16dp"
+        android:layout_toEndOf="@id/svu_checkBox"
+        android:text="Ayur Vihar" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="151dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/svu_checkBox"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/teaching_radio_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Teaching" />
+
+        <RadioButton
+            android:id="@+id/nonteaching_radio_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Non Teaching" />
+
+        <RadioButton
+            android:id="@+id/staff_radio_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Staff" />
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/dob_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Your DOB"
+        android:layout_below="@id/radioGroup"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"/>
+
+    <AutoCompleteTextView
+        android:id="@+id/institute_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Institute"
+        android:layout_below="@id/dob_edittext"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"/>
+
+    <MultiAutoCompleteTextView
+        android:id="@+id/city_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="City"
+        android:layout_below="@id/institute_edittext"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"/>
+
+    <EditText
+        android:id="@+id/comment_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Your Comment"
+        android:layout_below="@id/city_edittext"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:inputType="textMultiLine"
+        android:layout_marginEnd="16dp"/>
+
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:layout_below="@id/comment_edittext"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"/>
+
+    <TextView
+        android:id="@+id/output"
+        android:layout_width="373dp"
+        android:layout_height="198dp"
+        android:layout_below="@id/submit"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="23dp"
+        android:text="Hello World!"
+        android:textSize="16sp" />
+
+</RelativeLayout>

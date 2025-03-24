@@ -75,6 +75,78 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
         cursor.close();
+        db.close();
         return records.toString();
+    }
+
+    public String searchRecord(String rollno) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        StringBuilder record = new StringBuilder();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE rollno = ?", new String[]{rollno});
+
+        if (cursor.moveToFirst()) {
+            String rollNumber = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ROLLNO));
+            String email = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_EMAIL));
+            String name = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME));
+            String uType = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_UTYPE));
+
+            record.append("Roll No: ").append(rollNumber).append("\n");
+            record.append("Email: ").append(email).append("\n");
+            record.append("Name: ").append(name).append("\n");
+            record.append("User Type: ").append(uType).append("\n\n");
+        } else {
+            record.append("No record found.");
+        }
+
+        cursor.close();
+        db.close();
+        return record.toString();
+    }
+
+    public boolean updateRecord(String rollno, String email, String name, String password, String uType) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE rollno = ?", new String[]{rollno});
+
+        if (!cursor.moveToFirst()) {
+            cursor.close();
+            db.close();
+            return false;
+        }
+
+        String currentEmail = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_EMAIL));
+        String currentName = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME));
+        String currentPassword = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PASSWORD));
+        String currentUType = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_UTYPE));
+
+        cursor.close();
+
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_EMAIL, email.isEmpty() ? currentEmail : email);
+        values.put(COLUMN_NAME, name.isEmpty() ? currentName : name);
+        values.put(COLUMN_PASSWORD, password.isEmpty() ? currentPassword : password);
+        values.put(COLUMN_UTYPE, uType.isEmpty() ? currentUType : uType);
+
+        int rowsAffected = db.update(TABLE_NAME, values, "rollno = ?", new String[]{rollno});
+        db.close();
+
+        return rowsAffected > 0;
+    }
+
+    public boolean deleteUser(String rollno) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE rollno = ?", new String[]{rollno});
+
+        if (!cursor.moveToFirst()) {
+            cursor.close();
+            db.close();
+            return false;
+        }
+
+        cursor.close();
+
+        int rowsAffected = db.delete(TABLE_NAME, "rollno = ?", new String[]{rollno});
+        db.close();
+
+        return rowsAffected > 0;
     }
 }
