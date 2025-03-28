@@ -1,6 +1,8 @@
 package com.example.session6uicontrols;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -21,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private MultiAutoCompleteTextView cityEditText;
     private AutoCompleteTextView instituteEditText;
     private TextView outputTextView;
-    private Button submitButton;
+    private Button submitButton, goToOtherUIControlActivity;
 
     private static final String[] INSTITUTES = {
             "KJ Somaiya Institute of Management",
@@ -42,6 +44,17 @@ public class MainActivity extends AppCompatActivity {
         initializeUI();
         setupAutoCompleteFields();
         submitButton.setOnClickListener(v -> displayInput());
+
+
+        goToOtherUIControlActivity = findViewById(R.id.go_to_activity2_button);
+
+        goToOtherUIControlActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ListViewAndSpinnerActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void initializeUI() {
