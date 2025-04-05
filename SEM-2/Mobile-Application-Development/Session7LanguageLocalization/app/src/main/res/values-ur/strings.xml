@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">انٹرنیشنلائزیشن I18N کثیر لسانی سپورٹ پروجیکٹ میں خوش آمدید</string>
+    <string name="change_language">زبان بدلنے کے لیے یہاں کلک کریں۔</string>
+    <string name="login">لاگ ان کرنے کے لیے یہاں کلک کریں۔</string>
+    <string name="password">پاس ورڈ درج کریں۔</string>
+    <string name="email">abc@somaiya.edu :ای میل درج کریں: </string>
+</resources>

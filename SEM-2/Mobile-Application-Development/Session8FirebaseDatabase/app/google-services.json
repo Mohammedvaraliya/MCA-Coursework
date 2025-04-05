@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "963220680582",
+    "firebase_url": "https://madl-practical8-default-rtdb.firebaseio.com",
+    "project_id": "madl-practical8",
+    "storage_bucket": "madl-practical8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:963220680582:android:26b5221cf6b035194fc607",
+        "android_client_info": {
+          "package_name": "com.example.practical8"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATYxx9N6-DkVzQ6nwsKzJqS-pToB2kEJE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:963220680582:android:2b5f8ccf62c2cf564fc607",
+        "android_client_info": {
+          "package_name": "com.example.session8firebasedatabase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATYxx9N6-DkVzQ6nwsKzJqS-pToB2kEJE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">अंतर्राष्ट्रीयकरण I18N बहुभाषी समर्थन परियोजना में आपका स्वागत है</string>
+    <string name="change_language">भाषा बदलने के लिए यहाँ क्लिक करें</string>
+    <string name="login">लॉगिन करने के लिए यहाँ क्लिक करें</string>
+    <string name="password">पासवर्ड दर्ज करें</string>
+    <string name="email">ईमेल दर्ज करें: abc@somaiya.edu</string>
+</resources>
