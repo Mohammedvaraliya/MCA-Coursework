@@ -6,6 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Update Employee</title>
+    <link href="${pageContext.request.contextPath}/styles/style.css" rel="stylesheet">
 </head>
 <body>
 <%@ include file="../header.jsp" %>
@@ -13,7 +14,7 @@
 <%
     String idParam = request.getParameter("id");
     if(idParam == null || idParam.isEmpty()) {
-        response.sendRedirect("../error.jsp?message=" + URLEncoder.encode("Employee ID is required", "UTF-8"));
+        response.sendRedirect("../error.jsp?message=" + URLEncoder.encode("BlogPost ID is required", "UTF-8"));
         return;
     }
 
@@ -21,16 +22,16 @@
     try {
         employeeId = Long.parseLong(idParam);
     } catch (NumberFormatException e) {
-        response.sendRedirect("../error.jsp?message=" + URLEncoder.encode("Invalid Employee ID format", "UTF-8"));
+        response.sendRedirect("../error.jsp?message=" + URLEncoder.encode("Invalid BlogPost ID format", "UTF-8"));
         return;
     }
 
     HibernateEmployee hibernateEmployee = new HibernateEmployee();
-    Employee employee = hibernateEmployee.getEmployeeById(employeeId);
+    Employee blogPost = hibernateEmployee.getEmployeeById(employeeId);
 
-    if(employee == null) {
+    if(blogPost == null) {
         response.sendRedirect("../error.jsp?message=" +
-                URLEncoder.encode("Employee not found with ID: " + employeeId, "UTF-8"));
+                URLEncoder.encode("BlogPost not found with ID: " + employeeId, "UTF-8"));
         return;
     }
 %>
@@ -41,26 +42,26 @@
     </div>
     <div class="card-body">
         <form action="updateEmployee.jsp" method="post">
-            <input type="hidden" name="id" value="<%= employee.getId() %>">
+            <input type="hidden" name="id" value="<%= blogPost.getId() %>">
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
                 <input type="text" class="form-control" id="name" name="name"
-                       value="<%= employee.getName() %>" required>
+                       value="<%= blogPost.getName() %>" required>
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control" id="email" name="email"
-                       value="<%= employee.getEmail() %>" required>
+                       value="<%= blogPost.getEmail() %>" required>
             </div>
             <div class="mb-3">
                 <label for="hireDate" class="form-label">Hire Date</label>
                 <input type="date" class="form-control" id="hireDate" name="hireDate"
-                       value="<%= employee.getHireDate() %>" required>
+                       value="<%= blogPost.getHireDate() %>" required>
             </div>
             <div class="mb-3">
                 <label for="department" class="form-label">Department</label>
                 <input type="text" class="form-control" id="department" name="department"
-                       value="<%= employee.getDepartment() %>" required>
+                       value="<%= blogPost.getDepartment() %>" required>
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <a href="../index.jsp" class="btn btn-secondary me-md-2">Cancel</a>
@@ -81,7 +82,7 @@
 
                     response.sendRedirect("../index.jsp");
                 } catch(Exception e) {
-                    String errorMessage = "Error updating employee: " + e.getMessage();
+                    String errorMessage = "Error updating blogPost: " + e.getMessage();
                     response.sendRedirect("../error.jsp?message=" + URLEncoder.encode(errorMessage, "UTF-8"));
                 }
             }

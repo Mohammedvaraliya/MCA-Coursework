@@ -8,6 +8,7 @@
     <title>Employee Management System</title>
     <!-- Add Bootstrap Icons CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="${pageContext.request.contextPath}/styles/style.css" rel="stylesheet">
 </head>
 <body>
 <%@ include file="header.jsp" %>
@@ -76,7 +77,7 @@
                         </a>
                         <a href="${pageContext.request.contextPath}/operations/deleteEmployee.jsp?id=<%= emp.getId() %>"
                            class="btn btn-sm btn-danger"
-                           onclick="return confirm('Are you sure you want to delete this employee?')">
+                           onclick="return confirm('Are you sure you want to delete this blogPost?')">
                             <i class="bi bi-trash"></i> Delete
                         </a>
                     </td>
@@ -86,7 +87,7 @@
                 } else {
                 %>
                 <tr>
-                    <td colspan="6" class="text-center">No employee records found</td>
+                    <td colspan="6" class="text-center">No blogPost records found</td>
                 </tr>
                 <%
                     }

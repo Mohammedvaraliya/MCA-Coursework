@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Error</title>
+    <link href="${pageContext.request.contextPath}/styles/style.css" rel="stylesheet">
 </head>
 <body>
 <%@ include file="header.jsp" %>

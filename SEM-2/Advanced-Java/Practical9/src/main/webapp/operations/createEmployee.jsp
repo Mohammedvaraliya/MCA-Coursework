@@ -6,6 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Add New Employee</title>
+    <link href="${pageContext.request.contextPath}/styles/style.css" rel="stylesheet">
 </head>
 <body>
 <%@ include file="../header.jsp" %>
@@ -44,19 +45,19 @@
         <%
             if("POST".equalsIgnoreCase(request.getMethod())) {
                 try {
-                    Employee employee = new Employee();
-                    employee.setId(Long.parseLong(request.getParameter("id")));
-                    employee.setName(request.getParameter("name"));
-                    employee.setEmail(request.getParameter("email"));
-                    employee.setHireDate(request.getParameter("hireDate"));
-                    employee.setDepartment(request.getParameter("department"));
+                    Employee blogPost = new Employee();
+                    blogPost.setId(Long.parseLong(request.getParameter("id")));
+                    blogPost.setName(request.getParameter("name"));
+                    blogPost.setEmail(request.getParameter("email"));
+                    blogPost.setHireDate(request.getParameter("hireDate"));
+                    blogPost.setDepartment(request.getParameter("department"));
 
                     HibernateEmployee hibernateEmployee = new HibernateEmployee();
-                    hibernateEmployee.createEmployee(employee);
+                    hibernateEmployee.createEmployee(blogPost);
 
                     response.sendRedirect("../index.jsp");
                 } catch(Exception e) {
-                    String errorMessage = "Error creating employee: " + e.getMessage();
+                    String errorMessage = "Error creating blogPost: " + e.getMessage();
                     String encodedErrorMessage = URLEncoder.encode(errorMessage, "UTF-8");
                     response.sendRedirect("../error.jsp?message=" + encodedErrorMessage);
                 }

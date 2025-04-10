@@ -25,5 +25,7 @@
 
         <!-- Entity mappings -->
         <mapping class="org.kjsim.Employee"/>
+        <mapping class="org.kjsim.blogs.BlogPost"/>
+        <mapping class="org.kjsim.blogs.Comment"/>
     </session-factory>
 </hibernate-configuration>

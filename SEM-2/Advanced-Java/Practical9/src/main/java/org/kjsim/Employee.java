@@ -70,7 +70,7 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Employee {" +
+        return "BlogPost {" +
                 "\n\tID: " + id +
                 "\n\tName: '" + name + '\'' +
                 "\n\tEmail: '" + email + '\'' +
