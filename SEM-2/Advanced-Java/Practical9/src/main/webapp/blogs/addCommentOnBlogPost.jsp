@@ -1,16 +1,30 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: varal
-  Date: 11-04-2025
-  Time: 12:17 am
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
+<%@ page import="org.kjsim.blogs.Comment" %>
+<%@ page import="org.kjsim.blogs.BlogPost" %>
+<%@ page import="org.kjsim.blogs.HibernateBlogPost" %>
+<%@ page import="org.kjsim.blogs.HibernateComment" %>
 
-</body>
-</html>
+<%
+    String content = request.getParameter("commentContent");
+    String postIdParam = request.getParameter("postId");
+
+    if (content != null && postIdParam != null) {
+        try {
+            Long postId = Long.parseLong(postIdParam);
+            HibernateBlogPost blogService = new HibernateBlogPost();
+            BlogPost post = blogService.getBlogPostById(postId);
+
+            if (post != null) {
+                Comment comment = new Comment();
+                comment.setContent(content);
+                comment.setPost(post);
+
+                HibernateComment commentService = new HibernateComment();
+                commentService.addCommentToPost(postId, comment);
+            }
+        } catch (Exception e) {
+            out.println("<div class='alert alert-danger'>Error adding comment.</div>");
+        }
+    }
+
+    response.sendRedirect("viewBlogPostById.jsp?id=" + postIdParam);
+%>

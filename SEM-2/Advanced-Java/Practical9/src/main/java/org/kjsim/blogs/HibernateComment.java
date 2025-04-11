@@ -7,6 +7,7 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HibernateComment {
@@ -49,11 +50,32 @@ public class HibernateComment {
 
     public List<Comment> getCommentsForPost(long postId) {
         try (Session session = factory.openSession()) {
-            BlogPost post = session.get(BlogPost.class, postId);
-            return post != null ? post.getComments() : null;
+            String hql = "SELECT c FROM Comment c WHERE c.post.id = :postId";
+            return session.createQuery(hql, Comment.class)
+                    .setParameter("postId", postId)
+                    .getResultList();
         } catch (Exception e) {
             System.err.println("Error fetching comments: " + e.getMessage());
+            return new ArrayList<>();
+        }
+    }
+
+    public Comment getCommentById(long commentId) {
+        try (Session session = factory.openSession()) {
+            return session.get(Comment.class, commentId);
+        } catch (Exception e) {
+            System.err.println("Error fetching comment by ID: " + e.getMessage());
             return null;
+        }
+    }
+
+    public void updateComment(Comment updated) {
+        try (Session session = factory.openSession()) {
+            session.beginTransaction();
+            session.merge(updated);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            System.err.println("Error updating comment: " + e.getMessage());
         }
     }
 
