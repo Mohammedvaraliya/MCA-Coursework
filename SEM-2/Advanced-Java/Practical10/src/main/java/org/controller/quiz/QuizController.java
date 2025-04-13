@@ -1,6 +1,10 @@
 package org.controller.quiz;
 
+<<<<<<< HEAD
 import org.controller.quiz.models.Quiz;
+=======
+import org.controller.quiz.model.Quiz;
+>>>>>>> 36adf264085266c22ae347d55343922053e8da7c
 import org.controller.quiz.services.QuizService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;

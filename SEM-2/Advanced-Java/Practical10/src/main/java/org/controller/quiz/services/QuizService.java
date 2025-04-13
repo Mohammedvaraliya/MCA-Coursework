@@ -1,7 +1,12 @@
 package org.controller.quiz.services;
 
+<<<<<<< HEAD
 import org.controller.quiz.models.Question;
 import org.controller.quiz.models.Quiz;
+=======
+import org.controller.quiz.model.Question;
+import org.controller.quiz.model.Quiz;
+>>>>>>> 36adf264085266c22ae347d55343922053e8da7c
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
