@@ -1,4 +1,4 @@
-package org.controller.quiz.model;
+package org.controller.quiz.models;
 
 import java.util.List;
 

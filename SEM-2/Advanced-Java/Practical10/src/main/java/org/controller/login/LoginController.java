@@ -1,7 +1,7 @@
 package org.controller.login;
 
 import jakarta.servlet.http.HttpSession;
-import org.controller.login.model.LoginForm;
+import org.controller.login.models.LoginForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;

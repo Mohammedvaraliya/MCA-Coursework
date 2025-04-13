@@ -1,4 +1,4 @@
-package org.controller.login.model;
+package org.controller.login.models;
 
 public class LoginForm {
     private String username;

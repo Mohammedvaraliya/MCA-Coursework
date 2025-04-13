@@ -1,7 +1,7 @@
 package org.controller.quiz.services;
 
-import org.controller.quiz.model.Question;
-import org.controller.quiz.model.Quiz;
+import org.controller.quiz.models.Question;
+import org.controller.quiz.models.Quiz;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
