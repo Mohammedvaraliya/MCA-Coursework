@@ -1,11 +1,7 @@
 package org.controller.login;
 
 import jakarta.servlet.http.HttpSession;
-<<<<<<< HEAD
 import org.controller.login.models.LoginForm;
-=======
-import org.controller.login.model.LoginForm;
->>>>>>> 36adf264085266c22ae347d55343922053e8da7c
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
