@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Session8FirebaseDatabase"
         tools:targetApi="31">
         <activity
+            android:name=".FirebaseCRUDActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
