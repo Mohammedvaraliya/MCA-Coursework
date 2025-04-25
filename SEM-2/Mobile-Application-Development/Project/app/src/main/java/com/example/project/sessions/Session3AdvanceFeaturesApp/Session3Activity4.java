@@ -1,4 +1,4 @@
-package com.example.project.Session3AdvanceFeaturesApp;
+package com.example.project.sessions.Session3AdvanceFeaturesApp;
 
 import android.content.Intent;
 import android.os.Bundle;

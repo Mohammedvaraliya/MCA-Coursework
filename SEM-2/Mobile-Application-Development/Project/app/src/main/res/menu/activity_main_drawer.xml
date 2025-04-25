@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_session2"
+            android:title="Session 2: Arithmetic &amp; Search" />
+        <item
+            android:id="@+id/nav_session3"
+            android:title="Session 3: Advanced Navigation" />
+        <item
+            android:id="@+id/nav_session4"
+            android:title="Session 4: DB &amp; CRUD" />
+        <item
+            android:id="@+id/nav_session5"
+            android:title="Session 5: Menus" />
+        <item
+            android:id="@+id/nav_session6"
+            android:title="Session 6: UI Controls" />
+        <item
+            android:id="@+id/nav_session7"
+            android:title="Session 7: Localization" />
+        <item
+            android:id="@+id/nav_session8"
+            android:title="Session 8: Firebase" />
+    </group>
+</menu>

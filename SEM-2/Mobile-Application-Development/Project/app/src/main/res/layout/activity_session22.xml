@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="24dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".sessions.Session2MultiActivityApp.Session2Activity2">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="This is Second Activity"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="24dp" />
+
+    <EditText
+        android:id="@+id/query"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Search anything on Google"
+        android:inputType="text"
+        android:layout_marginBottom="12dp" />
+
+    <EditText
+        android:id="@+id/query2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Search location on Google"
+        android:inputType="text"
+        android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search"
+        android:layout_marginBottom="20dp" />
+
+    <Button
+        android:id="@+id/button_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back to Main Activity" />
+
+</LinearLayout>

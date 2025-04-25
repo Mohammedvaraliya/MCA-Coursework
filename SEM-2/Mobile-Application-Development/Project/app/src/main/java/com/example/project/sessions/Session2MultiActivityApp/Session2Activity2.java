@@ -1,4 +1,4 @@
-package com.example.project.Session2MultiActivityApp;
+package com.example.project.sessions.Session2MultiActivityApp;
 
 import android.content.Intent;
 import android.net.Uri;

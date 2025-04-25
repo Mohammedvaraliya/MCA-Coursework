@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:padding="24dp"
+    tools:context=".sessions.Session3AdvanceFeaturesApp.Session3Activity3">
+
+    <EditText
+        android:id="@+id/mobile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:hint="Enter Mobile Number"
+        android:inputType="text"
+        android:padding="12dp"
+        android:background="@drawable/edit_text_background"
+        android:textColor="#333333" />
+
+    <Button
+        android:id="@+id/dial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dial Number"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/button_background"
+        android:layout_below="@id/mobile"
+        android:layout_marginTop="40dp"
+        android:padding="12dp"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/wallpaper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Set Wallpaper"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/button_background"
+        android:layout_below="@id/dial"
+        android:layout_marginTop="40dp"
+        android:padding="12dp"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/send_email_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Go to Send Email Activity"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/button_background"
+        android:layout_below="@id/wallpaper"
+        android:layout_marginTop="40dp"
+        android:padding="12dp"
+        android:textSize="16sp" />
+</RelativeLayout>

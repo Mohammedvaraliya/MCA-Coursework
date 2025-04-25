@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:padding="24dp"
+    tools:context=".sessions.Session3AdvanceFeaturesApp.Session3Activity4">
+
+    <EditText
+        android:id="@+id/recipient"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:hint="Enter Recipient Email"
+        android:inputType="textEmailAddress"
+        android:padding="12dp"
+        android:background="@drawable/edit_text_background"
+        android:textColor="#333333" />
+
+    <EditText
+        android:id="@+id/cc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:hint="Enter CC Emails"
+        android:layout_below="@id/recipient"
+        android:inputType="textEmailAddress"
+        android:padding="12dp"
+        android:background="@drawable/edit_text_background"
+        android:textColor="#333333" />
+
+    <EditText
+        android:id="@+id/subject"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:hint="Enter Subject of Email"
+        android:layout_below="@id/cc"
+        android:inputType="textEmailAddress"
+        android:padding="12dp"
+        android:background="@drawable/edit_text_background"
+        android:textColor="#333333" />
+
+    <EditText
+        android:id="@+id/message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:hint="Enter Message of Email"
+        android:layout_below="@id/subject"
+        android:inputType="textAutoCorrect"
+        android:padding="12dp"
+        android:background="@drawable/edit_text_background"
+        android:textColor="#333333" />
+
+    <Button
+        android:id="@+id/send_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Send Email"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/button_background"
+        android:layout_below="@id/message"
+        android:layout_marginTop="40dp"
+        android:padding="12dp"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/string_arrays_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Go to String Arrays Activity"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/button_background"
+        android:layout_below="@id/send_email"
+        android:layout_marginTop="40dp"
+        android:padding="12dp"
+        android:textSize="16sp" />
+</RelativeLayout>

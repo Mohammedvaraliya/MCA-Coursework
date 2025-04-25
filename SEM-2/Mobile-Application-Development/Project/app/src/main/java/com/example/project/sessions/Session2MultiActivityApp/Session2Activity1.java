@@ -1,4 +1,4 @@
-package com.example.project.Session2MultiActivityApp;
+package com.example.project.sessions.Session2MultiActivityApp;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -18,6 +19,7 @@ import com.example.project.R;
 
 public class Session2Activity1 extends AppCompatActivity {
 
+    private ActionBarDrawerToggle toggle;
     TextView output;
     Button clickView, nextButton;
     EditText operation, num1, num2;
