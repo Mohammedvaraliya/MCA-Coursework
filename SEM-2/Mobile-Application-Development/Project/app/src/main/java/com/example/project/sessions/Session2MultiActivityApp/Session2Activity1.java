@@ -9,7 +9,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -19,7 +18,6 @@ import com.example.project.R;
 
 public class Session2Activity1 extends AppCompatActivity {
 
-    private ActionBarDrawerToggle toggle;
     TextView output;
     Button clickView, nextButton;
     EditText operation, num1, num2;
@@ -43,15 +41,15 @@ public class Session2Activity1 extends AppCompatActivity {
         num2 = findViewById(R.id.num2);
         nextButton = findViewById(R.id.button_next);
 
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Session2Activity1.this, Session2Activity2.class);
-                intent.putExtra("userId", 54);
-                intent.putExtra("email", "m.varaliya@somaiya.edu");
-                startActivity(intent);
-                finish();
-            }
+        // Correctly set button click
+        clickView.setOnClickListener(this::show);
+
+        nextButton.setOnClickListener(v -> {
+            Intent intent = new Intent(Session2Activity1.this, Session2Activity2.class);
+            intent.putExtra("userId", 54);
+            intent.putExtra("email", "m.varaliya@somaiya.edu");
+            startActivity(intent);
+            finish();
         });
     }
 
@@ -86,7 +84,7 @@ public class Session2Activity1 extends AppCompatActivity {
 
             output.setText("Result: " + result);
 
-            Toast.makeText(getApplicationContext(), "Button clicked", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Button clicked", Toast.LENGTH_SHORT).show();
         } catch (NumberFormatException e) {
             Toast.makeText(getApplicationContext(), "Please enter valid numbers!", Toast.LENGTH_SHORT).show();
         }

@@ -2,8 +2,10 @@ package com.example.project;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
+import android.view.MenuItem;
 
+import androidx.annotation.LayoutRes;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -13,24 +15,21 @@ import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ActivityMainBinding binding;
+    protected ActivityMainBinding binding;
     private ActionBarDrawerToggle toggle;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        super.setContentView(binding.getRoot());
 
-        // Set up toolbar
         setSupportActionBar(binding.appBarMain.toolbar);
 
-        // Drawer and NavigationView
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
 
-        // ✅ Setup Hamburger Toggle manually
         toggle = new ActionBarDrawerToggle(
                 this,
                 drawer,
@@ -39,9 +38,8 @@ public class MainActivity extends AppCompatActivity {
                 R.string.navigation_drawer_close
         );
         drawer.addDrawerListener(toggle);
-        toggle.syncState(); // show the hamburger icon
+        toggle.syncState();
 
-        // Handle navigation item clicks
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
 
@@ -49,10 +47,17 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(this, com.example.project.sessions.Session2MultiActivityApp.Session2Activity1.class));
             } else if (id == R.id.nav_session3) {
                 startActivity(new Intent(this, com.example.project.sessions.Session3AdvanceFeaturesApp.Session3Activity1.class));
+            } else if (id == R.id.nav_session4) {
+                startActivity(new Intent(this, com.example.project.sessions.Session4DatabaseCRUDApp.Session4Activity1.class));
+            } else if (id == R.id.nav_session5) {
+                startActivity(new Intent(this, com.example.project.sessions.Session5MenusToolbar.Session5Activity1.class));
+            } else if (id == R.id.nav_session6) {
+                startActivity(new Intent(this, com.example.project.sessions.Session6UIControls.Session6Activity1.class));
+            } else if (id == R.id.nav_session7) {
+                startActivity(new Intent(this, com.example.project.sessions.Session7LanguageLocalization.Session7Activity1.class));
+            } else if (id == R.id.nav_session8) {
+                startActivity(new Intent(this, com.example.project.sessions.Session8FirebaseDatabase.Session8Activity1.class));
             }
-//            else if (id == R.id.nav_session4) {
-//                startActivity(new Intent(this, com.example.project.sessions.Session4DbCrud.Session4Activity1.class));
-//            }
 
             drawer.closeDrawers();
             return true;
@@ -60,8 +65,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
+    public void setContentView(@LayoutRes int layoutResID) {
+        getLayoutInflater().inflate(layoutResID, binding.appBarMain.getRoot(), true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (toggle != null && toggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        binding = null;
     }
 }

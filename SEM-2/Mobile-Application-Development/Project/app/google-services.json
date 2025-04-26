@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "688655474865",
+    "project_id": "madl-project-c10fa",
+    "storage_bucket": "madl-project-c10fa.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:688655474865:android:a6724e50e53dd03fd3c290",
+        "android_client_info": {
+          "package_name": "com.example.project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_No72ARH9sFf8QeTbbFlWAfQXp09m1PA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

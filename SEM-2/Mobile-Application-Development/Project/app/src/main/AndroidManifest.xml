@@ -13,25 +13,49 @@
         android:theme="@style/Theme.Project"
         tools:targetApi="31">
         <activity
-            android:name="com.example.project.sessions.Session3AdvanceFeaturesApp.Session3Activity5"
+            android:name=".sessions.Session8FirebaseDatabase.Session8Activity2"
             android:exported="false" />
         <activity
-            android:name="com.example.project.sessions.Session3AdvanceFeaturesApp.Session3Activity4"
+            android:name=".sessions.Session8FirebaseDatabase.Session8Activity1"
             android:exported="false" />
         <activity
-            android:name="com.example.project.sessions.Session3AdvanceFeaturesApp.Session3Activity3"
+            android:name=".sessions.Session7LanguageLocalization.Session7Activity1"
             android:exported="false" />
         <activity
-            android:name="com.example.project.sessions.Session3AdvanceFeaturesApp.Session3Activity2"
+            android:name=".sessions.Session6UIControls.Session6Activity3"
             android:exported="false" />
         <activity
-            android:name="com.example.project.sessions.Session3AdvanceFeaturesApp.Session3Activity1"
+            android:name=".sessions.Session6UIControls.Session6Activity2"
             android:exported="false" />
         <activity
-            android:name="com.example.project.sessions.Session2MultiActivityApp.Session2Activity2"
+            android:name=".sessions.Session6UIControls.Session6Activity1"
             android:exported="false" />
         <activity
-            android:name="com.example.project.sessions.Session2MultiActivityApp.Session2Activity1"
+            android:name=".sessions.Session5MenusToolbar.Session5Activity1"
+            android:exported="false" />
+        <activity
+            android:name=".sessions.Session4DatabaseCRUDApp.Session4Activity1"
+            android:exported="false" />
+        <activity
+            android:name=".sessions.Session3AdvanceFeaturesApp.Session3Activity5"
+            android:exported="false" />
+        <activity
+            android:name=".sessions.Session3AdvanceFeaturesApp.Session3Activity4"
+            android:exported="false" />
+        <activity
+            android:name=".sessions.Session3AdvanceFeaturesApp.Session3Activity3"
+            android:exported="false" />
+        <activity
+            android:name=".sessions.Session3AdvanceFeaturesApp.Session3Activity2"
+            android:exported="false" />
+        <activity
+            android:name=".sessions.Session3AdvanceFeaturesApp.Session3Activity1"
+            android:exported="false" />
+        <activity
+            android:name=".sessions.Session2MultiActivityApp.Session2Activity2"
+            android:exported="false" />
+        <activity
+            android:name=".sessions.Session2MultiActivityApp.Session2Activity1"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

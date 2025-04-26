@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/downloads"
+        android:title="Downloads"
+        android:icon="@android:drawable/stat_sys_download"
+        app:showAsAction="ifRoom"
+        android:menuCategory="container"
+        android:orderInCategory="1">
+        <menu>
+            <item
+                android:id="@+id/audio"
+                android:icon="@drawable/audio_icon"
+                android:title="Audio"
+                app:showAsAction="always" />
+
+            <item
+                android:id="@+id/images"
+                android:icon="@drawable/image_icon"
+                android:title="Images"
+                app:showAsAction="always" />
+
+            <item
+                android:id="@+id/home"
+                android:icon="@drawable/home_icon"
+                android:title="Home"
+                app:showAsAction="ifRoom" />
+
+            <item
+                android:id="@+id/profile"
+                android:icon="@drawable/profile_icon"
+                android:title="Profile"
+                app:showAsAction="ifRoom" />
+
+            <item
+                android:id="@+id/setting"
+                android:icon="@drawable/settings_icon"
+                android:title="Setting"
+                app:showAsAction="ifRoom" />
+
+            <item
+                android:id="@+id/quit"
+                android:icon="@drawable/quit_icon"
+                android:title="Quit"
+                app:showAsAction="ifRoom" />
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/audio2"
+        android:icon="@drawable/audio_icon"
+        android:title="Audio"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/images2"
+        android:icon="@drawable/image_icon"
+        android:title="Images"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/home2"
+        android:icon="@drawable/home_icon"
+        android:title="Home"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/profile2"
+        android:icon="@drawable/profile_icon"
+        android:title="Profile"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/setting2"
+        android:icon="@drawable/settings_icon"
+        android:title="Setting"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/quit2"
+        android:icon="@drawable/quit_icon"
+        android:title="Quit"
+        app:showAsAction="ifRoom" />
+
+</menu>

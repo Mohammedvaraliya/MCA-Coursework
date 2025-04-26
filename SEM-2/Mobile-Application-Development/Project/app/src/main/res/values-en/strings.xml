@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="session_name">Welcome to the Internationalization I18N MultiLingual support project</string>
+    <string name="change_language">Click here to Change the Language</string>
+    <string name="login">Click here to Login</string>
+    <string name="password">Enter Password</string>
+    <string name="email">Enter Email: abc@somaiya.edu</string>
+</resources>

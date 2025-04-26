@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".sessions.Session6UIControls.Session6Activity1"
+    android:fillViewport="true">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="10dp"
+        tools:context=".sessions.Session6UIControls.Session6Activity1">
+
+        <!-- Name EditText -->
+        <EditText
+            android:id="@+id/name_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Your Name"
+            android:layout_margin="16dp" />
+
+        <!-- Checkboxes (SVU and Ayur Vihar) aligned horizontally -->
+        <LinearLayout
+            android:id="@+id/checkboxes_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/name_edittext"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp">
+
+            <TextView
+                android:id="@+id/checkBox_lable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="College"/>
+
+            <CheckBox
+                android:id="@+id/svu_checkBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SVU" />
+
+            <CheckBox
+                android:id="@+id/ayurvihar_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ayur Vihar"
+                android:layout_marginStart="16dp" />
+        </LinearLayout>
+
+        <!-- Radio Group for teaching options -->
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/checkboxes_layout"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/teaching_radio_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Teaching" />
+
+            <RadioButton
+                android:id="@+id/nonteaching_radio_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Non Teaching" />
+
+            <RadioButton
+                android:id="@+id/staff_radio_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Staff" />
+        </RadioGroup>
+
+        <!-- Date of Birth EditText -->
+        <EditText
+            android:id="@+id/dob_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Your DOB"
+            android:layout_below="@id/radioGroup"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"/>
+
+        <!-- Institute AutoCompleteTextView -->
+        <AutoCompleteTextView
+            android:id="@+id/institute_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Institute"
+            android:layout_below="@id/dob_edittext"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"/>
+
+        <!-- City MultiAutoCompleteTextView -->
+        <MultiAutoCompleteTextView
+            android:id="@+id/city_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="City"
+            android:layout_below="@id/institute_edittext"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"/>
+
+        <!-- Comment EditText -->
+        <EditText
+            android:id="@+id/comment_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Your Comment"
+            android:layout_below="@id/city_edittext"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:inputType="textMultiLine"
+            android:layout_marginEnd="16dp"/>
+
+        <!-- Submit Button -->
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:layout_below="@id/comment_edittext"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"/>
+
+        <!-- Output TextView -->
+        <TextView
+            android:id="@+id/output"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/submit"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="23dp"
+            android:text="Hello World!"
+            android:textSize="16sp" />
+
+        <!-- Button to navigate to Activity 2 -->
+        <Button
+            android:id="@+id/go_to_activity2_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Go to other UI Controls Activity"
+            android:layout_below="@id/output"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"/>
+
+    </RelativeLayout>
+</ScrollView>

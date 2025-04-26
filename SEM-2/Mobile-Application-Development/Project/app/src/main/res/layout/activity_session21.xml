@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:hint="Enter Number 1"
         android:inputType="number"
-        android:layout_marginBottom="12dp" />
+        android:layout_margin="30dp"/>
 
     <EditText
         android:id="@+id/num2"
@@ -23,22 +23,21 @@
         android:layout_height="wrap_content"
         android:hint="Enter Number 2"
         android:inputType="number"
-        android:layout_marginBottom="12dp" />
+        android:layout_margin="30dp" />
 
     <EditText
         android:id="@+id/operation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Operation you want to perform"
+        android:hint="Operation you want to perform (+, -, *, /)"
         android:inputType="text"
-        android:layout_marginBottom="16dp" />
+        android:layout_margin="30dp" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Calculate"
-        android:onClick="show"
         android:layout_marginBottom="12dp" />
 
     <Button

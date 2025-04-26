@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginVertical="50dp"
+    tools:context=".sessions.Session5MenusToolbar.Session5Activity1">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    <TextView
+        android:id="@+id/popupmenutitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Popup Menu"
+        android:textSize="20dp"
+        android:textColor="#333333"
+        android:layout_below="@id/toolbar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:fontFamily="sans-serif-medium"/>
+
+    <Button
+        android:id="@+id/popupmenubutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Open PopUp Menu"
+        android:layout_below="@id/popupmenutitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:id="@+id/contextmenutitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Context Menu"
+        android:textSize="20dp"
+        android:textColor="#333333"
+        android:layout_below="@id/popupmenubutton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:fontFamily="sans-serif-medium"/>
+
+    <TextView
+        android:id="@+id/contextmenutextview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Longpress to see the Context Menu"
+        android:textSize="20dp"
+        android:textColor="#333333"
+        android:layout_below="@id/contextmenutitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:fontFamily="sans-serif-medium"/>
+
+</RelativeLayout>
