@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!-- Background ImageView -->
+    <!-- Background Image -->
     <ImageView
         android:id="@+id/background_image"
         android:layout_width="match_parent"
@@ -17,6 +17,7 @@
         android:alpha="0.3"
         android:contentDescription="Background AI Image"/>
 
+    <!-- Dark overlay -->
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -62,9 +63,13 @@
                     android:layout_height="wrap_content"
                     android:text="Welcome to the Future"
                     android:textColor="@android:color/white"
-                    android:textSize="28sp"
+                    android:textSize="32sp"
                     android:textStyle="bold"
                     android:gravity="center"
+                    android:shadowColor="#80000000"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="4"
                     android:layout_marginBottom="12dp"/>
 
                 <TextView
@@ -75,6 +80,10 @@
                     android:textColor="#B0BEC5"
                     android:textSize="18sp"
                     android:gravity="center"
+                    android:shadowColor="#40000000"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="3"
                     android:layout_marginBottom="36dp"/>
 
                 <Button
@@ -84,10 +93,13 @@
                     android:text="Get Started"
                     android:backgroundTint="#8E24AA"
                     android:textColor="@android:color/white"
+                    android:textAllCaps="false"
                     android:paddingStart="32dp"
                     android:paddingEnd="32dp"
-                    android:paddingTop="12dp"
-                    android:paddingBottom="12dp"
+                    android:paddingTop="14dp"
+                    android:paddingBottom="14dp"
+                    android:textSize="18sp"
+                    android:elevation="6dp"
                     android:layout_marginTop="16dp"
                     android:background="@drawable/button_background" />
 

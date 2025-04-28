@@ -1,0 +1,32 @@
+{
+  "Tables": {
+    "Table1": {
+      "tableNumber": 1,
+      "tableName": "Couple Table 1",
+      "status": "available"
+    },
+    "Table2": {
+      "tableNumber": 2,
+      "tableName": "Couple Table 2",
+      "status": "available"
+    },
+    ...
+  },
+  "Menu": {
+    "Indian": {
+      "Item1": {
+        "itemName": "Butter Chicken",
+        "price": 110
+      },
+      "Item2": {
+        "itemName": "Paneer Tikka",
+        "price": 120
+      },
+      ...
+    },
+    "Chinese": {
+      ...
+    },
+    ...
+  }
+}

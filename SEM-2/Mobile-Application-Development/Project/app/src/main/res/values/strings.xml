@@ -1,11 +1,16 @@
 <resources>
-    <string name="app_name" translatable="false">MADL Project</string>
+    <string name="app_name" translatable="false">Hotel Management System (AI + Normal)</string>
+    <string name="default_web_client_id">688655474865-t5vhgkqprni94q2n1t8qjibhvpq4imr2.apps.googleusercontent.com</string>
+    <string name="firebase_database_url">https://madl-project-c10fa-default-rtdb.firebaseio.com</string>
+    <string name="google_api_key">AIzaSyA_No72ARH9sFf8QeTbbFlWAfQXp09m1PA</string>
+    <string name="project_id" translatable="false">madl-project-c10fa</string>
     <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
     <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
     <string name="nav_header_title" translatable="false">Android Studio</string>
     <string name="nav_header_subtitle" translatable="false">android.studio@android.com</string>
     <string name="nav_header_desc" translatable="false">Navigation header</string>
     <string name="action_settings" translatable="false">Settings</string>
+    <string name="action_logout" translatable="false">Logout</string>
 
     <string name="menu_home" translatable="false">Home</string>
     <string name="menu_gallery" translatable="false">Gallery</string>
@@ -29,4 +34,12 @@
     <string name="login" translatable="false">Click here to Login</string>
     <string name="password" translatable="false">Enter Password</string>
     <string name="email" translatable="false">Enter Email: abc@somaiya.edu</string>
+
+    <string name="select_category" translatable="false">Select Category</string>
+    <string name="select_item" translatable="false">Select Item</string>
+    <string name="select_quantity" translatable="false">Select Quantity</string>
+    <string name="add_item" translatable="false">Add Item</string>
+    <string name="selected_items" translatable="false">Selected Items:</string>
+    <string name="place_order" translatable="false">Place Order</string>
+    <string name="clear_selection" translatable="false">Clear Selection</string>
 </resources>
