@@ -32,8 +32,7 @@
         <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="125dp"
-            android:layout_marginBottom="100dp"
+            android:layout_marginTop="25dp"
             android:background="@drawable/bg_table_header"
             android:orientation="vertical"
             android:padding="24dp">
@@ -121,7 +120,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Menu Item"
-                        app:boxStrokeColor="#CBD5E0"
+                        app:boxStrokeColor="#B1B4D2F6"
                         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.rounded">
 
                         <AutoCompleteTextView

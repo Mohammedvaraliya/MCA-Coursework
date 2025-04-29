@@ -3,6 +3,8 @@ package com.example.project.hotel.normalSystem;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -13,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.project.R;
+import com.example.project.hotel.LoginSignupActivity;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputLayout;
@@ -297,5 +300,29 @@ public class MenuSelectionActivity extends AppCompatActivity {
                     .addOnFailureListener(e ->
                             Toast.makeText(this, "Failed to place order: " + e.getMessage(), Toast.LENGTH_SHORT).show());
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_logout) {
+            FirebaseAuth.getInstance().signOut();
+            Toast.makeText(this, "Logged out successfully!", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, LoginSignupActivity.class));
+            finish();
+            return true;
+        } else if (id == R.id.action_show_orders) {
+            startActivity(new Intent(this, OrderReportActivity.class));
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -17,6 +17,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.project.R;
 import com.example.project.hotel.aiSystem.AIMainActivity;
 import com.example.project.hotel.normalSystem.NormalMainActivity;
+import com.example.project.hotel.normalSystem.OrderReportActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -78,13 +79,19 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_logout) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_logout) {
             FirebaseAuth.getInstance().signOut();
             Toast.makeText(this, "Logged out successfully!", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this, LoginSignupActivity.class));
             finish();
             return true;
+        } else if (id == R.id.action_show_orders) {
+            startActivity(new Intent(this, OrderReportActivity.class));
+            return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 }

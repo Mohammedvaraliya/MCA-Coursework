@@ -2,85 +2,60 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#121212"
     tools:context=".hotel.aiSystem.AIMainActivity">
 
-    <!-- Background Image -->
-    <ImageView
-        android:id="@+id/background_image"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/chat_scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/ai_robot_reception3"
-        android:scaleType="centerCrop"
-        android:alpha="0.3"
-        android:contentDescription="Background AI Image" />
-
-    <!-- Dark overlay -->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#80000000" />
-
-    <!-- Main Content -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="24dp">
+        android:layout_above="@+id/input_container"
+        android:padding="16dp"
+        android:fillViewport="true">
 
         <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Welcome to AI System!"
-            android:textSize="24sp"
-            android:textColor="#FFFFFF"
-            android:fontFamily="sans-serif-medium"
-            android:layout_marginBottom="40dp"
-            android:layout_gravity="center_horizontal" />
-
-        <!-- User Input -->
-        <EditText
-            android:id="@+id/user_input"
+            android:id="@+id/response_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Ask me anything..."
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:lineSpacingExtra="8dp" />
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/input_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#1E1E1E"
+        android:orientation="horizontal"
+        android:padding="12dp">
+
+        <EditText
+            android:id="@+id/user_input"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Type your message..."
             android:textColor="#FFFFFF"
             android:textColorHint="#AAAAAA"
             android:background="@drawable/edit_text_background"
-            android:padding="16dp"
-            android:layout_marginBottom="16dp" />
+            android:padding="12dp"
+            android:imeOptions="actionSend"
+            android:inputType="textCapSentences" />
 
-        <!-- Send Button -->
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/send_button"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
             android:text="Send"
             android:textColor="#FFFFFF"
-            android:backgroundTint="#6200EE"
-            android:layout_gravity="end"
-            android:layout_marginBottom="24dp" />
-
-        <!-- Response Container -->
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@drawable/rounded_bg"
-            android:padding="16dp">
-
-            <TextView
-                android:id="@+id/response_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#FFFFFF"
-                android:text="Waiting for your question..."
-                android:textSize="16sp" />
-        </ScrollView>
-
+            app:icon="@drawable/ic_send"
+            app:iconTint="#FFFFFF"
+            app:backgroundTint="#6200EE"
+            app:cornerRadius="24dp" />
     </LinearLayout>
-
 </RelativeLayout>

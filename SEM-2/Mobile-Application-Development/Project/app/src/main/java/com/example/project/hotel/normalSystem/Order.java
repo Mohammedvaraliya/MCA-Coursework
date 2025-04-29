@@ -3,12 +3,45 @@ package com.example.project.hotel.normalSystem;
 import java.util.List;
 
 public class Order {
+    private String id;
     private String userEmail;
     private String tableName;
     private List<OrderItem> items;
     private int totalAmount;
     private String status;
     private long timestamp;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
+    }
+
+    public void setItems(List<OrderItem> items) {
+        this.items = items;
+    }
+
+    public void setTotalAmount(int totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
 
     public Order() {
         // Required for Firebase

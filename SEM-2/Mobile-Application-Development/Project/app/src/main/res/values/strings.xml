@@ -11,6 +11,7 @@
     <string name="nav_header_desc" translatable="false">Navigation header</string>
     <string name="action_settings" translatable="false">Settings</string>
     <string name="action_logout" translatable="false">Logout</string>
+    <string name="action_show_orders" translatable="false">Show Order</string>
 
     <string name="menu_home" translatable="false">Home</string>
     <string name="menu_gallery" translatable="false">Gallery</string>
