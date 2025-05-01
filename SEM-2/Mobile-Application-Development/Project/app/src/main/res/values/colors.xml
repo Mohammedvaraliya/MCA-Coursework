@@ -14,4 +14,26 @@
     <color name="status_served_bg">#D4EDDA</color>
     <color name="status_cancelled_bg">#F8D7DA</color>
 
+    <!-- Light theme colors -->
+    <color name="primary_color">#6200EE</color>
+    <color name="primary_dark">#3700B3</color>
+    <color name="accent_color">#03DAC6</color>
+
+    <color name="background_light">#FAFAFA</color>
+    <color name="text_dark">#212121</color>
+    <color name="hint_color">#9E9E9E</color>
+
+    <!-- Message colors -->
+    <color name="ai_message_bg">#E3F2FD</color>
+    <color name="ai_message_text">#0D47A1</color>
+    <color name="user_message_bg">#E8F5E9</color>
+    <color name="user_message_text">#2E7D32</color>
+
+    <!-- Status colors -->
+    <color name="success_color">#4CAF50</color>
+    <color name="error_color">#F44336</color>
+
+    <color name="ai_bubble_color">#E3F2FD</color>
+    <color name="user_bubble_color">#E8F5E9</color>
+
 </resources>

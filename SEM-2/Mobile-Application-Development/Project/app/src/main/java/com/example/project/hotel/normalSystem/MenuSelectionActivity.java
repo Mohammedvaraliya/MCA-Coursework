@@ -269,6 +269,12 @@ public class MenuSelectionActivity extends AppCompatActivity {
         }
 
         String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        String tableName = getIntent().getStringExtra("tableName");
+
+        if (tableName == null || tableName.isEmpty()) {
+            Toast.makeText(this, "Table name is missing", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         Order order = new Order(
                 email,
@@ -285,22 +291,47 @@ public class MenuSelectionActivity extends AppCompatActivity {
         if (orderId != null) {
             ordersRef.child(orderId).setValue(order)
                     .addOnSuccessListener(unused -> {
-                        // Update table status to occupied
-                        DatabaseReference tableRef = FirebaseDatabase.getInstance()
-                                .getReference("Tables")
-                                .child("Table" + getIntent().getIntExtra("tableNumber", 0));
-                        tableRef.child("status").setValue("occupied");
+                        DatabaseReference tablesRef = FirebaseDatabase.getInstance().getReference("Tables");
 
-                        Toast.makeText(this, "Order Placed Successfully", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(MenuSelectionActivity.this, SuccessOrderActivity.class);
-                        intent.putExtra("orderId", orderId);
-                        startActivity(intent);
-                        finish();
+                        tablesRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                boolean matchFound = false;
+                                for (DataSnapshot tableSnapshot : snapshot.getChildren()) {
+                                    String dbTableName = tableSnapshot.child("tableName").getValue(String.class);
+                                    if (dbTableName != null && dbTableName.equalsIgnoreCase(tableName)) {
+                                        matchFound = true;
+                                        tableSnapshot.getRef().child("status").setValue("occupied")
+                                                .addOnSuccessListener(v -> {
+                                                    Toast.makeText(MenuSelectionActivity.this, "Order Placed Successfully", Toast.LENGTH_SHORT).show();
+                                                    Intent intent = new Intent(MenuSelectionActivity.this, SuccessOrderActivity.class);
+                                                    intent.putExtra("orderId", orderId);
+                                                    startActivity(intent);
+                                                    finish();
+                                                })
+                                                .addOnFailureListener(e ->
+                                                        Toast.makeText(MenuSelectionActivity.this, "Failed to update table status: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                                        break;
+                                    }
+                                }
+
+                                if (!matchFound) {
+                                    Toast.makeText(MenuSelectionActivity.this, "Table not found in database", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                                Toast.makeText(MenuSelectionActivity.this, "Failed to access tables: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     })
                     .addOnFailureListener(e ->
                             Toast.makeText(this, "Failed to place order: " + e.getMessage(), Toast.LENGTH_SHORT).show());
         }
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

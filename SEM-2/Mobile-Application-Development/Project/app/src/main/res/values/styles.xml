@@ -19,4 +19,19 @@
             <item android:color="#4299E1" android:state_focused="true"/>
         </selector>
     </color>
+
+    <!-- Add this style to your res/values/styles.xml -->
+    <style name="ChatBubble">
+        <item name="android:padding">12dp</item>
+        <item name="android:layout_margin">8dp</item>
+        <item name="android:elevation">2dp</item>
+    </style>
+
+    <style name="ChatBubble.AI">
+        <item name="android:background">@drawable/ai_message_bg</item>
+    </style>
+
+    <style name="ChatBubble.User">
+        <item name="android:background">@drawable/user_message_bg</item>
+    </style>
 </resources>

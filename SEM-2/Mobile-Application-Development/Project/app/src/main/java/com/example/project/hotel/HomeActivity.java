@@ -16,6 +16,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.project.R;
 import com.example.project.hotel.aiSystem.AIMainActivity;
+import com.example.project.hotel.aiSystem.VoiceAIActivity;
 import com.example.project.hotel.normalSystem.NormalMainActivity;
 import com.example.project.hotel.normalSystem.OrderReportActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,7 +27,7 @@ public class HomeActivity extends AppCompatActivity {
     TextView titleTextView;
     FirebaseAuth firebaseAuth;
     FirebaseUser currentUser;
-    Button normalHotelButton, aiHotelButton;
+    Button normalHotelButton, aiTextHotelButton, aiVoiceHotelButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,8 @@ public class HomeActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         currentUser = firebaseAuth.getCurrentUser();
         normalHotelButton = findViewById(R.id.normalHotelButton);
-        aiHotelButton = findViewById(R.id.aiHotelButton);
+        aiTextHotelButton = findViewById(R.id.aiTextHotelButton);
+        aiVoiceHotelButton = findViewById(R.id.aiVoiceHotelButton);
 
         // Check if user exists and update welcome message
         if (currentUser != null) {
@@ -63,10 +65,17 @@ public class HomeActivity extends AppCompatActivity {
             finish();
         });
 
-        aiHotelButton.setOnClickListener(v -> {
-            Toast.makeText(HomeActivity.this, "AI Hotel Management selected", Toast.LENGTH_SHORT).show();
+        aiTextHotelButton.setOnClickListener(v -> {
+            Toast.makeText(HomeActivity.this, "AI Text Hotel Management selected", Toast.LENGTH_SHORT).show();
             Intent aiMainIntent = new Intent(this, AIMainActivity.class);
             startActivity(aiMainIntent);
+            finish();
+        });
+
+        aiVoiceHotelButton.setOnClickListener(v -> {
+            Toast.makeText(HomeActivity.this, "AI Voice Hotel Management selected", Toast.LENGTH_SHORT).show();
+            Intent aiVoiceIntent = new Intent(this, VoiceAIActivity.class);
+            startActivity(aiVoiceIntent);
             finish();
         });
     }

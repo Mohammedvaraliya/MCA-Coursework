@@ -4,32 +4,62 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#121212"
+    android:background="@color/background_light"
     tools:context=".hotel.aiSystem.AIMainActivity">
 
+    <!-- Header with app title -->
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/primary_color"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:elevation="4dp">
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_hotel" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="Hotel Assistant"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- Chat messages container -->
     <androidx.core.widget.NestedScrollView
         android:id="@+id/chat_scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/input_container"
-        android:padding="16dp"
-        android:fillViewport="true">
+        android:layout_below="@+id/header"
+        android:background="@color/background_light"
+        android:fillViewport="true"
+        android:padding="8dp">
 
-        <TextView
-            android:id="@+id/response_text"
+        <LinearLayout
+            android:id="@+id/messages_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:lineSpacingExtra="8dp" />
+            android:orientation="vertical" />
     </androidx.core.widget.NestedScrollView>
 
+    <!-- Input area -->
     <LinearLayout
         android:id="@+id/input_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="#1E1E1E"
+        android:background="@color/white"
+        android:elevation="8dp"
         android:orientation="horizontal"
         android:padding="12dp">
 
@@ -38,24 +68,25 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Type your message..."
-            android:textColor="#FFFFFF"
-            android:textColorHint="#AAAAAA"
             android:background="@drawable/edit_text_background"
-            android:padding="12dp"
+            android:hint="Type your message..."
             android:imeOptions="actionSend"
-            android:inputType="textCapSentences" />
+            android:inputType="textCapSentences"
+            android:maxLines="3"
+            android:padding="12dp"
+            android:textColor="@color/text_dark"
+            android:textColorHint="@color/hint_color" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/send_button"
-            android:layout_width="wrap_content"
+            android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginStart="8dp"
-            android:text="Send"
-            android:textColor="#FFFFFF"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            app:backgroundTint="@color/primary_color"
+            app:cornerRadius="24dp"
             app:icon="@drawable/ic_send"
-            app:iconTint="#FFFFFF"
-            app:backgroundTint="#6200EE"
-            app:cornerRadius="24dp" />
+            app:iconTint="@color/white" />
     </LinearLayout>
 </RelativeLayout>

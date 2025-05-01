@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="status_pending_bg">#FFF3CD</color>
+    <color name="status_in_progress_bg">#D1ECF1</color>
+    <color name="status_served_bg">#D4EDDA</color>
+    <color name="status_cancelled_bg">#F8D7DA</color>
+</resources>

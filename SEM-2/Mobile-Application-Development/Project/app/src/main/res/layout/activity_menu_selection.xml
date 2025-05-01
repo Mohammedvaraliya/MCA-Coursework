@@ -32,10 +32,10 @@
         <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
             android:background="@drawable/bg_table_header"
             android:orientation="vertical"
-            android:padding="24dp">
+            android:padding="24dp"
+            android:layout_marginVertical="25dp">
 
             <!-- Selected Table Header -->
             <TextView
@@ -174,7 +174,7 @@
                 android:id="@+id/selectedItemsCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="100dp"
+                android:layout_marginBottom="25dp"
                 android:visibility="gone"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="2dp">
@@ -223,7 +223,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="24dp"
-                        android:layout_marginBottom="100dp"
                         android:orientation="horizontal">
 
                         <com.google.android.material.button.MaterialButton

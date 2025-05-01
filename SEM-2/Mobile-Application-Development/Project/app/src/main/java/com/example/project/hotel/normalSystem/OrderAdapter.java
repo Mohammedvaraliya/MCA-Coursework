@@ -51,7 +51,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 
         // Stylish "Order Date"
         String styledDate = "<b><font color='#333333'>Ordered on:</font></b> <font color='#555555'>" + dateTime + "</font>";
-        holder.orderId.setText(Html.fromHtml(styledDate, Html.FROM_HTML_MODE_COMPACT));
+        holder.orderDate.setText(Html.fromHtml(styledDate, Html.FROM_HTML_MODE_COMPACT));
+        holder.tableName.setText("Table: " + order.getTableName());
 
         // Styled items list
         StringBuilder itemDesc = new StringBuilder();
@@ -145,12 +146,13 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     }
 
     public static class OrderViewHolder extends RecyclerView.ViewHolder {
-        TextView orderId, orderItems, orderTotal, orderStatus;
+        TextView orderDate, orderItems, orderTotal, orderStatus, tableName;
         MaterialCardView orderCard;
 
         public OrderViewHolder(@NonNull View itemView) {
             super(itemView);
-            orderId = itemView.findViewById(R.id.orderId);
+            orderDate = itemView.findViewById(R.id.orderDate);
+            tableName = itemView.findViewById(R.id.table_name);
             orderItems = itemView.findViewById(R.id.orderItems);
             orderTotal = itemView.findViewById(R.id.orderTotal);
             orderStatus = itemView.findViewById(R.id.orderStatus);

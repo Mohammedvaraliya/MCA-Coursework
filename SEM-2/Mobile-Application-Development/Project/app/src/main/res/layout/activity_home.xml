@@ -53,10 +53,21 @@
             android:padding="12dp" />
 
         <Button
-            android:id="@+id/aiHotelButton"
+            android:id="@+id/aiTextHotelButton"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:text="Use AI Hotel Management System"
+            android:text="Use AI Text Hotel Management System"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/button_background"
+            android:textSize="18sp"
+            android:layout_marginBottom="20dp"
+            android:padding="12dp" />
+
+        <Button
+            android:id="@+id/aiVoiceHotelButton"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="Use AI Voice Hotel Management System"
             android:textColor="#FFFFFF"
             android:background="@drawable/button_background"
             android:textSize="18sp"

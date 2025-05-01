@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:gravity="center"
+    android:background="#F5F5F5"
+    tools:context=".AdminDashboard">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Admin Dashboard"
+        android:textSize="24sp"
+        android:textColor="#333333"
+        android:layout_marginBottom="30dp"
+        android:textStyle="bold"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnTables"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="Manage Tables"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:backgroundTint="#6200EE"
+        app:cornerRadius="8dp"
+        android:padding="16dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnOrders"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="View All Orders"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:backgroundTint="#6200EE"
+        app:cornerRadius="8dp"
+        android:padding="16dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnLogout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:backgroundTint="#F44336"
+        app:cornerRadius="8dp"
+        android:padding="16dp"/>
+
+</LinearLayout>
