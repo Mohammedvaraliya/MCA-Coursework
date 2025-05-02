@@ -164,42 +164,60 @@ public class VoiceAIActivity extends AppCompatActivity implements TextToSpeech.O
                         isListening = false;
                         voiceButton.setText("Tap to Speak");
 
-                        String errorMessage;
-                        switch (error) {
-                            case SpeechRecognizer.ERROR_AUDIO:
-                                errorMessage = "Audio recording error";
-                                break;
-                            case SpeechRecognizer.ERROR_CLIENT:
-                                errorMessage = "Client side error";
-                                break;
-                            case SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS:
-                                errorMessage = "Insufficient permissions";
-                                break;
-                            case SpeechRecognizer.ERROR_NETWORK:
-                                errorMessage = "Network error";
-                                break;
-                            case SpeechRecognizer.ERROR_NETWORK_TIMEOUT:
-                                errorMessage = "Network timeout";
-                                break;
-                            case SpeechRecognizer.ERROR_NO_MATCH:
-                                errorMessage = "No recognition result matched";
-                                break;
-                            case SpeechRecognizer.ERROR_RECOGNIZER_BUSY:
-                                errorMessage = "RecognitionService busy";
-                                break;
-                            case SpeechRecognizer.ERROR_SERVER:
-                                errorMessage = "Server error";
-                                break;
-                            case SpeechRecognizer.ERROR_SPEECH_TIMEOUT:
-                                errorMessage = "No speech input";
-                                break;
-                            default:
-                                errorMessage = "Unknown error";
+                        if (error == SpeechRecognizer.ERROR_NO_MATCH) {
+                            // More helpful message when no match found
+                            switch (currentConversationState) {
+                                case "ITEM_QUANTITY_SELECTION":
+                                    displayAIResponse("I didn't catch the quantity. Please say a number between one and nine.");
+                                    break;
+                                case "MENU_CATEGORY_SELECTION":
+                                    displayAIResponse("Please say the menu category you're interested in.");
+                                    break;
+                                case "MENU_ITEM_SELECTION":
+                                    displayAIResponse("Please say the item name you'd like to order.");
+                                    break;
+                                case "ADD_MORE_ITEMS":
+                                case "ORDER_CONFIRMATION":
+                                    displayAIResponse("Please say yes or no.");
+                                    break;
+                                default:
+                                    displayAIResponse("I didn't catch that. Could you please repeat?");
+                            }
+                        } else {
+                            // Other error handling remains the same
+                            String errorMessage;
+                            switch (error) {
+                                case SpeechRecognizer.ERROR_AUDIO:
+                                    errorMessage = "Audio recording error";
+                                    break;
+                                case SpeechRecognizer.ERROR_CLIENT:
+                                    errorMessage = "Client side error";
+                                    break;
+                                case SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS:
+                                    errorMessage = "Insufficient permissions";
+                                    break;
+                                case SpeechRecognizer.ERROR_NETWORK:
+                                    errorMessage = "Network error";
+                                    break;
+                                case SpeechRecognizer.ERROR_NETWORK_TIMEOUT:
+                                    errorMessage = "Network timeout";
+                                    break;
+                                case SpeechRecognizer.ERROR_RECOGNIZER_BUSY:
+                                    errorMessage = "RecognitionService busy";
+                                    break;
+                                case SpeechRecognizer.ERROR_SERVER:
+                                    errorMessage = "Server error";
+                                    break;
+                                case SpeechRecognizer.ERROR_SPEECH_TIMEOUT:
+                                    errorMessage = "No speech input";
+                                    break;
+                                default:
+                                    errorMessage = "Unknown error";
+                            }
+                            Toast.makeText(VoiceAIActivity.this,
+                                    "Speech recognition error: " + errorMessage,
+                                    Toast.LENGTH_SHORT).show();
                         }
-
-                        Toast.makeText(VoiceAIActivity.this,
-                                "Speech recognition error: " + errorMessage,
-                                Toast.LENGTH_SHORT).show();
                     });
                 }
 
@@ -439,9 +457,9 @@ public class VoiceAIActivity extends AppCompatActivity implements TextToSpeech.O
     }
 
     private void handleMenuCategorySelection(String userMessage) {
-        if (userMessage.equalsIgnoreCase("yes")) {
+        if (isAffirmative(userMessage)) {
             fetchMenuCategories();
-        } else if (userMessage.equalsIgnoreCase("no")) {
+        } else if (isNegative(userMessage)) {
             if (selectedItems.isEmpty()) {
                 displayAIResponse("Your table is reserved. Let us know if you need anything!");
                 currentConversationState = "WELCOME";
@@ -449,24 +467,46 @@ public class VoiceAIActivity extends AppCompatActivity implements TextToSpeech.O
                 confirmOrder();
             }
         } else {
-            // Check if this is a valid category
-            databaseRef.child("Menu").child(userMessage).addListenerForSingleValueEvent(new ValueEventListener() {
+            // More flexible category matching
+            databaseRef.child("Menu").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.exists()) {
-                        currentCategory = userMessage;
-                        fetchMenuItems(userMessage);
+                    String normalizedInput = userMessage.trim().toLowerCase();
+                    String matchedCategory = null;
+
+                    for (DataSnapshot categorySnapshot : snapshot.getChildren()) {
+                        String category = categorySnapshot.getKey();
+                        if (category != null &&
+                                (category.toLowerCase().contains(normalizedInput) ||
+                                        normalizedInput.contains(category.toLowerCase()))) {
+                            matchedCategory = category;
+                            break;
+                        }
+                    }
+
+                    if (matchedCategory != null) {
+                        currentCategory = matchedCategory;
+                        fetchMenuItems(matchedCategory);
                     } else {
-                        displayAIResponse("Invalid category. Please choose from the list above.");
+                        displayAIResponse("I didn't recognize that category. Please choose from: " +
+                                getCategoryList(snapshot));
                     }
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-                    displayAIResponse("Error checking menu category. Please try again.");
+                    displayAIResponse("Error checking menu. Please try again.");
                 }
             });
         }
+    }
+
+    private String getCategoryList(DataSnapshot snapshot) {
+        StringBuilder categories = new StringBuilder("\n");
+        for (DataSnapshot categorySnapshot : snapshot.getChildren()) {
+            categories.append("• ").append(categorySnapshot.getKey()).append("\n");
+        }
+        return categories.toString();
     }
 
     private void fetchMenuItems(String category) {
@@ -535,75 +575,57 @@ public class VoiceAIActivity extends AppCompatActivity implements TextToSpeech.O
     }
 
     private void handleItemQuantitySelection(String userMessage) {
-        // Convert spoken numbers to digits with better handling
-        String normalizedInput = userMessage.toLowerCase()
-                .replaceAll("(one|won)", "1")
-                .replaceAll("(two|to|too)", "2")
-                .replaceAll("(three|tree)", "3")
-                .replaceAll("(four|for|fore)", "4")
-                .replaceAll("(five|fife)", "5")
-                .replaceAll("(six|sicks)", "6")
-                .replaceAll("(seven)", "7")
-                .replaceAll("(eight|ate)", "8")
-                .replaceAll("(nine)", "9")
-                .replaceAll("(zero|hero)", "0")
-                .replaceAll("[^0-9]", "");
+        int quantity = parseQuantity(userMessage);
 
-        if (normalizedInput.isEmpty()) {
-            // Reprompt with the same state instead of failing
-            displayAIResponse("Please say a quantity between one and nine for " + currentSelectedItem);
-            return; // Stay in ITEM_QUANTITY_SELECTION state
+        if (quantity <= 0) {
+            displayAIResponse("Please say a valid quantity between one and nine for " + currentSelectedItem);
+            return;
         }
 
-        try {
-            int quantity = Integer.parseInt(normalizedInput);
-            if (quantity <= 0) {
-                displayAIResponse("Please say a positive number.");
-                return;
-            }
+        if (quantity > 9) {
+            displayAIResponse("Maximum quantity is nine. Please say a smaller number.");
+            return;
+        }
 
-            // Get the price for the selected item
-            databaseRef.child("Menu").child(currentCategory).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
-                        String itemName = itemSnapshot.child("itemName").getValue(String.class);
-                        if (itemName != null && itemName.equalsIgnoreCase(currentSelectedItem)) {
-                            Integer price = itemSnapshot.child("price").getValue(Integer.class);
-                            if (price != null) {
-                                HashMap<String, Object> selectedItem = new HashMap<>();
-                                selectedItem.put("name", itemName);
-                                selectedItem.put("price", price);
-                                selectedItem.put("quantity", quantity);
-                                totalAmount += (price * quantity);
-                                selectedItem.put("totalPrice", totalAmount);
-                                selectedItems.add(selectedItem);
+        // Get the price for the selected item
+        databaseRef.child("Menu").child(currentCategory).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
+                    String itemName = itemSnapshot.child("itemName").getValue(String.class);
+                    if (itemName != null && itemName.equalsIgnoreCase(currentSelectedItem)) {
+                        Integer price = itemSnapshot.child("price").getValue(Integer.class);
+                        if (price != null) {
+                            HashMap<String, Object> selectedItem = new HashMap<>();
+                            selectedItem.put("name", itemName);
+                            selectedItem.put("price", price);
+                            selectedItem.put("quantity", quantity);
+                            totalAmount += (price * quantity);
+                            selectedItem.put("totalPrice", totalAmount);
+                            selectedItems.add(selectedItem);
 
-                                displayAIResponse(quantity + " " + itemName + " added to your order. " +
-                                        "Would you like to add more items? Say yes or no.");
-                                currentConversationState = "ADD_MORE_ITEMS";
-                                return;
-                            }
+                            displayAIResponse(quantity + " " + itemName + " added to your order. " +
+                                    "Would you like to add more items?");
+                            currentConversationState = "ADD_MORE_ITEMS";
+                            return;
                         }
                     }
-                    displayAIResponse("Error processing your order. Please try again.");
                 }
+                displayAIResponse("Error processing your order. Please try again.");
+            }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    displayAIResponse("Error processing your order. Please try again.");
-                }
-            });
-        } catch (NumberFormatException e) {
-            displayAIResponse("Please say a valid number (e.g., one, two, three).");
-        }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                displayAIResponse("Error processing your order. Please try again.");
+            }
+        });
     }
 
     private void handleAddMoreItems(String userMessage) {
-        if (userMessage.equalsIgnoreCase("yes")) {
+        if (isAffirmative(userMessage)) {
             currentConversationState = "MENU_CATEGORY_SELECTION";
             fetchMenuCategories();
-        } else if (userMessage.equalsIgnoreCase("no")) {
+        } else if (isNegative(userMessage)) {
             confirmOrder();
         } else {
             displayAIResponse("Please say yes or no.");
@@ -640,9 +662,9 @@ public class VoiceAIActivity extends AppCompatActivity implements TextToSpeech.O
     }
 
     private void handleOrderConfirmation(String userMessage) {
-        if (userMessage.equalsIgnoreCase("yes")) {
+        if (isAffirmative(userMessage)) {
             placeOrder();
-        } else if (userMessage.equalsIgnoreCase("no")) {
+        } else if (isNegative(userMessage)) {
             displayAIResponse("Okay, let me know if you want to make changes.");
             currentConversationState = "MENU_CATEGORY_SELECTION";
             fetchMenuCategories();
@@ -798,6 +820,52 @@ public class VoiceAIActivity extends AppCompatActivity implements TextToSpeech.O
                 displayAIResponse("Processing your request...");
             }
         });
+    }
+
+    private boolean isAffirmative(String input) {
+        String normalized = input.toLowerCase().trim();
+        return normalized.matches("(y(a|e|i|o|u|w|v|h)?(a|e|i|o|u)?s+.*)") ||
+                normalized.equals("y") ||
+                normalized.equals("yeah") ||
+                normalized.equals("yep") ||
+                normalized.equals("sure") ||
+                normalized.equals("ok");
+    }
+
+    private boolean isNegative(String input) {
+        String normalized = input.toLowerCase().trim();
+        return normalized.matches("n(a|e|i|o|u|w|v|h)?(a|e|i|o|u)?.*") ||
+                normalized.equals("no") ||
+                normalized.equals("nope") ||
+                normalized.equals("nah") ||
+                normalized.equals("not");
+    }
+
+    private int parseQuantity(String input) {
+        // First try direct number conversion
+        try {
+            return Integer.parseInt(input.replaceAll("[^0-9]", ""));
+        } catch (NumberFormatException e) {
+            // If not a direct number, try word matching
+            String normalized = input.toLowerCase()
+                    .replaceAll("(one|won|wun|wan|van|vun)", "1")
+                    .replaceAll("(two|to|too|tu|tou)", "2")
+                    .replaceAll("(three|tree|thri|thre)", "3")
+                    .replaceAll("(four|for|fore|foor|fou)", "4")
+                    .replaceAll("(five|fife|fiv|fiv)", "5")
+                    .replaceAll("(six|sicks|sik|siks)", "6")
+                    .replaceAll("(seven|sevn|sevn)", "7")
+                    .replaceAll("(eight|ate|ait|eit)", "8")
+                    .replaceAll("(nine|nain|nin|nien)", "9")
+                    .replaceAll("(zero|hero|ziro|ziro)", "0")
+                    .replaceAll("[^0-9]", "");
+
+            try {
+                return Integer.parseInt(normalized);
+            } catch (NumberFormatException ex) {
+                return -1; // Invalid
+            }
+        }
     }
 
     @Override
