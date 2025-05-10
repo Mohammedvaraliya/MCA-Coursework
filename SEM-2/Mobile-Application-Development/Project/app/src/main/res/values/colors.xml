@@ -36,4 +36,8 @@
     <color name="ai_bubble_color">#E3F2FD</color>
     <color name="user_bubble_color">#E8F5E9</color>
 
+    <color name="table_header_bg">#4CAF50</color>
+    <color name="table_row_odd">#FFFFFF</color>
+    <color name="table_row_even">#F5F5F5</color>
+
 </resources>

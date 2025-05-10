@@ -2,6 +2,7 @@ package com.example.project.hotel.aiSystem;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -47,6 +49,7 @@ import com.google.firebase.vertexai.type.GenerateContentResponse;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -370,24 +373,146 @@ public class VoiceAIActivity extends AppCompatActivity implements TextToSpeech.O
         }
     }
 
+    private View createCompactTableView(List<String> headers, List<List<String>> rows) {
+        // Create outer container
+        LinearLayout tableContainer = new LinearLayout(this);
+        tableContainer.setOrientation(LinearLayout.VERTICAL);
+
+        // Set background and border
+        tableContainer.setBackgroundResource(R.drawable.table_border);
+        tableContainer.setPadding(2, 2, 2, 2); // Minimal padding
+
+        // Add table header
+        LinearLayout headerRow = new LinearLayout(this);
+        headerRow.setOrientation(LinearLayout.HORIZONTAL);
+        headerRow.setBackgroundResource(R.color.table_header_bg);
+        headerRow.setPadding(4, 4, 4, 4); // Minimal padding
+
+        for (String header : headers) {
+            TextView headerCell = new TextView(this);
+            headerCell.setText(header);
+            headerCell.setTextColor(ContextCompat.getColor(this, R.color.white));
+            headerCell.setTypeface(null, Typeface.BOLD);
+            headerCell.setTextSize(14); // Slightly smaller text
+            headerCell.setPadding(8, 4, 8, 4); // Compact padding
+            headerCell.setLayoutParams(new LinearLayout.LayoutParams(
+                    0,
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    1f
+            ));
+            headerRow.addView(headerCell);
+        }
+        tableContainer.addView(headerRow);
+
+        // Add table rows
+        boolean alternate = false;
+        for (List<String> row : rows) {
+            LinearLayout tableRow = new LinearLayout(this);
+            tableRow.setOrientation(LinearLayout.HORIZONTAL);
+            tableRow.setBackgroundResource(alternate ? R.color.table_row_even : R.color.table_row_odd);
+            tableRow.setPadding(4, 4, 4, 4); // Minimal padding
+
+            for (String cell : row) {
+                TextView cellView = new TextView(this);
+                cellView.setText(cell);
+                cellView.setTextColor(ContextCompat.getColor(this, R.color.text_dark));
+                cellView.setTextSize(14); // Slightly smaller text
+                cellView.setPadding(8, 4, 8, 4); // Compact padding
+                cellView.setLayoutParams(new LinearLayout.LayoutParams(
+                        0,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        1f
+                ));
+                tableRow.addView(cellView);
+            }
+
+            tableContainer.addView(tableRow);
+            alternate = !alternate;
+        }
+
+        // Add minimal margin only at bottom
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        params.setMargins(0, 0, 0, 4); // Only bottom margin
+        tableContainer.setLayoutParams(params);
+
+        return tableContainer;
+    }
+
+    private void addTableViewToChat(String sender, View tableView, String followUpMessage) {
+        runOnUiThread(() -> {
+            try {
+                LayoutInflater inflater = LayoutInflater.from(this);
+                View messageView = inflater.inflate(R.layout.message_item, findViewById(R.id.messages_container), false);
+
+                // Configure sender text and icon
+                ImageView icon = messageView.findViewById(R.id.message_icon);
+                TextView senderText = messageView.findViewById(R.id.message_sender);
+                LinearLayout messageContainer = messageView.findViewById(R.id.message_container);
+
+                icon.setImageResource(R.drawable.ic_ai);
+                senderText.setTextColor(ContextCompat.getColor(this, R.color.ai_message_text));
+                senderText.setText(sender);
+
+                // Remove the default message text view
+                TextView messageText = messageView.findViewById(R.id.message_text);
+                ((ViewGroup)messageContainer).removeView(messageText);
+
+                // Add our table view
+                messageContainer.addView(tableView);
+
+                // Add follow-up message below the table with minimal padding
+                TextView followUp = new TextView(this);
+                followUp.setText(followUpMessage);
+                followUp.setTextSize(14); // Smaller text
+                followUp.setPadding(0, 4, 0, 0); // Minimal top padding
+                messageContainer.addView(followUp);
+
+                // Style the container
+                messageContainer.setBackgroundResource(R.drawable.ai_message_bg);
+                messageContainer.setPadding(4, 4, 4, 4); // Minimal padding
+
+                // Add to chat
+                LinearLayout container = findViewById(R.id.messages_container);
+                container.addView(messageView);
+
+                // Scroll to bottom
+                final NestedScrollView scrollView = findViewById(R.id.chat_scroll);
+                scrollView.post(() -> scrollView.fullScroll(View.FOCUS_DOWN));
+
+                // Speak the follow-up message
+                speak(followUpMessage);
+
+            } catch (Exception e) {
+                Log.e("VoiceAIActivity", "Error adding table to chat", e);
+                Toast.makeText(this, "Error displaying table", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     private void fetchAvailableTables() {
         databaseRef.child("Tables").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                StringBuilder tablesList = new StringBuilder("Available tables:\n\n");
+                List<String> headers = Arrays.asList("Table No", "Table Name");
+                List<List<String>> rows = new ArrayList<>();
                 boolean hasAvailableTables = false;
 
                 for (DataSnapshot tableSnapshot : snapshot.getChildren()) {
                     if ("available".equalsIgnoreCase(tableSnapshot.child("status").getValue(String.class))) {
                         String tableName = tableSnapshot.child("tableName").getValue(String.class);
                         int tableNumber = tableSnapshot.child("tableNumber").getValue(Integer.class);
-                        tablesList.append("• Table ").append(tableNumber).append(" - ").append(tableName).append("\n");
+                        rows.add(Arrays.asList(String.valueOf(tableNumber), tableName));
                         hasAvailableTables = true;
                     }
                 }
 
                 if (hasAvailableTables) {
-                    displayAIResponse(tablesList.toString() + "\nPlease say the table number you'd like to book.");
+                    // Create the table view with compact styling
+                    View tableView = createCompactTableView(headers, rows);
+                    addTableViewToChat("AI Assistant", tableView, "Please say the table number you'd like to book.");
                 } else {
                     displayAIResponse("Sorry, all tables are currently occupied. Please try again later.");
                     currentConversationState = "WELCOME";
@@ -442,11 +567,15 @@ public class VoiceAIActivity extends AppCompatActivity implements TextToSpeech.O
         databaseRef.child("Menu").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                StringBuilder menuCategories = new StringBuilder("Our menu categories:\n\n");
+                List<String> headers = Arrays.asList("Menu Categories");
+                List<List<String>> rows = new ArrayList<>();
+
                 for (DataSnapshot categorySnapshot : snapshot.getChildren()) {
-                    menuCategories.append("• ").append(categorySnapshot.getKey()).append("\n");
+                    rows.add(Arrays.asList(categorySnapshot.getKey()));
                 }
-                displayAIResponse(menuCategories.toString() + "\nPlease say the category you're interested in.");
+
+                View tableView = createCompactTableView(headers, rows);
+                addTableViewToChat("AI Assistant", tableView, "Please say the category you're interested in.");
             }
 
             @Override
@@ -510,24 +639,22 @@ public class VoiceAIActivity extends AppCompatActivity implements TextToSpeech.O
     }
 
     private void fetchMenuItems(String category) {
-        showLoadingIndicator(true);
         databaseRef.child("Menu").child(category).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                StringBuilder menuItems = new StringBuilder("Items in " + category + ":\n\n");
-                List<String> itemNames = new ArrayList<>();
+                List<String> headers = Arrays.asList("Item", "Price (₹)");
+                List<List<String>> rows = new ArrayList<>();
 
                 for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
                     String itemName = itemSnapshot.child("itemName").getValue(String.class);
                     Integer price = itemSnapshot.child("price").getValue(Integer.class);
                     if (itemName != null && price != null) {
-                        menuItems.append("• ").append(itemName).append(" - ₹").append(price).append("\n");
-                        itemNames.add(itemName.toLowerCase());
+                        rows.add(Arrays.asList(itemName, String.valueOf(price)));
                     }
                 }
 
-                // Store available items for better recognition
-                displayAIResponse(menuItems.toString() + "\nPlease say the item name you'd like to order.");
+                View tableView = createCompactTableView(headers, rows);
+                addTableViewToChat("AI Assistant", tableView, "Please say the item name you'd like to order.");
                 currentConversationState = "MENU_ITEM_SELECTION";
             }
 
@@ -640,24 +767,27 @@ public class VoiceAIActivity extends AppCompatActivity implements TextToSpeech.O
             return;
         }
 
-        StringBuilder orderSummary = new StringBuilder("Your order summary:\n\n");
-        orderSummary.append("Table: ").append(selectedTable).append("\n\n");
-        orderSummary.append("Items:\n");
+        List<String> headers = Arrays.asList("Item", "Qty", "Price", "Total");
+        List<List<String>> rows = new ArrayList<>();
 
         for (HashMap<String, Object> item : selectedItems) {
-            orderSummary.append("• ")
-                    .append(item.get("quantity"))
-                    .append(" x ")
-                    .append(item.get("name"))
-                    .append(" - ₹")
-                    .append((int)item.get("price") * (int)item.get("quantity"))
-                    .append("\n");
+            int price = (int)item.get("price");
+            int quantity = (int)item.get("quantity");
+            int total = price * quantity;
+
+            rows.add(Arrays.asList(
+                    (String)item.get("name"),
+                    String.valueOf(quantity),
+                    "₹" + price,
+                    "₹" + total
+            ));
         }
 
-        orderSummary.append("\nTotal: ₹").append(totalAmount).append("\n\n");
-        orderSummary.append("Would you like to place this order? Say yes or no.");
+        // Add total row
+        rows.add(Arrays.asList("", "", "Total:", "₹" + totalAmount));
 
-        displayAIResponse(orderSummary.toString());
+        View tableView = createCompactTableView(headers, rows);
+        addTableViewToChat("AI Assistant", tableView, "Would you like to place this order? Say yes or no.");
         currentConversationState = "ORDER_CONFIRMATION";
     }
 

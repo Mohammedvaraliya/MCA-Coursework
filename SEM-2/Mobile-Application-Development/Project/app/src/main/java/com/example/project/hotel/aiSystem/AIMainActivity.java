@@ -2,11 +2,13 @@ package com.example.project.hotel.aiSystem;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.JavascriptInterface;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.NestedScrollView;
@@ -37,12 +40,9 @@ import com.google.firebase.vertexai.java.GenerativeModelFutures;
 import com.google.firebase.vertexai.type.Content;
 import com.google.firebase.vertexai.type.GenerateContentResponse;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -82,8 +82,6 @@ public class AIMainActivity extends AppCompatActivity {
         sendButton = findViewById(R.id.send_button);
 
         sendButton.setOnClickListener(v -> handleUserInput());
-
-        // Handle "enter" key in keyboard
         userInput.setOnEditorActionListener((v, actionId, event) -> {
             handleUserInput();
             return true;
@@ -152,14 +150,14 @@ public class AIMainActivity extends AppCompatActivity {
     private void handleWelcomeState(String userMessage) {
         if (containsAny(userMessage, "table", "book", "reserve")) {
             currentConversationState = "TABLE_SELECTION";
-            fetchAvailableTables();
+            showAvailableTables();
         } else if (containsAny(userMessage, "menu", "view", "show", "see")) {
             currentConversationState = "MENU_CATEGORY_SELECTION";
             fetchMenuCategories();
         } else if (containsAny(userMessage, "order", "place")) {
             currentConversationState = "TABLE_SELECTION";
-            displayAIResponse("First, let's select a table for your order. Checking available tables...");
-            fetchAvailableTables();
+            displayAIResponse("First, let's select a table for your order. Showing available tables...");
+            showAvailableTables();
         } else if (containsAny(userMessage, "status", "check")) {
             displayAIResponse("Please provide your order ID to check the status.");
         } else {
@@ -172,35 +170,52 @@ public class AIMainActivity extends AppCompatActivity {
         }
     }
 
-    private void fetchAvailableTables() {
-        databaseRef.child("Tables").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                StringBuilder tablesList = new StringBuilder("Available tables:\n\n");
-                boolean hasAvailableTables = false;
+    private void showAvailableTables() {
+        databaseRef.child("Tables").orderByChild("status").equalTo("available")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            StringBuilder htmlTable = new StringBuilder();
+                            htmlTable.append("<html><head><style>")
+                                    .append("body { font-family: Arial, sans-serif; }")
+                                    .append(".table-container { margin: 10px; }")
+                                    .append(".hotel-table { width: 100%; border-collapse: collapse; }")
+                                    .append(".hotel-table th { background-color: #4CAF50; color: white; padding: 10px; text-align: left; }")
+                                    .append(".hotel-table td, .hotel-table th { border: 1px solid #ddd; padding: 8px; }")
+                                    .append(".hotel-table tr:nth-child(even) { background-color: #f2f2f2; }")
+                                    .append(".hotel-table tr:hover { background-color: #ddd; }")
+                                    .append(".select-btn { background-color: #4CAF50; color: white; border: none; padding: 5px 10px; text-align: center; text-decoration: none; display: inline-block; font-size: 12px; margin: 2px 1px; cursor: pointer; border-radius: 4px; }")
+                                    .append("</style></head><body><div class='table-container'>")
+                                    .append("<table class='hotel-table'><thead><tr>")
+                                    .append("<th>Sr No.</th><th>Table No.</th><th>Table Name</th><th>Action</th>")
+                                    .append("</tr></thead><tbody>");
 
-                for (DataSnapshot tableSnapshot : snapshot.getChildren()) {
-                    if ("available".equalsIgnoreCase(tableSnapshot.child("status").getValue(String.class))) {
-                        String tableName = tableSnapshot.child("tableName").getValue(String.class);
-                        int tableNumber = tableSnapshot.child("tableNumber").getValue(Integer.class);
-                        tablesList.append("• Table ").append(tableNumber).append(" - ").append(tableName).append("\n");
-                        hasAvailableTables = true;
+                            int serialNo = 1;
+                            for (DataSnapshot tableSnapshot : snapshot.getChildren()) {
+                                int tableNumber = tableSnapshot.child("tableNumber").getValue(Integer.class);
+                                String tableName = tableSnapshot.child("tableName").getValue(String.class);
+
+                                htmlTable.append("<tr>")
+                                        .append("<td>").append(serialNo++).append("</td>")
+                                        .append("<td>").append(tableNumber).append("</td>")
+                                        .append("<td>").append(tableName).append("</td>")
+                                        .append("<td><button class='select-btn' onclick='Android.selectTable(").append(tableNumber).append(")'>Select</button></td>")
+                                        .append("</tr>");
+                            }
+
+                            htmlTable.append("</tbody></table></div></body></html>");
+                            displayHtmlResponse(htmlTable.toString(), "Available Tables", "table");
+                        } else {
+                            displayAIResponse("No available tables at the moment.");
+                        }
                     }
-                }
 
-                if (hasAvailableTables) {
-                    displayAIResponse(tablesList.toString() + "\nPlease type the table number you'd like to book.");
-                } else {
-                    displayAIResponse("Sorry, all tables are currently occupied. Please try again later.");
-                    currentConversationState = "WELCOME";
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                displayAIResponse("Error fetching tables. Please try again.");
-            }
-        });
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        displayAIResponse("Error fetching table data. Please try again.");
+                    }
+                });
     }
 
     private void handleTableSelection(String userMessage) {
@@ -244,16 +259,42 @@ public class AIMainActivity extends AppCompatActivity {
         databaseRef.child("Menu").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                StringBuilder menuCategories = new StringBuilder("Our menu categories:\n\n");
-                for (DataSnapshot categorySnapshot : snapshot.getChildren()) {
-                    menuCategories.append("• ").append(categorySnapshot.getKey()).append("\n");
+                if (snapshot.exists()) {
+                    StringBuilder htmlTable = new StringBuilder();
+                    htmlTable.append("<html><head><style>")
+                            .append("body { font-family: Arial, sans-serif; }")
+                            .append(".table-container { margin: 10px; }")
+                            .append(".hotel-table { width: 100%; border-collapse: collapse; }")
+                            .append(".hotel-table th { background-color: #4CAF50; color: white; padding: 10px; text-align: left; }")
+                            .append(".hotel-table td, .hotel-table th { border: 1px solid #ddd; padding: 8px; }")
+                            .append(".hotel-table tr:nth-child(even) { background-color: #f2f2f2; }")
+                            .append(".hotel-table tr:hover { background-color: #ddd; }")
+                            .append(".select-btn { background-color: #4CAF50; color: white; border: none; padding: 5px 10px; text-align: center; text-decoration: none; display: inline-block; font-size: 12px; margin: 2px 1px; cursor: pointer; border-radius: 4px; }")
+                            .append("</style></head><body><div class='table-container'>")
+                            .append("<table class='hotel-table'><thead><tr>")
+                            .append("<th>Sr No.</th><th>Menu Category</th><th>Action</th>")
+                            .append("</tr></thead><tbody>");
+
+                    int serialNo = 1;
+                    for (DataSnapshot categorySnapshot : snapshot.getChildren()) {
+                        String categoryName = categorySnapshot.getKey();
+                        htmlTable.append("<tr>")
+                                .append("<td>").append(serialNo++).append("</td>")
+                                .append("<td>").append(categoryName).append("</td>")
+                                .append("<td><button class='select-btn' onclick='Android.selectCategory(\"").append(categoryName).append("\")'>Select</button></td>")
+                                .append("</tr>");
+                    }
+
+                    htmlTable.append("</tbody></table></div></body></html>");
+                    displayHtmlResponse(htmlTable.toString(), "Menu Categories", "category");
+                } else {
+                    displayAIResponse("No menu categories available.");
                 }
-                displayAIResponse(menuCategories.toString() + "\nPlease type the category you're interested in.");
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                displayAIResponse("Error fetching menu. Please try again.");
+                displayAIResponse("Error fetching menu categories. Please try again.");
             }
         });
     }
@@ -269,23 +310,8 @@ public class AIMainActivity extends AppCompatActivity {
                 confirmOrder();
             }
         } else {
-            // Check if this is a valid category
-            databaseRef.child("Menu").child(userMessage).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.exists()) {
-                        currentCategory = userMessage;
-                        fetchMenuItems(userMessage);
-                    } else {
-                        displayAIResponse("Invalid category. Please choose from the list above.");
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    displayAIResponse("Error checking menu category. Please try again.");
-                }
-            });
+            currentCategory = userMessage;
+            fetchMenuItems(userMessage);
         }
     }
 
@@ -293,16 +319,42 @@ public class AIMainActivity extends AppCompatActivity {
         databaseRef.child("Menu").child(category).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                StringBuilder menuItems = new StringBuilder("Items in " + category + ":\n\n");
-                for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
-                    String itemName = itemSnapshot.child("itemName").getValue(String.class);
-                    Integer price = itemSnapshot.child("price").getValue(Integer.class);
-                    if (itemName != null && price != null) {
-                        menuItems.append("• ").append(itemName).append(" - ₹").append(price).append("\n");
+                if (snapshot.exists()) {
+                    StringBuilder htmlTable = new StringBuilder();
+                    htmlTable.append("<html><head><style>")
+                            .append("body { font-family: Arial, sans-serif; }")
+                            .append(".table-container { margin: 10px; }")
+                            .append(".hotel-table { width: 100%; border-collapse: collapse; }")
+                            .append(".hotel-table th { background-color: #4CAF50; color: white; padding: 10px; text-align: left; }")
+                            .append(".hotel-table td, .hotel-table th { border: 1px solid #ddd; padding: 8px; }")
+                            .append(".hotel-table tr:nth-child(even) { background-color: #f2f2f2; }")
+                            .append(".hotel-table tr:hover { background-color: #ddd; }")
+                            .append(".select-btn { background-color: #4CAF50; color: white; border: none; padding: 5px 10px; text-align: center; text-decoration: none; display: inline-block; font-size: 12px; margin: 2px 1px; cursor: pointer; border-radius: 4px; }")
+                            .append("</style></head><body><div class='table-container'>")
+                            .append("<table class='hotel-table'><thead><tr>")
+                            .append("<th>Sr No.</th><th>Item Name</th><th>Price</th><th>Action</th>")
+                            .append("</tr></thead><tbody>");
+
+                    int serialNo = 1;
+                    for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
+                        String itemName = itemSnapshot.child("itemName").getValue(String.class);
+                        Integer price = itemSnapshot.child("price").getValue(Integer.class);
+
+                        if (itemName != null && price != null) {
+                            htmlTable.append("<tr>")
+                                    .append("<td>").append(serialNo++).append("</td>")
+                                    .append("<td>").append(itemName).append("</td>")
+                                    .append("<td>₹").append(price).append("</td>")
+                                    .append("<td><button class='select-btn' onclick='Android.selectItem(\"").append(itemName).append("\")'>Select</button></td>")
+                                    .append("</tr>");
+                        }
                     }
+
+                    htmlTable.append("</tbody></table></div></body></html>");
+                    displayHtmlResponse(htmlTable.toString(), "Menu Items: " + category, "item");
+                } else {
+                    displayAIResponse("No items available in this category.");
                 }
-                displayAIResponse(menuItems.toString() + "\nPlease type the item name you'd like to order.");
-                currentConversationState = "MENU_ITEM_SELECTION";
             }
 
             @Override
@@ -313,39 +365,9 @@ public class AIMainActivity extends AppCompatActivity {
     }
 
     private void handleMenuItemSelection(String userMessage) {
-        // Check if this item exists in the current category
-        databaseRef.child("Menu").child(currentCategory).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                boolean itemFound = false;
-                for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
-                    String itemName = itemSnapshot.child("itemName").getValue(String.class);
-                    if (itemName != null && itemName.equalsIgnoreCase(userMessage)) {
-                        itemFound = true;
-                        Integer price = itemSnapshot.child("price").getValue(Integer.class);
-                        if (price != null) {
-                            currentSelectedItem = itemName; // Store the selected item
-                            HashMap<String, Object> selectedItem = new HashMap<>();
-                            selectedItem.put("name", itemName);
-                            selectedItem.put("price", price);
-
-                            displayAIResponse("How many " + itemName + " would you like?");
-                            currentConversationState = "ITEM_QUANTITY_SELECTION";
-                            return;
-                        }
-                    }
-                }
-
-                if (!itemFound) {
-                    displayAIResponse("Item not found. Please choose from the list above.");
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                displayAIResponse("Error checking menu item. Please try again.");
-            }
-        });
+        currentSelectedItem = userMessage;
+        displayAIResponse("How many " + userMessage + " would you like?");
+        currentConversationState = "ITEM_QUANTITY_SELECTION";
     }
 
     private void handleItemQuantitySelection(String userMessage) {
@@ -356,7 +378,6 @@ public class AIMainActivity extends AppCompatActivity {
                 return;
             }
 
-            // Get the price for the selected item
             databaseRef.child("Menu").child(currentCategory).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -472,13 +493,87 @@ public class AIMainActivity extends AppCompatActivity {
                 });
     }
 
+    private void displayHtmlResponse(String htmlContent, String title, String type) {
+        WebView webView = new WebView(this);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.setWebViewClient(new WebViewClient());
+        webView.loadDataWithBaseURL(null, htmlContent, "text/html", "UTF-8", null);
+
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setView(webView)
+                .setTitle(title)
+                .setPositiveButton("Close", null)
+                .show();
+
+        switch (type) {
+            case "table":
+                webView.addJavascriptInterface(new WebAppInterface(dialog), "Android");
+                break;
+            case "category":
+                webView.addJavascriptInterface(new CategoryWebInterface(dialog), "Android");
+                break;
+            case "item":
+                webView.addJavascriptInterface(new ItemWebInterface(dialog), "Android");
+                break;
+        }
+    }
+
+    public class WebAppInterface {
+        private AlertDialog dialog;
+
+        public WebAppInterface(AlertDialog dialog) {
+            this.dialog = dialog;
+        }
+
+        @JavascriptInterface
+        public void selectTable(int tableNumber) {
+            runOnUiThread(() -> {
+                dialog.dismiss();
+                handleTableSelection(String.valueOf(tableNumber));
+            });
+        }
+    }
+
+    public class CategoryWebInterface {
+        private AlertDialog dialog;
+
+        public CategoryWebInterface(AlertDialog dialog) {
+            this.dialog = dialog;
+        }
+
+        @JavascriptInterface
+        public void selectCategory(String category) {
+            runOnUiThread(() -> {
+                dialog.dismiss();
+                currentCategory = category;
+                displayAIResponse("You selected: " + category + "\nFetching items...");
+                fetchMenuItems(category);
+            });
+        }
+    }
+
+    public class ItemWebInterface {
+        private AlertDialog dialog;
+
+        public ItemWebInterface(AlertDialog dialog) {
+            this.dialog = dialog;
+        }
+
+        @JavascriptInterface
+        public void selectItem(String itemName) {
+            runOnUiThread(() -> {
+                dialog.dismiss();
+                handleMenuItemSelection(itemName);
+            });
+        }
+    }
+
     private void handleDefaultState(String userMessage) {
         Content content = new Content.Builder()
                 .addText("You are a helpful hotel assistant. Answer this question: " + userMessage)
                 .build();
 
         ListenableFuture<GenerateContentResponse> future = model.generateContent(content);
-
         Executor executor = Executors.newSingleThreadExecutor();
 
         Futures.addCallback(future, new FutureCallback<GenerateContentResponse>() {
@@ -520,7 +615,6 @@ public class AIMainActivity extends AppCompatActivity {
         TextView senderText = messageView.findViewById(R.id.message_sender);
         TextView messageText = messageView.findViewById(R.id.message_text);
 
-        // Set icon and colors based on message type
         if (messageType == MESSAGE_TYPE_AI) {
             icon.setImageResource(R.drawable.ic_ai);
             senderText.setTextColor(ContextCompat.getColor(this, R.color.ai_message_text));
@@ -536,11 +630,9 @@ public class AIMainActivity extends AppCompatActivity {
         senderText.setText(sender);
         messageText.setText(message);
 
-        // Add the message to the container
         LinearLayout container = findViewById(R.id.messages_container);
         container.addView(messageView);
 
-        // Scroll to bottom
         final NestedScrollView scrollView = findViewById(R.id.chat_scroll);
         scrollView.post(() -> scrollView.fullScroll(View.FOCUS_DOWN));
     }
