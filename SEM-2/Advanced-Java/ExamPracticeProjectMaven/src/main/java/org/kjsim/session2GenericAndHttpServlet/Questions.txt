@@ -1,0 +1,5 @@
+1. Demonstrate Generic and HTTP Servlet response and request objects in an application.
+
+2. A simple form to collect user input (name and roll number). Submits data to the `GenericServletDemo` servlet.
+
+3. A form to perform CRUD operations on the student table (Mysql).

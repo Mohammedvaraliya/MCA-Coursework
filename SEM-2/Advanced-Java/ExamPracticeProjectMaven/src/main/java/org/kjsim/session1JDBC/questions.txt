@@ -1,0 +1,9 @@
+Program on JDBC using statements.
+
+1. Write a java program to connect with the MySQL database & insert n number of records in the table using prepareStatement.
+
+2. Write a java program to connect with the database & update records using MySQL database.
+
+3. Write a program to connect with the database & delete records using MySQL database.
+
+4. Write a java program to connect with JDBC and retrieve records from any one table.
