@@ -1,0 +1,158 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 2rem;
+    color: #4CAF50;
+    margin-bottom: 10px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.buttons p {
+    font-size: 1.1rem;
+    color: #555;
+}
+
+/* Button-like appearance */
+button, .custom-tag-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+    margin: 10px 0;
+    text-align: center;
+}
+
+button:hover, .custom-tag-button:hover {
+    background-color: #45a049;
+}
+
+/* Styling for each tag example */
+.simple-tag-example {
+    background-color: #e7f7e7;
+    border-left: 5px solid #4CAF50;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.tag-handler-example {
+    background-color: #f9f9f9;
+    border-left: 5px solid #2196F3;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.loop-tag-example {
+    background-color: #f1f8ff;
+    border-left: 5px solid #FF5722;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+/* Styling for the example output */
+.example-output {
+    background-color: #f4f4f4;
+    border: 1px dashed #ddd;
+    padding: 15px;
+    color: #444;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1rem;
+    margin-top: 15px;
+    border-radius: 5px;
+}
+
+/* Adding spacing for custom tag results */
+.custom-tag-output {
+    padding: 10px;
+    margin-top: 15px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    font-size: 1.1rem;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 10px 15px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+td {
+    background-color: #f9f9f9;
+}
+
+/* Hover Effect on Table Rows */
+tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Button Container Styling */
+.buttons {
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* Responsive Table */
+@media (max-width: 768px) {
+    th, td {
+        padding: 8px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+}

@@ -1,0 +1,126 @@
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    text-align: center;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 80%;
+}
+
+h1 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    color: #444;
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+pre {
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 10px;
+    color: #333;
+    text-align: left;
+    font-family: monospace;
+    font-size: 14px;
+}
+
+.buttons button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 10px 3px;
+    cursor: pointer;
+    width: 23%;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.buttons button:hover {
+    background-color: #0056b3;
+}
+
+.buttons button:active {
+    background-color: #003f7d;
+}
+
+form {
+    margin: 30px auto;
+    padding: 25px;
+    background-color: white;
+}
+
+form label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+    font-weight: 500;
+    color: #333;
+    text-align: start;
+}
+
+form input[type="text"],
+form input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1em;
+    transition: border-color 0.3s ease;
+}
+
+form input[type="text"]:focus,
+form input[type="password"]:focus {
+    border-color: #ff0000;
+    outline: none;
+}
+
+form button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+    width: 23%;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+a {
+    color: #007bff;
+}
+
+a:hover {
+    text-decoration: underline;
+}

@@ -25,6 +25,21 @@
         <h2>Session 3: Http Session, Cookies, URL Rewriting, Hidden Fields</h2>
         <a href="./session3HttpSessionAndStateManagement" class="session-link">Go to Session 3 Implementation</a>
     </section>
+
+    <section class="session">
+        <h2>Session 4: Page directives with JSP, JSP Objects and Scripting, JSP Actions, JSP with Beans</h2>
+        <a href="./session4DirectivesObjectsScriptingActionsBeans" class="session-link">Go to Session 4 Implementation</a>
+    </section>
+
+    <section class="session">
+        <h2>Session 5: Error Page in JSP</h2>
+        <a href="./session5ErrorPage" class="session-link">Go to Session 5 Implementation</a>
+    </section>
+
+    <section class="session">
+        <h2>Session 6: Custom Tags</h2>
+        <a href="./session6CustomTags" class="session-link">Go to Session 6 Implementation</a>
+    </section>
 </main>
 </body>
 </html>
