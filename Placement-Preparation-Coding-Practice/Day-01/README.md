@@ -6,7 +6,7 @@
 4. **Max Number of Words Found**
 5. **Rotate String**
 
-## 1. Roman to Integer
+## 01. Roman to Integer
 
 [LeetCode Problem URL](https://leetcode.com/problems/roman-to-integer/)
 
@@ -36,12 +36,16 @@ Example 1:
 Input: s = "III"
 Output: 3
 Explanation: III = 1 + 1 + 1 = 3
+```
 
+```bash
 Example 2:
 Input: s = "LVIII"
 Output: 58
 Explanation: L = 50, V = 5, III = 3 → 50 + 5 + 3 = 58
+```
 
+```bash
 Example 3:
 Input: s = "MCMXCIV"
 Output: 1994
@@ -50,7 +54,7 @@ Explanation: M = 1000, CM = 900, XC = 90, IV = 4 → 1000 + 900 + 90 + 4 = 1994
 
 ### Explanation
 
-#### Approach: Subtract Smaller Before Larger
+**Approach: Subtract Smaller Before Larger**
 
 We iterate over the Roman numeral string and compare **current value with previous value**:
 
@@ -104,7 +108,7 @@ Look for:
 
 ---
 
-## 2. Shuffle String
+## 02. Shuffle String
 
 [Leetcode Problem URL](https://leetcode.com/problems/shuffle-string/)
 
@@ -136,7 +140,7 @@ Explanation: After shuffling, each character remains in its position.
 
 ---
 
-## 3. Reverse String
+## 03. Reverse String
 
 [Leetcode Problem URL](https://leetcode.com/problems/reverse-string/)
 
@@ -164,7 +168,7 @@ Output: ["h","a","n","n","a","H"]
 
 ---
 
-## 4. Maximum Number of Words Found in Sentences
+## 04. Maximum Number of Words Found in Sentences
 
 [Leetcode Problem URL](https://leetcode.com/problems/maximum-number-of-words-found-in-sentences/)
 
@@ -201,7 +205,7 @@ In this example, the second and third sentences (underlined) have the same numbe
 
 ---
 
-## 5. Rotate String
+## 05. Rotate String
 
 [Leetcode Problem URL](https://leetcode.com/problems/rotate-string/)
 
