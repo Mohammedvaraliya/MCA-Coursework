@@ -115,7 +115,7 @@ Output: [0]
 
 ---
 
-## 02. Shuffle String
+## 02. Subarray Sum Equals K
 
 [Leetcode Problem URL](https://leetcode.com/problems/subarray-sum-equals-k/)
 
@@ -138,6 +138,133 @@ Output: 2
 ```
 
 ### Explanation
+
+We will use a trick called cumulative sum (think of it like adding up the numbers one by one) and a little memory helper (called a hashmap) to keep track of things we've already added up.
+
+We use a **prefix sum with hashmap** approach to solve this problem in linear time. This is an optimized method that avoids brute-force checking of all subarrays.
+
+#### **Why This Approach Was Chosen**
+
+- A brute-force solution would require checking all subarrays and computing their sums, which leads to **O(n²)** time complexity. This is inefficient for large arrays.
+- The prefix sum method allows us to calculate the sum of any subarray in **O(1)** time using previously stored cumulative sums.
+- A hashmap helps us efficiently track how many times a specific cumulative sum has occurred, which allows us to count valid subarrays without iterating over them again.
+
+#### **Underlying Pattern**
+
+This solution is based on the **prefix sum** technique combined with **hashing** for fast lookups.
+
+We maintain:
+
+- Cumulative Sum: We keep adding the numbers one by one. Each time we do that, we check if the difference between the current sum (s) and k has appeared before.
+- Map: The map remembers all the sums we've seen so far, and how many times we’ve seen them. This helps us check quickly if there's a subarray that sums to k.
+
+The key idea is:
+
+> If `s` is the current cumulative sum and `s - k` has appeared before, then there exists a subarray ending at the current index which sums to `k`.
+
+#### Step-by-Step Walkthrough
+
+1. Let’s walk through this with the input:
+
+   ```python
+   nums = [1, 1, 1], k = 2
+   ```
+
+2. Initialization:
+
+   - `sumdict = {0: 1}`
+     (There's one way to have a sum of 0 before starting) This means we’ve seen a sum of 0 once (before starting).
+   - `count = 0`
+   - `s = 0` (Running sum)
+
+3. Iteration Details:
+
+   | Iteration | num | s (cumulative sum) | s - k | sumdict lookup | count (subarrays) | sumdict updated        |
+   | --------: | --- | ------------------ | ----- | -------------- | ----------------- | ---------------------- |
+   |         1 | 1   | 1                  | -1    | not found      | 0                 | `{0:1, 1:1}`           |
+   |         2 | 1   | 2                  | 0     | found → +1     | 1                 | `{0:1, 1:1, 2:1}`      |
+   |         3 | 1   | 3                  | 1     | found → +1     | 2                 | `{0:1, 1:1, 2:1, 3:1}` |
+
+4. Final Result:
+
+   - `count = 2`
+
+   This means there are **2 subarrays** whose sum is `k = 2`.
+
+   - Subarray `[1,1]` at index 0 to 1
+   - Subarray `[1,1]` at index 1 to 2
+
+5. **Example: nums = `[1, 1, 1]`, k = 2**
+
+6. **Start with an empty list** and a running sum of 0.
+
+   - **Map** (`sumdict`): This will keep track of how many times a certain sum has appeared.
+   - Start with `{0: 1}`. This means we’ve seen a sum of 0 **once** (before starting).
+
+7. **Start walking through the list:**
+
+8. Step 1: Take the first number, which is `1`.
+
+   - **Running sum (s)**: Add `1` to our current sum, so `s = 1`.
+   - **Check if we’ve seen `s - k`** before:
+
+   - We want to know if `s - k = 1 - 2 = -1` has been seen. It hasn’t, so no new subarray found.
+   - **Update the map**: We’ve now seen a sum of `1`, so we update the map: `{0: 1, 1: 1}`.
+   - No subarray found yet, so `count = 0`.
+
+9. Step 2: Take the second number, which is `1`.
+
+   - **Running sum (s)**: Add `1` again, so `s = 2`.
+   - **Check if we’ve seen `s - k`** before:
+
+   - We want to know if `s - k = 2 - 2 = 0` has been seen. Yes! The sum `0` was seen before (at the start).
+   - This means there’s a subarray that ends here and has a sum of `2`! The subarray is `[1, 1]`.
+   - **Update the map**: Now we’ve seen a sum of `2`, so we update the map: `{0: 1, 1: 1, 2: 1}`.
+   - We found **1 subarray** so far, so `count = 1`.
+
+10. Step 3: Take the third number, which is `1`.
+
+    - **Running sum (s)**: Add `1` again, so `s = 3`.
+    - **Check if we’ve seen `s - k`** before:
+
+    - We want to know if `s - k = 3 - 2 = 1` has been seen. Yes! The sum `1` was seen before (at step 1).
+    - This means there’s another subarray that ends here and has a sum of `2`! The subarray is `[1, 1]`.
+    - **Update the map**: Now we’ve seen a sum of `3`, so we update the map: `{0: 1, 1: 1, 2: 1, 3: 1}`.
+    - We found **another subarray**. Now, `count = 2`.
+
+11. Final Result:
+
+    We have found **2 subarrays** with a sum of `2`:
+
+    1. Subarray `[1, 1]` at indices 0 to 1
+    2. Subarray `[1, 1]` at indices 1 to 2
+
+    So, the output is `2`.
+
+#### Time and Space Complexity Analysis
+
+1. **Time Complexity: O(n)**
+
+   - We iterate over the array exactly once.
+   - All operations inside the loop (sum calculation, dictionary lookup and update) are O(1).
+
+2. **Space Complexity: O(n)**
+
+   - In the worst case, all prefix sums are unique, and we store `n` sums in the hashmap.
+
+#### Strengths of This Solution:
+
+- **Optimal Time:** Achieves linear time, a significant improvement over brute-force O(n²).
+- **In-place Processing:** Only uses a hashmap for auxiliary storage.
+- **Scalable:** Works efficiently even on large arrays (e.g., 10⁵+ elements).
+
+#### When to Use This Pattern:
+
+Look for these cues:
+
+- You are asked to count subarrays or ranges that meet a specific sum or condition.
+- Prefix sums or differences are relevant.
+- You need an efficient way to search previous computations → use a hashmap.
 
 ---
 
