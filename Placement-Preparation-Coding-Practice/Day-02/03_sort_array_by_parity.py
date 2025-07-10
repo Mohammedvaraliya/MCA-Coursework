@@ -1,5 +1,5 @@
 class Solution:
-    def sortArrayByParity1(self, nums: list[int]) -> list[int]:
+    def sortArrayByParity_brute_force(self, nums: list[int]) -> list[int]:
         res = []
 
         for i in range(len(nums)):

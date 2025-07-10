@@ -274,7 +274,7 @@ Look for these cues:
 
 [Leetcode Problem URL](https://leetcode.com/problems/sort-array-by-parity/)
 
-Given an integer array nums, move all the even integers at the beginning of the array followed by all the odd integers.
+Given an integer array `nums`, move all the even integers at the beginning of the array followed by all the odd integers.
 
 Return any array that satisfies this condition.
 
@@ -294,6 +294,98 @@ Output: [0]
 ```
 
 ### Explanation
+
+The problem requires rearranging an array so that all **even numbers appear before odd numbers**, maintaining **no specific relative order**. To solve this, two methods are considered:
+
+- **Brute Force Approach**: Use additional space to build a result array.
+- **In-Place Two-Pointer Approach**: Modify the array directly using the two-pointer technique.
+
+#### Why This Approach Was Chosen
+
+The in-place **two-pointer approach** was chosen for the final solution because:
+
+- It satisfies the in-place constraint (no extra array used).
+- It reduces space complexity from O(n) to **O(1)**.
+- It is more **efficient and elegant** than building a new array using two separate loops.
+- It avoids unnecessary memory allocation and copying.
+
+#### Problem-Solving Pattern
+
+This approach follows the **Two-Pointer Pattern**, which is commonly used when modifying or partitioning arrays in-place based on a condition.
+
+- One pointer (`left`) moves forward from the start.
+- Another pointer (`right`) moves backward from the end.
+- When necessary, values are **swapped** to ensure even numbers go to the front and odd numbers go to the back.
+
+#### Step-by-Step Walkthrough
+
+1. Input:
+
+   ```python
+   nums = [3, 1, 2, 4]
+   ```
+
+2. Initial State:
+
+   - `left = 0`, pointing to `nums[0] = 3`
+   - `right = 3`, pointing to `nums[3] = 4`
+
+3. Iteration 1:
+
+   - `nums[left] = 3` → odd
+   - `nums[right] = 4` → even
+   - Swap `nums[left]` and `nums[right]` → `nums = [4, 1, 2, 3]`
+   - Increment `left → 1`, Decrement `right → 2`
+
+4. Iteration 2:
+
+   - `nums[left] = 1` → odd
+   - `nums[right] = 2` → even
+   - Swap `nums[left]` and `nums[right]` → `nums = [4, 2, 1, 3]`
+   - Increment `left → 2`, Decrement `right → 1`
+
+5. Exit Condition:
+
+- `left >= right` (2 ≥ 1), loop ends.
+
+1. Final Output:
+
+   ```python
+   [4, 2, 1, 3]
+   ```
+
+   Any order that places all even numbers before odd numbers is valid. Therefore, this output is accepted.
+
+#### Time and Space Complexity Analysis
+
+1. Time Complexity: **O(n)**
+
+- Each element is visited at most once.
+- Swapping is a constant time operation.
+
+> **Total Time = O(n)**, where `n` is the length of the array.
+
+---
+
+2. Space Complexity: **O(1)**
+
+- No additional space is used except for a few pointers.
+- The input array is modified in-place.
+
+> **Total Space = O(1)** constant space.
+
+#### Strengths of the Two-Pointer In-Place Approach:
+
+- Efficient: O(n) time, O(1) space.
+- No auxiliary array is needed.
+- Easy to implement and understand.
+- Well-suited for partitioning problems.
+
+#### When to Use This Pattern:
+
+- When the problem involves rearranging elements based on a condition (e.g., even vs. odd).
+- When in-place modification is required or optimal.
+- When order of elements is not important, only grouping by condition.
 
 ---
 
