@@ -395,12 +395,12 @@ This approach follows the **Two-Pointer Pattern**, which is commonly used when m
 
 [Leetcode Problem URL](https://leetcode.com/problems/remove-duplicates-from-sorted-array/)
 
-Given an integer array nums sorted in non-decreasing order, remove the duplicates in-place such that each unique element appears only once. The relative order of the elements should be kept the same. Then return the number of unique elements in nums.
+Given an integer array `nums` sorted in non-decreasing order, remove the duplicates in-place such that each unique element appears only once. The relative order of the elements should be kept the same. Then return the number of unique elements in `nums`.
 
-Consider the number of unique elements of nums to be k, to get accepted, you need to do the following things:
+Consider the number of unique elements of `nums` to be `k`, to get accepted, you need to do the following things:
 
-- Change the array nums such that the first k elements of nums contain the unique elements in the order they were present in nums initially. The remaining elements of nums are not important as well as the size of nums.
-- Return k.
+- Change the array `nums` such that the first `k` elements of nums contain the unique elements in the order they were present in `nums` initially. The remaining elements of `nums` are not important as well as the size of `nums`.
+- Return `k`.
 
 **Custom Judge:**
 
@@ -439,6 +439,87 @@ It does not matter what you leave beyond the returned k (hence they are undersco
 ```
 
 ### Explanation
+
+#### Approach Explanation
+
+1. Why This Approach Was Chosen
+
+   This problem is best tackled using a **two-pointer** approach that processes the array in a **single pass** while modifying it in-place. This pattern is optimal because:
+
+   - It respects the in-place constraint.
+   - It avoids unnecessary shifting or auxiliary data structures.
+   - It allows direct overwriting of duplicates with the next distinct values.
+
+2. Applied Pattern
+
+   - **Two-Pointer Technique**:
+
+   - `prev` pointer keeps track of the position of the **last unique element**.
+   - `next` pointer scans through the array, identifying **new unique elements**.
+
+This pattern is frequently used in array transformation problems where you need to "move" or "filter" values efficiently in-place.
+
+3. How This Is More Efficient
+
+   - **Brute force** solutions may require building new arrays or using sets.
+   - This solution avoids any additional space while operating in linear time.
+   - Each element is visited exactly once, making the approach both efficient and elegant.
+
+### Step-by-Step Walkthrough
+
+1. Input:
+
+   ```python
+   nums = [0,0,1,1,1,2,2,3,3,4]
+   ```
+
+2. Initial State:
+
+   - `prev = 0`, `next = 1`
+
+3. Iteration-wise Trace:
+
+   | Iteration | `next` Index | `nums[next]` | `nums[prev]` | Action                        | Updated `nums`         | `prev` |
+   | --------- | ------------ | ------------ | ------------ | ----------------------------- | ---------------------- | ------ |
+   | 1         | 1            | 0            | 0            | Duplicate, skip               | \[0,0,1,1,1,2,2,3,3,4] | 0      |
+   | 2         | 2            | 1            | 0            | New unique → move to `prev+1` | \[0,1,1,1,1,2,2,3,3,4] | 1      |
+   | 3         | 3            | 1            | 1            | Duplicate, skip               | \[0,1,1,1,1,2,2,3,3,4] | 1      |
+   | 4         | 4            | 1            | 1            | Duplicate, skip               | \[0,1,1,1,1,2,2,3,3,4] | 1      |
+   | 5         | 5            | 2            | 1            | New unique → move to `prev+1` | \[0,1,2,1,1,2,2,3,3,4] | 2      |
+   | 6         | 6            | 2            | 2            | Duplicate, skip               | \[0,1,2,1,1,2,2,3,3,4] | 2      |
+   | 7         | 7            | 3            | 2            | New unique → move to `prev+1` | \[0,1,2,3,1,2,2,3,3,4] | 3      |
+   | 8         | 8            | 3            | 3            | Duplicate, skip               | \[0,1,2,3,1,2,2,3,3,4] | 3      |
+   | 9         | 9            | 4            | 3            | New unique → move to `prev+1` | \[0,1,2,3,4,2,2,3,3,4] | 4      |
+
+4. Final State:
+
+   - `prev = 4`, so total unique elements = `prev + 1 = 5`
+   - `nums` becomes: `[0, 1, 2, 3, 4, _, _, _, _, _]`
+
+5. Return Value:
+
+   ```python
+   return 5
+   ```
+
+### Time and Space Complexity
+
+| Complexity | Value  | Explanation                                         |
+| ---------- | ------ | --------------------------------------------------- |
+| Time       | $O(n)$ | The array is traversed once.                        |
+| Space      | $O(1)$ | No extra space is used; in-place modification only. |
+
+#### Summary
+
+- **Pattern**: Two-pointer (in-place overwrite).
+- **Efficiency**: Optimal space and linear time.
+- **Mutates input array** to store unique values at the start.
+
+#### Use-Cases for This Pattern
+
+- Removing duplicates in sorted arrays.
+- In-place filtering of elements based on conditions.
+- Partitioning or compressing data in fixed memory.
 
 ---
 
