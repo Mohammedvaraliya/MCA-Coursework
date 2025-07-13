@@ -578,6 +578,80 @@ It does not matter what you leave beyond the returned k (hence they are undersco
 
 ### Explanation
 
+1. Why This Approach Was Chosen
+
+   The requirement is to modify the array in-place without using extra space, while filtering out a specific value. A **two-pointer technique** provides the cleanest and most optimal way to achieve this by:
+
+   - Keeping track of the position where the next non-`val` element should be placed.
+   - Skipping the values that need to be removed.
+   - Ensuring we never use extra memory.
+
+2. Problem-Solving Pattern
+
+   This solution follows the **Two-Pointer Technique**, specifically the **fast-slow pointer** or **overwrite pattern**:
+
+   - One pointer (`next`) scans through the array.
+   - The other pointer (`cur`) tracks the position to place the next valid value.
+
+   This is a common pattern used in problems like:
+
+   - Removing duplicates
+   - Moving zeros
+   - Filtering elements in place
+
+3. Why This Is Efficient
+
+   Compared to brute-force approaches that may shift elements or use new lists:
+
+   - This method **minimizes writes**.
+   - It maintains **O(1) space** and **linear time**.
+   - It works in-place and is suitable even for large arrays.
+
+#### Step-by-Step Walkthrough
+
+1. Input:
+
+   ```python
+   nums = [0,1,2,2,3,0,4,2], val = 2
+   ```
+
+2. Initial State:
+
+   - `cur = 0` (position to place next valid element)
+
+3. Iteration-wise Trace:
+
+   | Iteration | `next` | `nums[next]` | Action Taken           | Updated `nums`     | `cur` |
+   | --------- | ------ | ------------ | ---------------------- | ------------------ | ----- |
+   | 0         | 0      | 0            | Valid → place at `cur` | \[0,1,2,2,3,0,4,2] | 1     |
+   | 1         | 1      | 1            | Valid → place at `cur` | \[0,1,2,2,3,0,4,2] | 2     |
+   | 2         | 2      | 2            | Skip (matches `val`)   | \[0,1,2,2,3,0,4,2] | 2     |
+   | 3         | 3      | 2            | Skip                   | \[0,1,2,2,3,0,4,2] | 2     |
+   | 4         | 4      | 3            | Valid → place at `cur` | \[0,1,3,2,3,0,4,2] | 3     |
+   | 5         | 5      | 0            | Valid → place at `cur` | \[0,1,3,0,3,0,4,2] | 4     |
+   | 6         | 6      | 4            | Valid → place at `cur` | \[0,1,3,0,4,0,4,2] | 5     |
+   | 7         | 7      | 2            | Skip                   | \[0,1,3,0,4,0,4,2] | 5     |
+
+4. Final Result:
+
+   - Modified `nums`: `[0, 1, 3, 0, 4, _, _, _]`
+   - Return value: `5` (count of valid elements)
+
+#### Time and Space Complexity
+
+| Complexity | Value  | Explanation                                   |
+| ---------- | ------ | --------------------------------------------- |
+| Time       | $O(n)$ | Every element is visited exactly once.        |
+| Space      | $O(1)$ | No extra data structures used; in-place only. |
+
+#### Summary
+
+- **Pattern**: Two-pointer overwrite.
+- **Efficiency**: Best possible for in-place modification with O(1) space.
+- **Simplicity**: Clear and easy to implement.
+
+This method can be generalized for many in-place filtering or transformation problems, making it an essential technique in array manipulation.
+
 ---
 
 ---
