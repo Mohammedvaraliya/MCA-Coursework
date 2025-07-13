@@ -14,7 +14,88 @@
 
 ## 02. Find Second Largest Element
 
+You have been given an array/list 'ARR' of integers. Your task is to find the second largest element present in the 'ARR'.
+
+Note:
+
+1. Duplicate elements may be present.
+2. If no such element is present return -1.
+
+```bash
+Example:
+Input: Given a sequence of five numbers 2, 4, 5, 6, 8.
+Output:  6
+Explanation:
+In the given sequence of numbers, number 8 is the largest element, followed by number 6 which is the second-largest element. Hence we return number 6 which is the second-largest element in the sequence.
+```
+
 ### Explanation
+
+#### Approach Explanation
+
+1. Why This Approach Was Chosen
+
+   The problem requires finding the second-largest element in an unsorted array **without using extra space or sorting**. A **single-pass traversal** is optimal because it avoids the overhead of sorting (`O(n log n)`) and is memory efficient.
+
+2. Problem-Solving Pattern
+
+   This approach is based on a **Greedy + Linear Scan** pattern:
+
+   - **Greedy**: At each step, we keep track of the best (largest) and second-best (second largest) values seen so far.
+   - **Linear Scan**: We only make one pass over the array, checking each number once.
+
+#### Step-by-Step Walkthrough
+
+1. Input:
+
+   ```python
+   nums = [7, 3, 9, 2, 8]
+   ```
+
+1. Initial State:
+
+- `first = -inf` (tracks the largest value seen)
+- `second = -inf` (tracks the second largest)
+
+1. Iteration-wise Trace:
+
+   | Iteration | `num` | Condition                             | `first` | `second` |
+   | --------- | ----- | ------------------------------------- | ------- | -------- |
+   | 1         | 7     | 7 > -inf → update `first`             | 7       | -inf     |
+   | 2         | 3     | 3 < 7 → update `second` to 3          | 7       | 3        |
+   | 3         | 9     | 9 > 7 → `second = first`, `first = 9` | 9       | 7        |
+   | 4         | 2     | 2 < 7 → no update                     | 9       | 7        |
+   | 5         | 8     | 8 < 9 and > 7 → update `second = 8`   | 9       | 8        |
+
+1. Final Result:
+
+   - `first = 9`
+   - `second = 8`
+
+1. Output:
+
+   ```python
+   return second  # → 8
+   ```
+
+#### Alternative (Brute Force Approach)
+
+Sorting the array in descending order and picking the first distinct element that is less than the maximum.
+**Drawback**: Requires extra time (`O(n log n)`) and potentially extra space.
+
+#### Time and Space Complexity
+
+| Metric           | Complexity | Explanation                                                          |
+| ---------------- | ---------- | -------------------------------------------------------------------- |
+| Time Complexity  | $O(n)$     | Single loop through the array to find the largest and second largest |
+| Space Complexity | $O(1)$     | No additional data structures used                                   |
+
+#### Summary
+
+- Efficient single-pass solution.
+- No extra space used.
+- Covers edge cases like duplicates and very small arrays.
+- A must-know pattern for problems involving **top-k** elements.
 
 ---
 
