@@ -226,6 +226,76 @@ Thus, the result should be [1,0].
 
 ### Explanation
 
+1.  Why This Approach Was Chosen
+
+    - Instead of converting the entire array to a number (which could lead to overflow in some languages), we use an **in-place digit-level carry propagation** approach. This method is:
+
+    - Efficient.
+    - Safe for arbitrarily large integers.
+    - Avoids unnecessary conversions or libraries.
+
+2.  Problem-Solving Pattern Used
+
+    - **Reverse Iteration + Carry Handling** (similar to manual addition)
+    - This approach is related to the **greedy pattern**, making the locally optimal choice (increase from the end) for a globally correct solution.
+
+3.  How It’s Efficient Compared to Other Methods
+
+    - **Avoids integer overflow** by not converting the entire number.
+    - Works **in-place** with constant space.
+    - Handles edge cases like multiple trailing 9s naturally.
+
+#### Step-by-Step Walkthrough
+
+1. Let’s consider the input:
+
+   ```python
+   digits = [1, 4, 9]
+   ```
+
+   We are adding 1 to the number 149.
+
+2. Initial State:
+
+   - Start from the last digit (i = 2)
+
+3. Iteration Breakdown
+
+   | Step | Index (i) | Value at digits\[i] | Action               | digits         |
+   | ---- | --------- | ------------------- | -------------------- | -------------- |
+   | 1    | 2         | 9                   | 9 → 0, carry over    | \[1, 4, **0**] |
+   | 2    | 1         | 4                   | 4 + 1 = 5, stop here | \[1, **5**, 0] |
+
+4. Final Output:
+
+   ```python
+   [1, 5, 0]  # Which represents 150
+   ```
+
+5. Edge Case: All Nines
+
+   For `digits = [9, 9, 9]`, you would get:
+
+   | Step | Index | Value     | Action          | digits     |
+   | ---- | ----- | --------- | --------------- | ---------- |
+   | 1    | 2     | 9         | → 0, carry over | \[9, 9, 0] |
+   | 2    | 1     | 9         | → 0, carry over | \[9, 0, 0] |
+   | 3    | 0     | 9         | → 0, carry over | \[0, 0, 0] |
+   | 4    | -     | prepend 1 | \[1, 0, 0, 0]   |            |
+
+#### Time and Space Complexity
+
+| Metric               | Complexity | Explanation                                                                                                                         |
+| -------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| **Time Complexity**  | $O(n)$     | Traverse the list once from right to left (worst case: all 9s).                                                                     |
+| **Space Complexity** | $O(1)$     | Modifies in-place, with the exception of one inserted digit in worst-case (`[1, 0, 0, 0]`). This does not count as auxiliary space. |
+
+#### Summary
+
+- This is a classic digit manipulation problem.
+- Efficient single-pass, constant space solution.
+- Mastering this problem improves your understanding of digit-by-digit algorithms (similar to handling carry in addition).
+
 ---
 
 ---
