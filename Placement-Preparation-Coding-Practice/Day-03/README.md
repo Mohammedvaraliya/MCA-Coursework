@@ -6,7 +6,92 @@
 
 ## 01. Find Minimum and Maximum
 
+Given an array, the task is to find the maximum and the minimum element of the array using the minimum number of comparisons.
+
+```bash
+Examples:
+
+Input: arr[] = {3, 5, 4, 1, 9}
+Output:
+Minimum element is: 1
+Maximum element is: 9
+```
+
+```bash
+Input: arr[] = {22, 14, 8, 17, 35, 3}
+Output:
+Minimum element is: 3
+Maximum element is: 35
+```
+
 ### Explanation
+
+#### Approach Explanation
+
+1. **Chosen Strategy**
+
+   - The solution uses a **single linear traversal** to simultaneously track both the minimum and maximum values in the array.
+   - At each iteration, we compare the current number with the current `min_val` and `max_val`, updating them as necessary.
+
+2. **Why This Approach?**
+
+   - The approach is straightforward and efficient for this problem.
+   - Instead of sorting the array or doing multiple passes (which would be inefficient), we find both values in one traversal using only **2 comparisons per element**.
+
+3. **Problem-Solving Pattern**
+
+   - This approach follows the **greedy pattern** and also leverages the **iterative traversal** technique.
+   - It greedily updates the current best-known minimum and maximum as it scans the array from left to right.
+
+4. **Efficiency and Elegance**
+
+   - **Efficiency**: This method performs exactly `2(n-1)` comparisons in the worst case (where `n` is the length of the array).
+   - **Elegance**: It's simple, readable, and does not rely on auxiliary data structures.
+
+#### Step-by-Step Walkthrough
+
+1. Let’s walk through the code using the input:
+
+   ```python
+   nums = [5, 3, 9, 2, 8]
+   ```
+
+2. Initial Setup
+
+   - `min_val = +∞`
+   - `max_val = -∞`
+
+3. Iteration Breakdown
+
+   | Iteration | Current `n` | Comparison with `max_val` | Update `max_val`? | Comparison with `min_val` | Update `min_val`? |
+   | --------- | ----------- | ------------------------- | ----------------- | ------------------------- | ----------------- |
+   | 1         | 5           | 5 > -∞ → true             | max_val = 5       | 5 < ∞ → true              | min_val = 5       |
+   | 2         | 3           | 3 > 5 → false             | no                | 3 < 5 → true              | min_val = 3       |
+   | 3         | 9           | 9 > 5 → true              | max_val = 9       | 9 < 3 → false             | no                |
+   | 4         | 2           | 2 > 9 → false             | no                | 2 < 3 → true              | min_val = 2       |
+   | 5         | 8           | 8 > 9 → false             | no                | 8 < 2 → false             | no                |
+
+4. Final Output
+
+   - After all iterations:
+
+   - `min_val = 2`
+   - `max_val = 9`
+
+   - Output: `"Maximum is 9, and minimum is 2"`
+
+#### Time and Space Complexity Analysis
+
+| Complexity Type  | Value    | Explanation                                                                  |
+| ---------------- | -------- | ---------------------------------------------------------------------------- |
+| Time Complexity  | **O(n)** | We traverse the array once, making 2 comparisons per element (except first). |
+| Space Complexity | **O(1)** | Constant extra space is used regardless of input size.                       |
+
+#### Summary
+
+- This implementation finds both the minimum and maximum in a **single pass** through the array.
+- It is both time-efficient and space-efficient, using a simple greedy strategy.
+- No auxiliary space or complex logic is needed, making it ideal for real-world applications where performance and clarity are equally important.
 
 ---
 
