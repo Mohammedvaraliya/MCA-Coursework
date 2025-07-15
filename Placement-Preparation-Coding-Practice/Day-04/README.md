@@ -47,6 +47,80 @@ Output: true
 
 ### Explanation
 
+#### Approach Explanation
+
+1.  Why This Approach?
+
+    This is a **classic stack-based problem** where we track opening brackets and match them with closing ones using **Last-In-First-Out (LIFO)** behavior. A stack is the most appropriate data structure for such pattern-based validations where **matching and ordering both matter**.
+
+2.  Problem-Solving Pattern Used
+
+    - **Stack** (LIFO)
+    - Sometimes grouped under **greedy** or **simulation** patterns, because we simulate bracket closing in real time using stack operations.
+
+3.  Efficiency of This Approach
+
+    - **Optimal use of space**: We only store unmatched opening brackets.
+    - **Early exit**: We return `False` as soon as a mismatch is found, avoiding unnecessary computation.
+    - **Clean and readable**: The algorithm is concise and intuitive once the pattern is understood.
+
+#### Step-by-Step Walkthrough
+
+1. Let's walk through a complete example using the second approach (`is_paren_balanced_2nd_approach`) as it is more concise and efficient.
+
+2. Input:
+
+   ```python
+   s = "({[]})"
+   ```
+
+3. Initial Setup:
+
+   ```python
+   stack = []
+   matching = {')': '(', '}': '{', ']': '['}
+   ```
+
+4. Iteration-wise Breakdown:
+
+   | Index | Character | Action                    | Stack             |
+   | ----- | --------- | ------------------------- | ----------------- |
+   | 0     | '('       | Open bracket → push       | \['(']            |
+   | 1     | '{'       | Open bracket → push       | \['(', '{']       |
+   | 2     | '\['      | Open bracket → push       | \['(', '{', '\['] |
+   | 3     | ']'       | Closing → match with '\[' | \['(', '{']       |
+   | 4     | '}'       | Closing → match with '{'  | \['(']            |
+   | 5     | ')'       | Closing → match with '('  | \[]               |
+
+5. Final Check:
+
+   - Stack is empty → ✅ All brackets matched correctly.
+   - Return `True`
+
+6. Algorithm
+
+   - If a character is a closing bracket:
+
+   - Check if the last item in the stack matches.
+   - If yes, pop the top item.
+   - If not, return False.
+
+   - If it’s an opening bracket, push it onto the stack.
+   - At the end, if the stack is empty, return True.
+
+#### Time and Space Complexity
+
+| Metric               | Complexity | Explanation                                                                         |
+| -------------------- | ---------- | ----------------------------------------------------------------------------------- |
+| **Time Complexity**  | $O(n)$     | We traverse the input string once (`n` = number of characters in `s`).              |
+| **Space Complexity** | $O(n)$     | In the worst case (e.g., all opening brackets), the stack holds all `n` characters. |
+
+#### Summary
+
+- The use of a **stack** makes this problem straightforward and efficient.
+- Handles nesting and mixed types of brackets.
+- The second approach is highly efficient in practice due to reduced object overhead compared to a custom class-based stack.
+
 ---
 
 ---
