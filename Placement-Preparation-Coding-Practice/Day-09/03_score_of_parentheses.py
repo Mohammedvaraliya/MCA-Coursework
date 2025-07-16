@@ -1,17 +1,5 @@
 class Solution:
     def scoreOfParentheses_1(self, s: str) -> int:
-        stack = [0]
-
-        for char in s:
-            if char == '(':
-                stack.append(0)
-            else:
-                v = stack.pop()
-                stack[-1] += max(2 * v, 1)
-
-        return stack.pop()
-    
-    def scoreOfParentheses(self, s: str) -> int:
         stack = []
 
         for char in s:
@@ -29,6 +17,18 @@ class Solution:
                     stack.append(2 * val)
 
         return sum(stack)
+    
+    def scoreOfParentheses(self, s: str) -> int:
+        stack = [0]
+
+        for char in s:
+            if char == '(':
+                stack.append(0)
+            else:
+                v = stack.pop()
+                stack[-1] += max(2 * v, 1)
+
+        return stack.pop()
 
 
 if __name__ == "__main__":
