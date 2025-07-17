@@ -1,7 +1,3 @@
-Thanks for sharing the problem image! Let's walk through it clearly and simply.
-
----
-
 ## 🧩 Problem Explanation: Maximum Height of Triangle
 
 You're given **N balls**, and you want to arrange them in rows to form a triangle:
@@ -100,3 +96,89 @@ print(f"Height-Incomplete = {height_incomplete}")
 - If the total balls used so far is ≤ N, the row is complete.
 - If the total balls used exceeds N, the last row is incomplete.
 - You track both heights as you go.
+
+---
+
+## 🧪 Input:
+
+**N = 5** balls
+
+---
+
+## 🧠 Triangle Formation Rules
+
+- Row 1 needs 1 ball
+- Row 2 needs 2 balls
+- Row 3 needs 3 balls
+- Row 4 needs 4 balls
+- … and so on
+
+We keep adding rows until we run out of balls.
+
+---
+
+## 🔍 Step-by-Step Walkthrough
+
+### ✅ Initialization:
+
+```python
+balls_used = 0
+height_complete = 0
+height_incomplete = 0
+```
+
+---
+
+### 🔁 Loop Iteration:
+
+#### ▶ Row 1:
+
+- Needs 1 ball
+- `balls_used = 0 + 1 = 1`
+- `balls_used <= N` → ✅ complete row
+- `height_complete = 1`
+- `height_incomplete = 1`
+
+#### ▶ Row 2:
+
+- Needs 2 balls
+- `balls_used = 1 + 2 = 3`
+- `balls_used <= N` → ✅ complete row
+- `height_complete = 2`
+- `height_incomplete = 2`
+
+#### ▶ Row 3:
+
+- Needs 3 balls
+- `balls_used = 3 + 3 = 6`
+- `balls_used > N` → ❌ not enough balls
+- `height_incomplete = 3`
+- Loop breaks here
+
+---
+
+## ✅ Final Result
+
+- **Height of complete triangle** = 2
+- **Height of incomplete triangle** = 3
+
+---
+
+## 🧠 Visual Representation
+
+```
+Row 1: ●
+Row 2: ● ●
+Row 3: ● ●   ← incomplete (only 2 balls available, needs 3)
+```
+
+---
+
+## 🧾 Output
+
+```
+Height-Complete = 2
+Height-Incomplete = 3
+```
+
+---

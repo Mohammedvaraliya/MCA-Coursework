@@ -118,3 +118,86 @@ sum=200
 ```
 
 ---
+
+## 🧠 Step-by-Step Walkthrough
+
+### ✅ Step 1: Identify Principal Diagonal
+
+The principal diagonal includes these positions:
+
+- (0,0) → 10
+- (1,1) → 23
+- (2,2) → −19
+- (3,3) → 17
+- (4,4) → 3
+
+**Original Diagonal Sum** = 10 + 23 + (−19) + 17 + 3 = **34**
+
+---
+
+### ✅ Step 2: Flatten and Sort All Values
+
+All values in the matrix:
+
+```
+[10, 25, 2, 1, 0, -15, 23, 48, 31, 13, 7, 8, -19, -18, -25, -42, 44, 37, 17, 4, 29, -26, 40, -17, 3]
+```
+
+Sorted in descending order:
+
+```
+[48, 44, 40, 37, 31, 29, 25, 23, 17, 13, 10, 8, 7, 4, 3, 2, 1, 0, -15, -17, -18, -19, -25, -26, -42]
+```
+
+### ✅ Step 3: Replace Diagonal with Top 5 Values
+
+We replace each diagonal cell with one of the top 5 values:
+
+| Diagonal Position | Original Value | Replaced With |
+| ----------------- | -------------- | ------------- |
+| (0,0)             | 10             | 48            |
+| (1,1)             | 23             | 44            |
+| (2,2)             | −19            | 40            |
+| (3,3)             | 17             | 37            |
+| (4,4)             | 3              | 31            |
+
+### ✅ Step 4: New Diagonal Sum
+
+New diagonal values: 48 + 44 + 40 + 37 + 31 = **200**
+
+---
+
+### ✅ Step 5: Modified Matrix
+
+We only change the diagonal cells:
+
+```
+ 48   25    2    1    0
+-15   44   48   31   13
+  7    8   40  -18  -25
+-42   44   37   37    4
+ 29  -26   40  -17   31
+```
+
+(Note: The rest of the matrix remains unchanged except for the diagonal swaps.)
+
+---
+
+## ✅ Final Output
+
+```
+sum=200
+ 48  25   2   1   0
+-15  44  48  31  13
+  7   8  40 -18 -25
+-42  44  37  37   4
+ 29 -26  40 -17  31
+```
+
+---
+
+## 🧠 Summary
+
+- Original diagonal sum: **34**
+- New diagonal sum after optimal swaps: **200**
+- You picked the top 5 values from the matrix and placed them on the diagonal.
