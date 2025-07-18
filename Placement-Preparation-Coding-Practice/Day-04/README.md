@@ -249,6 +249,79 @@ Output: 2
 
 ### Explanation
 
+#### Approach Explanation
+
+1. Why This Approach?
+
+   The chosen approach uses a **frequency counting technique** with the help of a hash map (dictionary) to track the occurrence of each element in the list. This allows us to quickly identify the number of times each number appears and determine the element that occurs more than `n // 2` times.
+
+   This method is chosen because:
+
+   - It is simple and effective.
+   - It ensures linear time complexity.
+   - It leverages hashing, which is commonly used in frequency-based problems.
+
+2. Problem-Solving Pattern Used
+
+   - **Hash Map (Dictionary) Counting**: Each element is used as a key in the dictionary and its frequency is updated as the list is traversed.
+   - **Greedy Element Selection**: We keep track of the maximum frequency seen so far and select the corresponding element as the current candidate for the majority.
+
+3. Efficiency and Elegance
+
+   While more advanced solutions like the **Boyer-Moore Voting Algorithm** exist with `O(1)` space, this counting approach is:
+
+   - **Intuitive and beginner-friendly**.
+   - **Easy to debug and extend** for variations (e.g., top-k frequent elements).
+   - Still runs in **O(n)** time, making it efficient for most use cases.
+
+#### Step-by-Step Walkthrough
+
+1. Input:
+
+   ```python
+   nums = [3, 3, 4, 2, 4, 4, 2, 4, 4]
+   ```
+
+2. Step 1: Count Frequency of Each Element
+
+3. We iterate through the array and build a frequency map (`count`):
+
+   | Step | Element | count dictionary   |
+   | ---- | ------- | ------------------ |
+   | 1    | 3       | {3: 1}             |
+   | 2    | 3       | {3: 2}             |
+   | 3    | 4       | {3: 2, 4: 1}       |
+   | 4    | 2       | {3: 2, 4: 1, 2: 1} |
+   | 5    | 4       | {3: 2, 4: 2, 2: 1} |
+   | 6    | 4       | {3: 2, 4: 3, 2: 1} |
+   | 7    | 2       | {3: 2, 4: 3, 2: 2} |
+   | 8    | 4       | {3: 2, 4: 4, 2: 2} |
+   | 9    | 4       | {3: 2, 4: 5, 2: 2} |
+
+4. Step 2: Find the Element with the Highest Frequency
+
+5. We iterate over the `count` dictionary:
+
+   - `3` → count = 2 → max_count = 2, res = 3
+   - `4` → count = 5 → max_count = 5, res = 4
+   - `2` → count = 2 → no update
+
+6. **Final result**: `4`, which appears 5 times in a list of size 9 (> 9/2 = 4.5)
+
+#### Time and Space Complexity Analysis
+
+| Metric               | Complexity | Explanation                                                                   |
+| -------------------- | ---------- | ----------------------------------------------------------------------------- |
+| **Time Complexity**  | $O(n)$     | Single pass to build the frequency map + another pass to find max = 2 \* O(n) |
+| **Space Complexity** | $O(n)$     | At worst, all elements are distinct, so dictionary stores `n` entries         |
+
+#### Summary
+
+- The implemented solution uses **hashing (dictionary)** to count element frequencies.
+- It ensures **linear time complexity** and is easy to implement.
+- Ideal for interviews and early-stage problem solving.
+- For better space optimization, consider **Boyer-Moore Voting Algorithm**.
+
 ---
 
 ---

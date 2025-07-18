@@ -1,4 +1,15 @@
 class Solution:
+    def findMajority_boyerMoreVotingAlgo(self, nums: list[int]) -> int:
+        candidate = None
+        count = 0
+        
+        for num in nums:
+            if count == 0:
+                candidate = num
+            count += (1 if num == candidate else -1)
+        
+        return candidate
+    
     def findMajority(self, nums: list[int]) -> int:
         count = {}
         for n in nums:
