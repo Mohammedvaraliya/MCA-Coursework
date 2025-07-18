@@ -1,5 +1,3 @@
-# MagicMoneyCalculator.py
-
 class MagicMoneyCalculator:
     def __init__(self, initial_amount, target_amount):
         self.initial = initial_amount
