@@ -6,7 +6,12 @@ class MatrixDiagonalMaximizer:
 
     def maximize_diagonal(self):
         # Flatten and sort all values in descending order
-        flat_values = sorted([val for row in self.matrix for val in row], reverse=True)
+        flattened = []
+        for row in self.matrix:
+            for val in row:
+                flattened.append(val)
+
+        flat_values = sorted(flattened, reverse=True)
 
         # Replace diagonal elements with top values
         for i in range(self.size):
