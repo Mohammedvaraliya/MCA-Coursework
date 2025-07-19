@@ -352,6 +352,133 @@ Output: [0,0,9,0,0]
 
 ### Explanation
 
+We solve the problem using **two passes** over the array:
+
+1. First pass (Left to Right): Compute **prefix products**.
+2. Second pass (Right to Left): Compute **postfix products** and multiply with prefix values stored earlier.
+
+This avoids the use of division and achieves O(n) time and O(1) auxiliary space (not counting the output array).
+
+#### What Pattern Should We Look For?
+
+When the problem requires calculating results **excluding** the current index, and when:
+
+- The operation is associative (like multiplication or addition),
+- Division is not allowed,
+- You must preserve the result in a single pass or two passes efficiently,
+
+**Prefix and Postfix technique** is the ideal pattern.
+
+#### Step-by-Step Breakdown of Logic
+
+1. #### Walkthrough with Input:
+
+   ```python
+   nums = [1, 2, 3, 4]
+   ```
+
+2. Initialize result array `res` to hold prefix products:
+
+   ```python
+   res = [1, 1, 1, 1]  # This will eventually hold our result
+   ```
+
+3. First Pass: Prefix Product
+
+   Start from left to right and compute product of all elements to the **left of current index**.
+
+4. **Iteration-wise update:**
+
+   | i   | prefix | res\[i] | prefix update (prefix \*= nums\[i]) |
+   | --- | ------ | ------- | ----------------------------------- |
+   | 0   | 1      | 1       | prefix = 1 × 1 = 1                  |
+   | 1   | 1      | 1       | prefix = 1 × 2 = 2                  |
+   | 2   | 2      | 2       | prefix = 2 × 3 = 6                  |
+   | 3   | 6      | 6       | prefix = 6 × 4 = 24                 |
+
+5. After this step:
+
+   ```python
+   res = [1, 1, 2, 6]
+   ```
+
+6. Second Pass: Postfix Product
+
+   Start from right to left and multiply current `res[i]` with product of all elements **to the right**.
+
+7. **Iteration-wise update:**
+
+   | i   | postfix | res\[i] (before) | res\[i] (after \*= postfix) | postfix update (postfix \*= nums\[i]) |
+   | --- | ------- | ---------------- | --------------------------- | ------------------------------------- |
+   | 3   | 1       | 6                | 6                           | postfix = 1 × 4 = 4                   |
+   | 2   | 4       | 2                | 2 × 4 = 8                   | postfix = 4 × 3 = 12                  |
+   | 1   | 12      | 1                | 1 × 12 = 12                 | postfix = 12 × 2 = 24                 |
+   | 0   | 24      | 1                | 1 × 24 = 24                 | postfix = 24 × 1 = 24                 |
+
+8. Final `res` after this step:
+
+   ```python
+   [24, 12, 8, 6]
+   ```
+
+9. #### Walkthrough with Input:
+
+   ```python
+   nums = [-1, 1, 0, -3, 3]
+   ```
+
+10. Initial state:
+
+    ```python
+    res = [1, 1, 1, 1, 1]
+    ```
+
+11. First Pass (Prefix):
+
+    | i   | prefix | res\[i] | prefix \*= nums\[i]  |
+    | --- | ------ | ------- | -------------------- |
+    | 0   | 1      | 1       | prefix = 1 × -1 = -1 |
+    | 1   | -1     | -1      | prefix = -1 × 1 = -1 |
+    | 2   | -1     | -1      | prefix = -1 × 0 = 0  |
+    | 3   | 0      | 0       | prefix = 0 × -3 = 0  |
+    | 4   | 0      | 0       | prefix = 0 × 3 = 0   |
+
+12. After prefix step:
+
+    ```python
+    res = [1, -1, -1, 0, 0]
+    ```
+
+13. Second Pass (Postfix):
+
+    | i   | postfix | res\[i] (before) | res\[i] (after) | postfix update        |
+    | --- | ------- | ---------------- | --------------- | --------------------- |
+    | 4   | 1       | 0                | 0               | postfix = 1 × 3 = 3   |
+    | 3   | 3       | 0                | 0               | postfix = 3 × -3 = -9 |
+    | 2   | -9      | -1               | -1 × -9 = 9     | postfix = -9 × 0 = 0  |
+    | 1   | 0       | -1               | -1 × 0 = 0      | postfix = 0 × 1 = 0   |
+    | 0   | 0       | 1                | 1 × 0 = 0       | postfix = 0 × -1 = 0  |
+
+14. **Final Output:**
+
+    ```python
+    [0, 0, 9, 0, 0]
+    ```
+
+#### Time and Space Complexity
+
+| Metric           | Value  | Explanation                                    |
+| ---------------- | ------ | ---------------------------------------------- |
+| Time Complexity  | $O(n)$ | One pass for prefix + one pass for postfix     |
+| Space Complexity | $O(1)$ | Output array doesn’t count towards extra space |
+
+#### Comparison with Other Approaches
+
+| Approach         | Time     | Space    | Notes                              |
+| ---------------- | -------- | -------- | ---------------------------------- |
+| Division-based   | $O(n)$   | $O(1)$   | Not allowed in problem constraints |
+| Prefix + Postfix | **O(n)** | **O(1)** | Optimal; handles zeros correctly   |
+
 ---
 
 ---
