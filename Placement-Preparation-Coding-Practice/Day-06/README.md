@@ -210,3 +210,105 @@ Output: 1
 ---
 
 ---
+
+## 03. Arrays: Buy and Sell Stock
+
+[Leetcode Problem URL](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
+
+You are given an array `prices` where `prices[i]` is the price of a given stock on the `ith` day.
+
+You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock.
+
+Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return `0`.
+
+```bash
+Example 1:
+
+Input: prices = [7,1,5,3,6,4]
+Output: 5
+Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
+Note that buying on day 2 and selling on day 1 is not allowed because you must buy before you sell.
+```
+
+```bash
+Example 2:
+
+Input: prices = [7,6,4,3,1]
+Output: 0
+Explanation: In this case, no transactions are done and the max profit = 0.
+```
+
+### Explanation
+
+We will use a **greedy algorithm** to solve this problem efficiently. The goal is to find the maximum profit by tracking the minimum price seen so far and calculating potential profits as we iterate through the prices.
+
+#### Approach Explanation
+
+1. Why This Approach?
+
+   A brute-force method using two nested loops checks every pair of days to find the maximum profit. However, this is inefficient for large inputs.
+
+   Instead, an **efficient one-pass approach** is used where we keep track of:
+
+   - The **minimum price so far**
+   - The **maximum profit so far**
+
+   This allows us to evaluate profit opportunities as we scan through the prices **only once**.
+
+2. Pattern Used
+
+   - **Greedy Algorithm**
+   - **Single Pass Scan**
+   - You make the locally optimal choice (buy at the lowest price so far) in hope that it leads to the global optimum (maximum overall profit).
+
+3. Why This Is Efficient
+
+   - It avoids unnecessary comparisons.
+   - It works in linear time and uses constant space.
+   - It’s intuitive, making it ideal for both interviews and production code.
+
+#### Step-by-Step Walkthrough
+
+1. Let’s go through the code using this example:
+
+   ```python
+   prices = [7, 1, 5, 3, 6, 4]
+   ```
+
+2. Initialization:
+
+   - `min_price = 7` (set to prices\[0])
+   - `max_profit = 0`
+
+3. Iteration:
+
+   | Day | Price | min_price   | Current Profit (price - min_price) | max_profit  |
+   | --- | ----- | ----------- | ---------------------------------- | ----------- |
+   | 0   | 7     | 7           | 0                                  | 0           |
+   | 1   | 1     | 1 (updated) | 0                                  | 0           |
+   | 2   | 5     | 1           | 4                                  | 4 (updated) |
+   | 3   | 3     | 1           | 2                                  | 4           |
+   | 4   | 6     | 1           | 5                                  | 5 (updated) |
+   | 5   | 4     | 1           | 3                                  | 5           |
+
+4. Final Result:
+
+   - **Maximum Profit = 5**
+
+#### Time and Space Complexity
+
+| Method             | Time Complexity | Space Complexity | Explanation                                                 |
+| ------------------ | --------------- | ---------------- | ----------------------------------------------------------- |
+| Brute-force        | $O(n²)$         | $O(1)$           | Compares all pairs `(i, j)` where `i < j`                   |
+| Optimized (Greedy) | $O(n)$          | $O(1)$           | Single scan; tracks min and max profit using constant space |
+
+#### Summary
+
+- The brute-force approach is easy to understand but not suitable for large inputs.
+- The optimal solution uses a **greedy approach** to continuously track the lowest buying price and update maximum profit accordingly.
+- This solution is **efficient**, **clean**, and **ideal for interview coding problems**.
+- Time complexity is **O(n)**, and space complexity is **O(1)**, making it a top-tier solution.
+
+---
+
+---
