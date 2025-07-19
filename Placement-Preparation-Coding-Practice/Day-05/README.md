@@ -180,6 +180,86 @@ rotate 2 steps to the right: [3,99,-1,-100]
 
 ### Explanation
 
+#### Approach Explanation
+
+1. Why This Approach?
+
+   To rotate the array efficiently **in-place without using extra space**, we used a **three-step reversal algorithm**.
+
+   Instead of rotating one element at a time (which would be inefficient for large arrays), this approach leverages the fact that rotating an array to the right by `k` steps is equivalent to:
+
+   > 1. Reversing the entire array
+   > 2. Reversing the first `k` elements
+   > 3. Reversing the remaining `n-k` elements
+
+2. Problem-Solving Pattern Used
+
+   - **Two-pointer technique**: For reversing segments of the array in-place.
+   - **Array manipulation and reversal**: Breaking the array into parts and manipulating them by reversing in-place.
+
+3. Why This Approach is Efficient and Elegant
+
+   - It rotates the array **in O(n)** time.
+   - It requires **only constant O(1)** extra space.
+   - The logic is clean and works regardless of array size or rotation count.
+   - Avoids unnecessary rotations by doing `k = k % n` (important when `k > n`).
+
+#### Step-by-Step Walkthrough
+
+1. Let’s walk through the code with the example:
+
+   ```python
+   nums = [1, 2, 3, 4, 5, 6, 7]
+   k = 3
+   ```
+
+1. Step 0: Normalize `k`
+
+   ```python
+   k %= n  # k = 3 % 7 = 3
+   ```
+
+1. Step 1: Reverse the entire array
+
+   ```python
+   Before: [1, 2, 3, 4, 5, 6, 7]
+   After full reverse: [7, 6, 5, 4, 3, 2, 1]
+   ```
+
+1. Step 2: Reverse the first `k` elements
+
+   ```python
+   Before: [7, 6, 5, 4, 3, 2, 1]
+   After reversing first 3: [5, 6, 7, 4, 3, 2, 1]
+   ```
+
+1. Step 3: Reverse the remaining `n-k` elements
+
+   ```python
+   Before: [5, 6, 7, 4, 3, 2, 1]
+   After reversing last 4: [5, 6, 7, 1, 2, 3, 4]
+   ```
+
+1. Final Output:
+
+   ```python
+   [5, 6, 7, 1, 2, 3, 4]
+   ```
+
+#### Time and Space Complexity Analysis
+
+| Metric               | Complexity | Explanation                                                  |
+| -------------------- | ---------- | ------------------------------------------------------------ |
+| **Time Complexity**  | $O(n)$     | Three full reversals of the array or its parts               |
+| **Space Complexity** | $O(1)$     | All operations are done in-place; no additional space needed |
+
+#### Summary
+
+- The implemented solution uses the **reversal algorithm**, which is the most optimal approach for in-place array rotation.
+- It avoids excessive shifting or use of extra arrays.
+- The logic is clean, and the implementation is intuitive with good use of pointers or Python slicing.
+- This approach is recommended for both **interviews** and **real-world performance-critical applications**.
+
 ---
 
 ---
