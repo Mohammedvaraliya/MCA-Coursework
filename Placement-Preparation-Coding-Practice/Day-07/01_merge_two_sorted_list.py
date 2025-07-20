@@ -1,76 +1,66 @@
 class ListNode:
-    def __init__(self, val):
+    def __init__(self, val=0, next=None):
         self.val = val
-        self.next = None
+        self.next = next
 
 class SinglyLinkedList:
     def __init__(self):
         self.head = None
 
-    def print_list(self):
-        cur_node = self.head
+    def print_list(self, list1):
+        cur_node = list1
         while cur_node:
             print(cur_node.val, end=" -> ")
             cur_node = cur_node.next
         print("None")
 
-    def merge_sorted(self, llist):
-        p = self.head
-        q = llist.head
-        s = None
+    def mergeTwoLists(self, list1, list2):
+        dummy = ListNode()
+        tail = dummy
 
-        if not p:
-            return q
-        if not q:
-            return p
-
-        if p.val <= q.val:
-            s = p
-            p = p.next
-        else:
-            s = q
-            q = q.next
-        new_head = s
-
-        while p and q:
-            if p.val <= q.val:
-                s.next = p
-                s = p
-                p = p.next
+        while list1 and list2:
+            if list1.val < list2.val:
+                tail.next = list1
+                list1 = list1.next
             else:
-                s.next = q
-                s = q
-                q = q.next
+                tail.next = list2
+                list2 = list2.next
+            tail = tail.next
 
-        if not p:
-            s.next = q
-        if not q:
-            s.next = p
+        if list1:
+            tail.next = list1
+        elif list2:
+            tail.next = list2
 
-        return new_head
+        return dummy.next
 
 
 if __name__ == "__main__":
-    llist_1 = SinglyLinkedList()
-    llist_1.head = ListNode(1)
-    llist_1.head.next = ListNode(2)
-    llist_1.head.next.next = ListNode(4)
+    
+    obj = SinglyLinkedList()
 
-    llist_2 = SinglyLinkedList()
-    llist_2.head = ListNode(1)
-    llist_2.head.next = ListNode(3)
-    llist_2.head.next.next = ListNode(4)
+    # Create the first sorted linked list: [1 -> 2 -> 4]
+    list1 = ListNode(1)
+    list1.next = ListNode(2)
+    list1.next.next = ListNode(4)
 
-    print("List 1:")
-    llist_1.print_list()
-    print("List 2:")
-    llist_2.print_list()
-    print("Merged List:")
+    # Create the second sorted linked list: [1 -> 3 -> 4]
+    list2 = ListNode(1)
+    list2.next = ListNode(3)
+    list2.next.next = ListNode(4)
 
-    merged_head = llist_1.merge_sorted(llist_2)
+    # Original lists1
+    print("Original Sorted Linked List 1:")
+    obj.print_list(list1)
 
-    current = merged_head
-    while current:
-        print(current.val, end=" -> ")
-        current = current.next
-    print("None")
+    # Original lists2
+    print("Original Sorted Linked List 2:")
+    obj.print_list(list2)
+
+
+    # Merge the two sorted linked lists
+    merged_list = obj.mergeTwoLists(list1, list2)
+
+    # Print the merged list
+    print("Merged Sorted Linked List:")
+    obj.print_list(merged_list)
