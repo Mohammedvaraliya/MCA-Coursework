@@ -112,9 +112,9 @@ This problem requires merging two sorted linked lists into a single sorted linke
 
 ---
 
-## 02. Merge Two Sorted Lists
+## 02. Remove Duplicates from Sorted List
 
-[LeetCode Problem URL](https://leetcode.com/problems/merge-two-sorted-lists/?envType=problem-list-v2&envId=linked-list)
+[LeetCode Problem URL](https://leetcode.com/problems/remove-duplicates-from-sorted-list/description/?envType=problem-list-v2&envId=linked-list)
 
 Given the head of a sorted linked list, delete all duplicates such that each element appears only once. Return the linked list sorted as well.
 
@@ -137,6 +137,75 @@ Output: [1,2,3]
 ```
 
 ### Explanation
+
+This problem requires removing duplicates from a sorted linked list. Since the list is already sorted, duplicates will always be adjacent, allowing us to efficiently remove them in a single pass.
+
+#### Approach Explanation
+
+1. Why This Approach?
+
+   We chose a **single-pass traversal** approach since the linked list is already **sorted in non-decreasing order**. This key observation allows us to **simply compare adjacent nodes** to detect and remove duplicates in **O(n)** time without needing additional memory.
+
+2. Problem-Solving Pattern
+
+   - **Two-Pointer Technique** (Current and Next Pointer)
+   - **Linked List Traversal**
+   - **Greedy Filtering** (removing duplicates as soon as they are found)
+
+   This pattern avoids extra data structures like hash sets or arrays and solves the problem in-place.
+
+3. Efficiency and Elegance
+
+   Compared to methods that involve converting the list to a Python list or using sets, our approach is:
+
+   - **In-place**: No extra memory usage.
+   - **Efficient**: Just one iteration over the list.
+   - **Clean**: No complex conditionals or auxiliary operations.
+
+#### Step-by-Step Walkthrough
+
+1. Let’s walk through this input step-by-step:
+
+   ```
+   Input: [1 → 1 → 2 → 3 → 3]
+   ```
+
+   - Initialize a pointer `head` to the start of the list.
+   - Traverse as long as both `head` and `head.next` are not null.
+   - At each step:
+
+   - If `head.val == head.next.val`, skip the next node by updating the `next` pointer.
+   - Otherwise, move the `head` pointer forward.
+
+1. Iteration Breakdown
+
+   | Step | Current `head.val` | `head.next.val` | Action                | Linked List State |
+   | ---- | ------------------ | --------------- | --------------------- | ----------------- |
+   | 1    | 1                  | 1               | Duplicate → skip next | 1 → 2 → 3 → 3     |
+   | 2    | 1                  | 2               | Move to next          | 1 → 2 → 3 → 3     |
+   | 3    | 2                  | 3               | Move to next          | 1 → 2 → 3 → 3     |
+   | 4    | 3                  | 3               | Duplicate → skip next | 1 → 2 → 3         |
+
+   The pointer stops when `head.next` becomes `None`.
+
+1. Final Output
+
+   ```
+   Updated List: [1 → 2 → 3]
+   ```
+
+#### Time and Space Complexity
+
+| Metric    | Complexity | Explanation                                                       |
+| --------- | ---------- | ----------------------------------------------------------------- |
+| **Time**  | $O(n)$     | We traverse the entire linked list once.                          |
+| **Space** | $O(1)$     | No additional data structures used; operations are done in-place. |
+
+#### Summary
+
+- This is an **in-place solution** that removes duplicates from a **sorted linked list**.
+- By **comparing adjacent nodes**, we efficiently eliminate duplicates in **O(n)** time and **O(1)** space.
+- This solution demonstrates a clean and minimalistic use of linked list traversal without auxiliary space or complexity.
 
 ---
 

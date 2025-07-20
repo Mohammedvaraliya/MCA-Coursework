@@ -29,6 +29,8 @@ if __name__ == "__main__":
     llist.head = ListNode(1)
     llist.head.next = ListNode(1)
     llist.head.next.next = ListNode(2)
+    llist.head.next.next.next = ListNode(3)
+    llist.head.next.next.next.next = ListNode(3)
 
     print("List:")
     llist.print_list()
