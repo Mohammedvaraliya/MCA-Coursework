@@ -1,4 +1,4 @@
-# Leetcode Questions Solved on Day 4 Placement Training:
+# Leetcode Questions Solved on Day 6 Placement Training:
 
 1. **Kth Largest Element in an Array**
 

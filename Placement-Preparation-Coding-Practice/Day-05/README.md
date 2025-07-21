@@ -1,4 +1,4 @@
-# Leetcode Questions Solved on Day 4 Placement Training:
+# Leetcode Questions Solved on Day 5 Placement Training:
 
 1. **Missing Number**
 2. **Rotate Array**

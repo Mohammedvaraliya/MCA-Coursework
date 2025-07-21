@@ -1,4 +1,4 @@
-# Leetcode Questions Solved on Day 2 Placement Training:
+# Leetcode Questions Solved on Day 3 Placement Training:
 
 1. **Find Minimum and Maximum**
 2. **Find Second Largest Element**
