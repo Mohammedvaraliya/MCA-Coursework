@@ -31,6 +31,19 @@ class MagicMoneyCalculator:
         for step in self.trace:
             print(step)
 
+    # Reusable method to calculate entries without class instantiation
+    def magic_cave_entries(self, initial, target):
+        previous = initial
+        current = initial + 1
+        count = 1
+        while current < target:
+            previous, current = current, previous + current
+            count += 1
+        return count
+
+
+
+
 
 if __name__ == "__main__":
     try:
@@ -42,3 +55,5 @@ if __name__ == "__main__":
         calculator.display_result()
     except ValueError as e:
         print(f"Invalid input: {e}")
+    
+    print("Entries needed:", calculator.magic_cave_entries(22, 100))

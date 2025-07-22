@@ -5,18 +5,28 @@ class MatrixDiagonalMaximizer:
         self.diagonal_indices = [(i, i) for i in range(self.size)]
 
     def maximize_diagonal(self):
-        # Flatten and sort all values in descending order
-        flattened = []
-        for row in self.matrix:
-            for val in row:
-                flattened.append(val)
-
-        flat_values = sorted(flattened, reverse=True)
-
-        # Replace diagonal elements with top values
+        non_diag_positions = []
+        
+        # Gather all non-diagonal values with their positions
         for i in range(self.size):
-            row, col = self.diagonal_indices[i]
-            self.matrix[row][col] = flat_values[i]
+            for j in range(self.size):
+                if i != j:
+                    non_diag_positions.append(((i, j), self.matrix[i][j]))
+
+        # Sort non-diagonal elements in descending order by value
+        non_diag_positions.sort(key=lambda x: x[1], reverse=True)
+        # print(non_diag_positions)
+
+        used = set()  # Track already used swap positions
+
+        for idx, (i, j) in enumerate(self.diagonal_indices):
+            for k in range(len(non_diag_positions)):
+                (ni, nj), val = non_diag_positions[k]
+                if (ni, nj) not in used:
+                    # Swap diagonal with selected value
+                    self.matrix[i][j], self.matrix[ni][nj] = self.matrix[ni][nj], self.matrix[i][j]
+                    used.add((ni, nj))
+                    break  # Move to next diagonal cell
 
     def calculate_diagonal_sum(self):
         return sum(self.matrix[i][i] for i in range(self.size))

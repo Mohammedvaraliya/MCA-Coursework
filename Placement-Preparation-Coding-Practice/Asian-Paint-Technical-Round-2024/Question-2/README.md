@@ -1,203 +1,171 @@
-## 🧩 Problem Explanation: Rearranging a 5×5 Matrix to Maximize Diagonal Sum
+# 🧮 Matrix Diagonal Maximizer
 
-You're given a **5×5 matrix** filled with **unique random integers** between **−50 and 50**.
+## 📌 Problem Statement
 
-### 🎯 Goal:
+You are given a **5×5 matrix** filled with unique integers ranging between **−50 and 50**. Your task is to **maximize the sum of the principal diagonal** (i.e., the top-left to bottom-right diagonal).
 
-- Maximize the **sum of the principal diagonal** (top-left to bottom-right).
-- You can **swap each diagonal cell once** with any other cell in the matrix.
+🔄 You are allowed to:
+
+- **Swap each diagonal element once** with **any non-diagonal element** in the matrix.
+
+🏁 Goal:
+
+- Rearrange the matrix using valid swaps to **maximize the diagonal sum**.
 - Print the **modified matrix** and the **new diagonal sum**.
 
 ---
 
-## 🧠 What Is the Principal Diagonal?
+## 🧠 Understanding the Principal Diagonal
 
-In a 5×5 matrix, the principal diagonal includes:
+In a 5×5 matrix, the principal diagonal consists of:
 
-- (0,0), (1,1), (2,2), (3,3), (4,4)
-
----
-
-## 🛠️ Step-by-Step Solution
-
-### ✅ Step 1: Read the Matrix
-
-Take a 5×5 matrix as input from the user.
-
-### ✅ Step 2: Identify Diagonal Positions
-
-Store the positions of the principal diagonal.
-
-### ✅ Step 3: Flatten and Sort the Matrix
-
-Convert the matrix into a list and sort it in descending order to get the largest values.
-
-### ✅ Step 4: Replace Diagonal Elements
-
-Swap each diagonal element with one of the top 5 largest values from the matrix.
-
-### ✅ Step 5: Calculate the Diagonal Sum
-
-Add up the new diagonal values.
-
-### ✅ Step 6: Print the Output
-
-Display the modified matrix and the diagonal sum.
+- `(0,0)`, `(1,1)`, `(2,2)`, `(3,3)`, `(4,4)`
 
 ---
 
-## ✅ Final Python Code (Object-Oriented)
+## 🛠️ Steps to Solve the Problem
 
-```python
-# MatrixDiagonalMaximizer.py
+### 1. **Identify Diagonal Elements**
 
-class MatrixDiagonalMaximizer:
-    def __init__(self, matrix):
-        self.matrix = matrix
-        self.size = len(matrix)
-        self.diagonal_indices = [(i, i) for i in range(self.size)]
+- Store the positions of the main diagonal cells.
 
-    def maximize_diagonal(self):
-        # Flatten and sort all values in descending order
-        flat_values = sorted([val for row in self.matrix for val in row], reverse=True)
+### 2. **Extract Non-Diagonal Elements**
 
-        # Replace diagonal elements with top values
-        for i in range(self.size):
-            row, col = self.diagonal_indices[i]
-            self.matrix[row][col] = flat_values[i]
+- Collect all matrix elements that are **not on the main diagonal**, along with their positions.
 
-    def calculate_diagonal_sum(self):
-        return sum(self.matrix[i][i] for i in range(self.size))
+### 3. **Sort Non-Diagonal Values**
 
-    def display_result(self):
-        self.maximize_diagonal()
-        diagonal_sum = self.calculate_diagonal_sum()
-        print(f"sum={diagonal_sum}")
-        for row in self.matrix:
-            print(" ".join(f"{val:3}" for val in row))
+- Sort non-diagonal elements in **descending order** to get the largest values.
 
+### 4. **Swap Values**
 
-if __name__ == "__main__":
-    print("Enter a 5x5 matrix (each row on a new line, space-separated):")
-    matrix = []
-    try:
-        for _ in range(5):
-            row = list(map(int, input().split()))
-            if len(row) != 5:
-                raise ValueError("Each row must contain exactly 5 integers.")
-            matrix.append(row)
+- For each diagonal cell, **swap** it with one of the top unused non-diagonal values.
 
-        maximizer = MatrixDiagonalMaximizer(matrix)
-        maximizer.display_result()
+### 5. **Calculate the Diagonal Sum**
 
-    except ValueError as e:
-        print(f"Invalid input: {e}")
+- After all swaps, compute the sum of the modified diagonal.
+
+### 6. **Display Results**
+
+- Show the new matrix and the final diagonal sum.
+
+---
+
+## ✅ Example Input
+
+```
+10  25   2   1   0
+-15 23  48  31  13
+  7   8 -19 -18 -25
+-42 44  37  17   4
+ 29 -26 40 -17   3
 ```
 
 ---
 
-### 🧪 Sample Input
+## 🧪 Step-by-Step Example Walkthrough
+
+### 🔍 Step 1: Original Diagonal
+
+| Index | Value |
+| ----- | ----- |
+| (0,0) | 10    |
+| (1,1) | 23    |
+| (2,2) | -19   |
+| (3,3) | 17    |
+| (4,4) | 3     |
+
+➡️ **Original diagonal sum =** 10 + 23 + (−19) + 17 + 3 = **34**
+
+---
+
+### 📊 Step 2: Sort Non-Diagonal Elements
+
+All non-diagonal elements (with positions):
 
 ```
-10 25  2  1  0
--15 23 48 31 13
- 7  8 -19 -18 -25
--42 44 37 17  4
-29 -26 40 -17  3
+[(0,1)=25, (0,2)=2, (0,3)=1, (0,4)=0,
+ (1,0)=−15, (1,2)=48, (1,3)=31, (1,4)=13,
+ (2,0)=7, (2,1)=8, (2,3)=−18, (2,4)=−25,
+ (3,0)=−42, (3,1)=44, (3,2)=37, (3,4)=4,
+ (4,0)=29, (4,1)=−26, (4,2)=40, (4,3)=−17]
 ```
 
-### ✅ Output
+Top 5 values:
+
+- **48**, **44**, **40**, **37**, **31**
+
+---
+
+### 🔄 Step 3: Perform Swaps
+
+Swap each diagonal cell with one of these top values:
+
+| Diagonal Position | Swapped With | Value |
+| ----------------- | ------------ | ----- |
+| (0,0)             | (1,2)        | 48    |
+| (1,1)             | (3,1)        | 44    |
+| (2,2)             | (4,2)        | 40    |
+| (3,3)             | (3,2)        | 37    |
+| (4,4)             | (1,3)        | 31    |
+
+---
+
+### 🧾 Final Matrix
 
 ```
-sum=200
  48  25   2   1   0
--15  31  10  23  13
-  7   8  37 -18 -25
--42  17  19  44   4
- 29 -26   3 -17  40
-```
-
----
-
-## 🧠 Step-by-Step Walkthrough
-
-### ✅ Step 1: Identify Principal Diagonal
-
-The principal diagonal includes these positions:
-
-- (0,0) → 10
-- (1,1) → 23
-- (2,2) → −19
-- (3,3) → 17
-- (4,4) → 3
-
-**Original Diagonal Sum** = 10 + 23 + (−19) + 17 + 3 = **34**
-
----
-
-### ✅ Step 2: Flatten and Sort All Values
-
-All values in the matrix:
-
-```
-[10, 25, 2, 1, 0, -15, 23, 48, 31, 13, 7, 8, -19, -18, -25, -42, 44, 37, 17, 4, 29, -26, 40, -17, 3]
-```
-
-Sorted in descending order:
-
-```
-[48, 44, 40, 37, 31, 29, 25, 23, 17, 13, 10, 8, 7, 4, 3, 2, 1, 0, -15, -17, -18, -19, -25, -26, -42]
-```
-
-### ✅ Step 3: Replace Diagonal with Top 5 Values
-
-We replace each diagonal cell with one of the top 5 values:
-
-| Diagonal Position | Original Value | Replaced With |
-| ----------------- | -------------- | ------------- |
-| (0,0)             | 10             | 48            |
-| (1,1)             | 23             | 44            |
-| (2,2)             | −19            | 40            |
-| (3,3)             | 17             | 37            |
-| (4,4)             | 3              | 31            |
-
-### ✅ Step 4: New Diagonal Sum
-
-New diagonal values: 48 + 44 + 40 + 37 + 31 = **200**
-
----
-
-### ✅ Step 5: Modified Matrix
-
-We only change the diagonal cells:
-
-```
- 48   25    2    1    0
--15   44   48   31   13
-  7    8   40  -18  -25
--42   44   37   37    4
- 29  -26   40  -17   31
-```
-
-(Note: The rest of the matrix remains unchanged except for the diagonal swaps.)
-
----
-
-## ✅ Final Output
-
-```
-sum=200
- 48  25   2   1   0
--15  44  48  31  13
+-15  44  10  23  13
   7   8  40 -18 -25
--42  44  37  37   4
- 29 -26  40 -17  31
+-42  17  37  37   4
+ 29 -26   3 -17  31
 ```
+
+### ✅ Final Diagonal
+
+| Index | Value |
+| ----- | ----- |
+| (0,0) | 48    |
+| (1,1) | 44    |
+| (2,2) | 40    |
+| (3,3) | 37    |
+| (4,4) | 31    |
+
+➡️ **New diagonal sum =** 48 + 44 + 40 + 37 + 31 = **200**
+
+---
+
+## 💡 Pattern in This Problem
+
+This is a classic **Greedy Optimization** problem with constraints. You're allowed limited actions (one swap per diagonal cell) and must maximize an outcome (the diagonal sum).
+
+### Core Concepts:
+
+- Matrix Manipulation
+- Greedy Choice Strategy
+- Swap Optimization under Constraint
+- Position Tracking
+
+---
+
+## 🔁 Related Questions to Practice
+
+1. **Minimize the diagonal sum** using valid swaps.
+2. Maximize the **anti-diagonal** (top-right to bottom-left).
+3. Swap entire **rows or columns** to maximize diagonal.
+4. Given `k` allowed swaps, maximize the diagonal sum.
+5. Use recursion or backtracking to explore multiple swap combinations.
 
 ---
 
 ## 🧠 Summary
 
-- Original diagonal sum: **34**
-- New diagonal sum after optimal swaps: **200**
-- You picked the top 5 values from the matrix and placed them on the diagonal.
+| Task              | Description                            |
+| ----------------- | -------------------------------------- |
+| Input             | 5×5 matrix of integers                 |
+| Allowed operation | One swap per diagonal element          |
+| Goal              | Maximize the diagonal sum              |
+| Approach          | Greedy swap with highest non-diagonals |
+| Output            | Modified matrix + diagonal sum         |
+
+---
