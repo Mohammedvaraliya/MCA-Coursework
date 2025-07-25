@@ -9,12 +9,22 @@ class LinkedList:
         self.head = None
 
     def print_list(self):
+        index_map = {}
+        cur = self.head
+        index = 0
+        while cur:
+            index_map[cur] = index
+            cur = cur.next
+            index += 1
+
         cur = self.head
         nodes = []
         while cur:
-            random_val = cur.random.val if cur.random else None
-            nodes.append(f"[Val: {cur.val}, Random: {random_val}]")
+            cur_index = index_map[cur]
+            rand_index = index_map[cur.random] if cur.random else "None"
+            nodes.append(f"[Index: {cur_index}, RandomIndex: {rand_index}]")
             cur = cur.next
+
         print(" -> ".join(nodes) + " -> None")
 
 class Solution:
@@ -40,22 +50,22 @@ class Solution:
 
 
 if __name__ == "__main__":
-    n1 = Node(1)
-    n2 = Node(2)
-    n3 = Node(3)
-    n4 = Node(4)
-    n5 = Node(5)
+    n1 = Node(17)
+    n2 = Node(13)
+    n3 = Node(11)
+    n4 = Node(10)
+    n5 = Node(1)
 
     n1.next = n2
     n2.next = n3
     n3.next = n4
     n4.next = n5
 
-    n1.random = n3
+    n1.random = None
     n2.random = n1
-    n3.random = n3
-    n4.random = None
-    n5.random = n2
+    n3.random = n5
+    n4.random = n3
+    n5.random = n1
 
     original_list = LinkedList()
     original_list.head = n1

@@ -259,3 +259,157 @@ This problem requires us to rearrange a singly linked list such that all nodes a
 ---
 
 ---
+
+## 04. Copy List with Random Pointer
+
+[LeetCode Problem URL](https://leetcode.com/problems/copy-list-with-random-pointer/)
+
+A linked list of length `n` is given such that each node contains an additional random pointer, which could point to any node in the list, or `null`.
+
+Construct a deep copy of the list. The deep copy should consist of exactly `n` brand new nodes, where each new node has its value set to the value of its corresponding original node. Both the `next` and `random` pointer of the new nodes should point to new nodes in the copied list such that the pointers in the original list and copied list represent the same list state. None of the pointers in the new list should point to nodes in the original list.
+
+For example, if there are two nodes `X` and `Y` in the original list, where `X.random --> Y`, then for the corresponding two nodes `x` and `y` in the copied list, `x.random --> y`.
+
+Return the head of the copied linked list.
+
+The linked list is represented in the input/output as a list of n nodes. Each node is represented as a pair of `[val, random_index]` where:
+
+`val`: an integer representing `Node.val`
+`random_index`: the index of the node (range from `0` to `n-1`) that the `random` pointer points to, or `null` if it does not point to any node.
+Your code will only be given the `head` of the original linked list.
+
+![Img1](https://assets.leetcode.com/uploads/2019/12/18/e1.png)
+
+```bash
+Example 1:
+
+Input: head = [[7,null],[13,0],[11,4],[10,2],[1,0]]
+Output: [[7,null],[13,0],[11,4],[10,2],[1,0]]
+```
+
+![Img2](https://assets.leetcode.com/uploads/2019/12/18/e2.png)
+
+```bash
+Example 2:
+
+Input: head = [[1,1],[2,1]]
+Output: [[1,1],[2,1]]
+```
+
+![Img3](https://assets.leetcode.com/uploads/2019/12/18/e3.png)
+
+```bash
+Example 3:
+
+Input: head = [[3,null],[3,0],[3,null]]
+Output: [[3,null],[3,0],[3,null]]
+```
+
+### Explanation
+
+This problem requires us to create a deep copy of a linked list where each node has an additional random pointer that can point to any node in the list or be `null`. The challenge is to ensure that the new list maintains the same structure and relationships as the original list.
+
+#### Approach Explanation
+
+1. Why This Approach?
+
+   This problem requires duplicating both the **structure** and **cross-links (random pointers)** of the original list. A one-pass clone of nodes would lose the `random` reference details.
+
+   To handle this, we use a **two-pass strategy**:
+
+   - First pass: Create all new nodes and map original nodes to new nodes.
+   - Second pass: Reassign the correct `next` and `random` pointers using the mapping.
+
+   This approach ensures a **true deep copy** while maintaining simplicity and clarity.
+
+2. Problem-Solving Pattern
+
+   - **HashMap / Dictionary mapping** between original nodes and copied nodes.
+   - **Two-pass traversal** (common in linked list cloning problems).
+   - Ensures O(n) time with no cyclic dependencies.
+
+3. Why This Is Efficient and Elegant
+
+   Other approaches attempt in-place interleaving and pointer reassignments, but they sacrifice readability and are prone to bugs. This dictionary-based method is:
+
+   - Intuitive
+   - Robust
+   - Efficient in practice
+
+#### Step-by-Step Walkthrough
+
+1. Example Input:
+
+   ```python
+   head = [[17,null],[13,0],[11,4],[10,2],[1,0]]
+   ```
+
+   Which means:
+
+   - `Node1: val=17, random=None`
+   - `Node2: val=13, random=Node1`
+   - `Node3: val=11, random=Node5`
+   - `Node4: val=10, random=Node3`
+   - `Node5: val=1,  random=Node1`
+
+2. Step 1: Clone Nodes Without Setting Pointers
+
+   ```python
+   current = head
+   while current:
+      old_to_new[current] = Node(current.val)
+      current = current.next
+   ```
+
+3. Now we have:
+
+   ```python
+   old_to_new = {
+      Node1_original: Node1_copy,
+      Node2_original: Node2_copy,
+      ...
+   }
+   ```
+
+4. Step 2: Assign `next` and `random` Pointers
+
+   ```python
+   current = head
+   while current:
+      copy_node = old_to_new[current]
+      copy_node.next = old_to_new.get(current.next)
+      copy_node.random = old_to_new.get(current.random)
+      current = current.next
+   ```
+
+5. Each copy now gets its `next` and `random` pointers based on the mapping. For instance:
+
+   - If `Node2_original.random = Node1_original`, then:
+
+   - `Node2_copy.random = old_to_new[Node1_original] = Node1_copy`
+
+6. Final Result:
+
+   The new list has:
+
+   - Nodes with same values.
+   - Correct `next` chain.
+   - Correct `random` references — **to new copies only**, not to any original node.
+
+#### Time and Space Complexity Analysis
+
+| Metric           | Value  | Explanation                                                              |
+| ---------------- | ------ | ------------------------------------------------------------------------ |
+| Time Complexity  | $O(n)$ | We visit each node twice (once to copy values, once to assign pointers). |
+| Space Complexity | $O(n)$ | A dictionary of size `n` is used to store mapping from original to copy. |
+
+#### Summary
+
+- We used a **dictionary** to map original nodes to their respective copies.
+- Ensured that the new list is structurally identical but made up of **entirely new nodes**.
+- Efficiently handled both `next` and `random` assignments using a **two-pass method**.
+- Time and space complexities are optimal for this problem class.
+
+---
+
+---
