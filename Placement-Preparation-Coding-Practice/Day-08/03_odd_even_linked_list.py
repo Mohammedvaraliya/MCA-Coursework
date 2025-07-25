@@ -30,6 +30,25 @@ class SinglyLinkedList:
             cur_node = cur_node.next
 
         print("None")
+    
+    def oddEvenList(self, head: 'ListNode') -> 'ListNode':
+        if not head or not head.next:
+            return head
+        
+        odd = head
+        even = head.next
+        even_head = even
+        
+        while even and even.next:
+            odd.next = odd.next.next
+            even.next = even.next.next
+            
+            odd = odd.next
+            even = even.next
+        
+        odd.next = even_head
+        
+        return head
 
 
 if __name__ == "__main__":
@@ -48,3 +67,9 @@ if __name__ == "__main__":
 
     print("Odd Nodes of the linked List:")
     llist.odd_nodes()
+
+    print("Rearranging Odd and Even Nodes:")
+    llist.oddEvenList(llist.head)
+
+    print("After rearranging, the linked list is:")
+    llist.print_list()  # Print the rearranged list
