@@ -20,12 +20,11 @@ class LinkedList:
         cur = self.head
         nodes = []
         while cur:
-            cur_index = index_map[cur]
-            rand_index = index_map[cur.random] if cur.random else "None"
-            nodes.append(f"[Index: {cur_index}, RandomIndex: {rand_index}]")
+            rand_index = index_map[cur.random] if cur.random else None
+            nodes.append([cur.val, rand_index])
             cur = cur.next
 
-        print(" -> ".join(nodes) + " -> None")
+        print(nodes)
 
 class Solution:
     def copyRandomList(self, head: 'Node') -> 'Node':
