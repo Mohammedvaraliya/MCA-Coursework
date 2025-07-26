@@ -413,3 +413,116 @@ This problem requires us to create a deep copy of a linked list where each node 
 ---
 
 ---
+
+## Rotate List
+
+[LeetCode Problem URL](https://leetcode.com/problems/rotate-list/)
+
+Given the `head` of a linked list, rotate the list to the right by k places.
+
+![Img1](https://assets.leetcode.com/uploads/2020/11/13/rotate1.jpg)
+
+```bash
+Example 1:
+
+Input: head = [1,2,3,4,5], k = 2
+Output: [4,5,1,2,3]
+```
+
+![Img2](https://assets.leetcode.com/uploads/2020/11/13/roate2.jpg)
+
+```bash
+Example 2:
+
+Input: head = [0,1,2], k = 4
+Output: [2,0,1]
+```
+
+### Explanation
+
+This problem requires us to rotate a linked list to the right by `k` places. The challenge is to achieve this efficiently, especially when `k` can be larger than the length of the list.
+
+#### Approach Explanation
+
+1. Why This Approach?
+
+   The key idea is to **convert the linked list temporarily into a circular list**, then break it at the correct position to achieve the rotation efficiently.
+
+   This avoids repeated traversals that would be inefficient for large lists or large values of `k`.
+
+2. Problem-Solving Pattern Used
+
+   - **Two-pointer technique**
+   - **Modular arithmetic**
+   - **Circular linked list manipulation**
+   - **Linked list pointer reconfiguration**
+
+3. Efficiency and Elegance
+
+   This approach achieves the desired rotation in **a single traversal for length** and another traversal for positioning, with no extra space, thus making it both time and space optimal.
+
+#### Step-by-Step Walkthrough
+
+1. Input:
+
+   ```python
+   head = [1, 2, 3, 4, 5]
+   k = 2
+   ```
+
+2. Step 1: Handle edge cases
+
+   - If `head` is `None`, has only one node, or `k == 0` → return head immediately.
+
+3. Step 2: Determine length and connect tail to head (form a circle)
+
+   - Traverse list:
+
+     - `length = 5`
+     - `tail = node with val 5`
+
+   - Connect tail to head:
+
+   - `tail.next = head` (circular link formed)
+
+4. Step 3: Calculate effective rotation steps
+
+   ```python
+   k = k % length  # 2 % 5 = 2
+   steps_to_new_tail = length - k - 1 = 2
+   ```
+
+5. We now need to stop 2 steps before the original tail to get the new tail node.
+
+6. Step 4: Find new tail and break the circle
+
+   - Starting at head (`1`), move 2 steps:
+
+     - Step 1: `2`
+     - Step 2: `3` → this becomes the **new tail**
+
+   - `new_head = new_tail.next = 4`
+   - Break the cycle: `new_tail.next = None`
+
+7. Final Output:
+
+   ```python
+   Rotated list = [4, 5, 1, 2, 3]
+   ```
+
+#### Time and Space Complexity
+
+| Complexity Metric | Value  | Explanation                                                 |
+| ----------------- | ------ | ----------------------------------------------------------- |
+| Time Complexity   | $O(n)$ | One pass to get length + one pass to find new head and tail |
+| Space Complexity  | $O(1)$ | Constant extra space; rotation done in-place                |
+
+#### Summary
+
+- This solution rotates the linked list efficiently with **O(n)** time and **O(1)** space.
+- The list is temporarily made circular to facilitate smooth rotation.
+- Modular arithmetic ensures we handle `k` values larger than list size.
+
+---
+
+---
