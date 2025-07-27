@@ -1,211 +1,255 @@
 # Leetcode Questions Solved on Day 9 Placement Training:
 
-1. **Merge Two Sorted Lists**
+1. **Flatten a Multilevel Doubly Linked List**
 
-## 01. Merge Two Sorted Lists
+## 01. Flatten a Multilevel Doubly Linked List
 
-[LeetCode Problem URL](https://leetcode.com/problems/merge-two-sorted-lists/?envType=problem-list-v2&envId=linked-list)
+[LeetCode Problem URL](https://leetcode.com/problems/flatten-a-multilevel-doubly-linked-list/)
 
-You are given the heads of two sorted linked lists list1 and list2.
+You are given a doubly linked list, which contains nodes that have a next pointer, a previous pointer, and an additional child pointer. This child pointer may or may not point to a separate doubly linked list, also containing these special nodes. These child lists may have one or more children of their own, and so on, to produce a multilevel data structure as shown in the example below.
 
-Merge the two lists into one sorted list. The list should be made by splicing together the nodes of the first two lists.
+Given the `head` of the first level of the list, flatten the list so that all the nodes appear in a single-level, doubly linked list. Let `curr` be a node with a child list. The nodes in the child list should appear after `curr` and before `curr.next` in the flattened list.
 
-Return the head of the merged linked list.
+Return the `head` of the flattened list. The nodes in the list must have all of their child pointers set to null.
 
-![img1](https://assets.leetcode.com/uploads/2020/10/03/merge_ex1.jpg)
+![img1](https://assets.leetcode.com/uploads/2021/11/09/flatten11.jpg)
 
 ```bash
 Example 1:
 
-Input: list1 = [1,2,4], list2 = [1,3,4]
-Output: [1,1,2,3,4,4]
+Input: head = [1,2,3,4,5,6,null,null,null,7,8,9,10,null,null,11,12]
+Output: [1,2,3,7,8,11,12,9,10,4,5,6]
+Explanation: The multilevel linked list in the input is shown.
+After flattening the multilevel linked list it becomes:
 ```
+
+![img1.2](https://assets.leetcode.com/uploads/2021/11/09/flatten12.jpg)
+
+![img2](https://assets.leetcode.com/uploads/2021/11/09/flatten2.1jpg)
 
 ```bash
 Example 2:
 
-Input: list1 = [], list2 = []
-Output: []
+Input: head = [1,2,null,3]
+Output: [1,3,2]
+Explanation: The multilevel linked list in the input is shown.
+After flattening the multilevel linked list it becomes:
 ```
+
+![img2.2](https://assets.leetcode.com/uploads/2021/11/24/list.jpg)
 
 ```bash
 Example 3:
 
-Input: list1 = [], list2 = [0]
-Output: [0]
+Input: head = []
+Output: []
+Explanation: There could be empty list in the input.
 ```
 
 ### Explanation
 
-This problem requires merging two sorted linked lists into a single sorted linked list. The key is to traverse both lists simultaneously, comparing their current nodes and appending the smaller one to the result list.
+This problem requires us to flatten a multilevel doubly linked list into a single-level list while maintaining the order of nodes. The key is to traverse the list in a depth-first manner, ensuring that child nodes are inserted immediately after their parent nodes.
 
 #### Approach Explanation
 
 1. Why This Approach?
 
-   To solve the problem efficiently, we use the **Two-Pointer technique** to traverse both sorted lists simultaneously and compare their current nodes. This allows us to **merge the lists in a single pass**, avoiding unnecessary overhead.
+   The most natural way to flatten a multilevel linked list is to **traverse it in depth-first order**, inserting child nodes immediately after their parent. To do this efficiently and in-place, we use a **stack** to manage traversal without recursion.
 
-   This approach **preserves the sorted order** and works in **linear time**, making it ideal for large linked lists.
+2. Problem-Solving Pattern Used
 
-2. Problem-Solving Pattern
+   - **Iterative Depth-First Traversal**
+   - **Linked List Pointer Manipulation**
+   - **Stack-based Backtracking**
 
-   - **Two Pointers**
-   - **Greedy Merge**
-   - **Linked List Manipulation**
+3. Efficiency of the Approach
 
-   This is a classic merge operation, similar to the one used in the merge step of **Merge Sort**.
-
-3. Efficiency and Elegance
-
-   Compared to brute-force approaches that might collect values into arrays and sort them later, this solution:
-
-   - **Does not require extra storage for values**
-   - **Avoids additional sorting**
-   - **Maintains constant space (excluding output)**
-
-   We achieve an elegant and efficient solution by directly manipulating the `next` pointers of the nodes.
+   - Avoids recursive calls, which could lead to stack overflow for deep nesting.
+   - Preserves the **O(1) auxiliary space** for node creation, using only a `stack` for traversal.
+   - Guarantees a **single pass** through each node.
 
 #### Step-by-Step Walkthrough
 
-1. Let’s walk through the merging of the following two sorted linked lists:
+1. Let’s walk through **Example 1**:
+
+2. Input:
+
+   ```plaintext
+   [1,2,3,4,5,6,null,null,null,7,8,9,10,null,null,11,12]
+   ```
+
+3. This represents:
+
+   - Main list: 1–2–3–4–5–6
+   - Node 3 has child: 7–8–9–10
+   - Node 8 has child: 11–12
+
+4. **Initialization**:
+
+   - Create a dummy node to act as a placeholder.
+   - Push `head` (node 1) onto the stack.
+
+5. **While stack is not empty**:
+
+   - Pop the top node from the stack.
+   - Connect it to the previous node (`prev`).
+   - If `next` exists, push it on stack.
+   - If `child` exists, push it on stack and set `child = None` to flatten.
+   - Move `prev` to current.
+
+6. Which forms this multi-level list:
 
    ```
-   list1 = [1 -> 2 -> 4]
-   list2 = [1 -> 3 -> 4]
+   1 - 2 - 3 - 4 - 5 - 6
+            |
+            7 - 8 - 9 - 10
+                  |
+               11 - 12
    ```
 
-2. Initialization
+7. Algorithm Initialization
 
-   - We create a `dummy` node to act as the starting point of our merged list.
-   - We use a `tail` pointer to build the result list by attaching nodes to it.
+   ```python
+   stack = [head]  # stack = [1]
+   prev = dummy    # dummy is a node with value 0
+   ```
 
-3. Iterative Merging
+8. Step 1
 
-   | Step | list1.val | list2.val | Action         | Merged List So Far    |
-   | ---- | --------- | --------- | -------------- | --------------------- |
-   | 1    | 1         | 1         | list2 appended | 1                     |
-   | 2    | 1         | 3         | list1 appended | 1 → 1                 |
-   | 3    | 2         | 3         | list1 appended | 1 → 1 → 2             |
-   | 4    | 4         | 3         | list2 appended | 1 → 1 → 2 → 3         |
-   | 5    | 4         | 4         | list2 appended | 1 → 1 → 2 → 3 → 4     |
-   | 6    | 4         | None      | list1 appended | 1 → 1 → 2 → 3 → 4 → 4 |
+   - **Stack:** `[1]`
+   - **Pop:** `1`
+   - **Link:** `prev.next = 1`, `1.prev = prev`
+   - **Push next:** `2` → `stack = [2]`
+   - **Child:** None
+   - **Move `prev` to 1**
 
-4. At the end of the loop, we return `dummy.next` which points to the head of the merged list.
+9. Step 2
 
-#### Time and Space Complexity
+   - **Stack:** `[2]`
+   - **Pop:** `2`
+   - **Link:** `1.next = 2`, `2.prev = 1`
+   - **Push next:** `3` → `stack = [3]`
+   - **Child:** None
+   - **Move `prev` to 2**
 
-| Metric    | Complexity | Explanation                                                                 |
-| --------- | ---------- | --------------------------------------------------------------------------- |
-| **Time**  | $O(n + m)$ | We traverse each of the two input lists once, where `n` and `m` are lengths |
-| **Space** | $O(1)$     | We perform merging in-place (excluding output list nodes already given)     |
+10. Step 3
 
-> The solution only creates one dummy node. All other nodes are reused from the input lists.
+    - **Stack:** `[3]`
+    - **Pop:** `3`
+    - **Link:** `2.next = 3`, `3.prev = 2`
+    - **Push next:** `4` → `stack = [4]`
+    - **Child:** `7` → Push to stack → `stack = [4, 7]`
+    - **Set `3.child = None`**
+    - **Move `prev` to 3**
+
+11. Step 4
+
+    - **Stack:** `[4, 7]`
+    - **Pop:** `7`
+    - **Link:** `3.next = 7`, `7.prev = 3`
+    - **Push next:** `8` → `stack = [4, 8]`
+    - **Child:** None
+    - **Move `prev` to 7**
+
+12. Step 5
+
+    - **Stack:** `[4, 8]`
+    - **Pop:** `8`
+    - **Link:** `7.next = 8`, `8.prev = 7`
+    - **Push next:** `9` → `stack = [4, 9]`
+    - **Child:** `11` → Push to stack → `stack = [4, 9, 11]`
+    - **Set `8.child = None`**
+    - **Move `prev` to 8**
+
+13. Step 6
+
+    - **Stack:** `[4, 9, 11]`
+    - **Pop:** `11`
+    - **Link:** `8.next = 11`, `11.prev = 8`
+    - **Push next:** `12` → `stack = [4, 9, 12]`
+    - **Child:** None
+    - **Move `prev` to 11**
+
+14. Step 7
+
+    - **Stack:** `[4, 9, 12]`
+    - **Pop:** `12`
+    - **Link:** `11.next = 12`, `12.prev = 11`
+    - **Push next:** None
+    - **Child:** None
+    - **Move `prev` to 12**
+
+15. Step 8
+
+    - **Stack:** `[4, 9]`
+    - **Pop:** `9`
+    - **Link:** `12.next = 9`, `9.prev = 12`
+    - **Push next:** `10` → `stack = [4, 10]`
+    - **Child:** None
+    - **Move `prev` to 9**
+
+16. Step 9
+
+    - **Stack:** `[4, 10]`
+    - **Pop:** `10`
+    - **Link:** `9.next = 10`, `10.prev = 9`
+    - **Push next:** None
+    - **Child:** None
+    - **Move `prev` to 10**
+
+17. Step 10
+
+    - **Stack:** `[4]`
+    - **Pop:** `4`
+    - **Link:** `10.next = 4`, `4.prev = 10`
+    - **Push next:** `5` → `stack = [5]`
+    - **Child:** None
+    - **Move `prev` to 4**
+
+18. Step 11
+
+    - **Stack:** `[5]`
+    - **Pop:** `5`
+    - **Link:** `4.next = 5`, `5.prev = 4`
+    - **Push next:** `6` → `stack = [6]`
+    - **Child:** None
+    - **Move `prev` to 5**
+
+19. Step 12
+
+    - **Stack:** `[6]`
+    - **Pop:** `6`
+    - **Link:** `5.next = 6`, `6.prev = 5`
+    - **Push next:** None
+    - **Child:** None
+    - **Move `prev` to 6**
+
+20. Final Step
+
+    - **Stack:** `[]` (empty)
+    - **Remove dummy node**
+    - **Return `dummy.next` which is the head of the flattened list**
+
+21. Final Flattened List
+
+    ```
+    1 – 2 – 3 – 7 – 8 – 11 – 12 – 9 – 10 – 4 – 5 – 6
+    ```
+
+22. Each node's `child` pointer is set to `null`.
+
+#### Time and Space Complexity Analysis
+
+| Metric               | Complexity | Explanation                                                                |
+| -------------------- | ---------- | -------------------------------------------------------------------------- |
+| **Time Complexity**  | $O(n)$     | Each node is visited exactly once                                          |
+| **Space Complexity** | $O(n)$     | Stack stores nodes temporarily during traversal (worst case: all in stack) |
 
 #### Summary
 
-- We used a **greedy** and **in-place two-pointer** strategy to merge two sorted linked lists.
-- The solution is efficient, clean, and leverages standard linked list operations.
-- Time complexity is **O(n + m)** and space complexity is **O(1)**, making it optimal.
-- This pattern is highly reusable for other merging and comparison problems involving lists or arrays.
-
----
-
----
-
-## 02. Remove Duplicates from Sorted List
-
-[LeetCode Problem URL](https://leetcode.com/problems/remove-duplicates-from-sorted-list/description/?envType=problem-list-v2&envId=linked-list)
-
-Given the head of a sorted linked list, delete all duplicates such that each element appears only once. Return the linked list sorted as well.
-
-![img1](https://assets.leetcode.com/uploads/2021/01/04/list1.jpg)
-
-```bash
-Example 1:
-
-Input: head = [1,1,2]
-Output: [1,2]
-```
-
-![img2](https://assets.leetcode.com/uploads/2021/01/04/list2.jpg)
-
-```bash
-Example 2:
-
-Input: head = [1,1,2,3,3]
-Output: [1,2,3]
-```
-
-### Explanation
-
-This problem requires removing duplicates from a sorted linked list. Since the list is already sorted, duplicates will always be adjacent, allowing us to efficiently remove them in a single pass.
-
-#### Approach Explanation
-
-1. Why This Approach?
-
-   We chose a **single-pass traversal** approach since the linked list is already **sorted in non-decreasing order**. This key observation allows us to **simply compare adjacent nodes** to detect and remove duplicates in **O(n)** time without needing additional memory.
-
-2. Problem-Solving Pattern
-
-   - **Two-Pointer Technique** (Current and Next Pointer)
-   - **Linked List Traversal**
-   - **Greedy Filtering** (removing duplicates as soon as they are found)
-
-   This pattern avoids extra data structures like hash sets or arrays and solves the problem in-place.
-
-3. Efficiency and Elegance
-
-   Compared to methods that involve converting the list to a Python list or using sets, our approach is:
-
-   - **In-place**: No extra memory usage.
-   - **Efficient**: Just one iteration over the list.
-   - **Clean**: No complex conditionals or auxiliary operations.
-
-#### Step-by-Step Walkthrough
-
-1. Let’s walk through this input step-by-step:
-
-   ```
-   Input: [1 → 1 → 2 → 3 → 3]
-   ```
-
-   - Initialize a pointer `head` to the start of the list.
-   - Traverse as long as both `head` and `head.next` are not null.
-   - At each step:
-
-   - If `head.val == head.next.val`, skip the next node by updating the `next` pointer.
-   - Otherwise, move the `head` pointer forward.
-
-1. Iteration Breakdown
-
-   | Step | Current `head.val` | `head.next.val` | Action                | Linked List State |
-   | ---- | ------------------ | --------------- | --------------------- | ----------------- |
-   | 1    | 1                  | 1               | Duplicate → skip next | 1 → 2 → 3 → 3     |
-   | 2    | 1                  | 2               | Move to next          | 1 → 2 → 3 → 3     |
-   | 3    | 2                  | 3               | Move to next          | 1 → 2 → 3 → 3     |
-   | 4    | 3                  | 3               | Duplicate → skip next | 1 → 2 → 3         |
-
-   The pointer stops when `head.next` becomes `None`.
-
-1. Final Output
-
-   ```
-   Updated List: [1 → 2 → 3]
-   ```
-
-#### Time and Space Complexity
-
-| Metric    | Complexity | Explanation                                                       |
-| --------- | ---------- | ----------------------------------------------------------------- |
-| **Time**  | $O(n)$     | We traverse the entire linked list once.                          |
-| **Space** | $O(1)$     | No additional data structures used; operations are done in-place. |
-
-#### Summary
-
-- This is an **in-place solution** that removes duplicates from a **sorted linked list**.
-- By **comparing adjacent nodes**, we efficiently eliminate duplicates in **O(n)** time and **O(1)** space.
-- This solution demonstrates a clean and minimalistic use of linked list traversal without auxiliary space or complexity.
+- This approach flattens a multilevel doubly linked list using **iterative DFS and a stack**.
+- Ensures **O(n) time**, handles **any depth**, and **preserves order**.
+- Nodes are modified in-place, so child pointers are reset to `None`.
 
 ---
 
