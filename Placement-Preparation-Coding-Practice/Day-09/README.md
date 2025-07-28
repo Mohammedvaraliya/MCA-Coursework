@@ -254,3 +254,111 @@ This problem requires us to flatten a multilevel doubly linked list into a singl
 ---
 
 ---
+
+## 02. Linked List Cycle II
+
+[LeetCode Problem URL](https://leetcode.com/problems/linked-list-cycle-ii/)
+
+Given the `head` of a linked list, return the node where the cycle begins. If there is no cycle, return `null`.
+
+There is a cycle in a linked list if there is some node in the list that can be reached again by continuously following the `next` pointer. Internally, `pos` is used to denote the index of the node that tail's `next` pointer is connected to (0-indexed). It is `-1` if there is no cycle. Note that `pos` is not passed as a parameter.
+
+Do not modify the linked list.
+
+![img1](https://assets.leetcode.com/uploads/2018/12/07/circularlinkedlist.png)
+
+```bash
+Example 1:
+
+Input: head = [3,2,0,-4], pos = 1
+Output: tail connects to node index 1
+Explanation: There is a cycle in the linked list, where tail connects to the second node.
+```
+
+![img2](https://assets.leetcode.com/uploads/2018/12/07/circularlinkedlist_test2.png)
+
+```bash
+Example 2:
+
+Input: head = [1,2], pos = 0
+Output: tail connects to node index 0
+Explanation: There is a cycle in the linked list, where tail connects to the first node.
+```
+
+![img3](https://assets.leetcode.com/uploads/2018/12/07/circularlinkedlist_test3.png)
+
+```bash
+Example 3:
+
+Input: head = [1], pos = -1
+Output: no cycle
+Explanation: There is no cycle in the linked list.
+```
+
+### Explanation
+
+This problem requires us to detect the starting node of a cycle in a linked list, if it exists. The solution must efficiently identify the cycle without modifying the list or using extra space.
+
+#### Approach Explanation
+
+1. Why This Approach
+
+   Iv'e used **Floyd’s Cycle Detection Algorithm (also called the Tortoise and Hare algorithm)**. It efficiently detects the presence of a cycle and determines its starting node with:
+
+   - O(n) time complexity
+   - O(1) space complexity
+   - No modifications to the linked list structure
+
+2. Pattern Used
+
+   - **Fast and Slow Pointer Technique (Two-Pointer Technique)**
+
+   This is a classic technique for detecting cycles in linked structures.
+
+3. How This Approach Works
+
+   Floyd’s Cycle Detection Algorithm works in two phases:
+
+   - **Phase 1:** Detect whether a cycle exists using two pointers: `slow` (moves 1 step) and `fast` (moves 2 steps). If a cycle exists, they will meet inside the cycle.
+   - **Phase 2:** Once a cycle is detected, place one pointer (`p`) at the head and move both `p` and `slow` one step at a time. They will meet at the **starting point of the cycle**.
+
+   > After they meet in the loop, starting one pointer from head and one from the meeting point — both moving 1 step at a time — will always meet at the start of the cycle.
+
+#### Step-by-Step Walkthrough (with Example)
+
+1. Let's use the input: `head = [3, 2, 0, -4]`, with `pos = 1`. That means the tail connects back to the node with value `2`.
+
+2. Linked List Structure (Cycle Exists)
+
+   ```
+   3 -> 2 -> 0 -> -4
+       ↑         ↓
+       ← ← ← ← ←
+   ```
+
+3. Step-by-Step Execution Table
+
+   | Step | `slow` value | `fast` value | Phase                              |
+   | ---- | ------------ | ------------ | ---------------------------------- |
+   | 1    | 3            | 3            | Init                               |
+   | 2    | 2            | 0            | Moving                             |
+   | 3    | 0            | 2            | Moving                             |
+   | 4    | -4           | -4           | **Meeting Point** (Cycle Detected) |
+
+4. We now place `p = head = 3`, and move both `p` and `slow` one step at a time.
+
+   | Step | `p` value | `slow` value | Comment           |
+   | ---- | --------- | ------------ | ----------------- |
+   | 1    | 3         | -4           |                   |
+   | 2    | 2         | 2            | Cycle begins here |
+
+#### Time and Space Complexity
+
+| Complexity Type  | Value  | Explanation                                    |
+| ---------------- | ------ | ---------------------------------------------- |
+| Time Complexity  | $O(n)$ | Each pointer traverses the list at most twice. |
+| Space Complexity | $O(1)$ | No extra space is used except pointers.        |
+
+---
+
+---

@@ -62,6 +62,7 @@ class Solution:
 if __name__ == "__main__":
     head1 = build_linked_list([3,2,0,-4], pos=1)
     head2 = build_linked_list([1,2], pos=0)
+    head3 = build_linked_list([1], pos=-1)
 
     sol = Solution()
 
@@ -70,3 +71,6 @@ if __name__ == "__main__":
 
     sol2 = sol.detectCycle(head2)
     print(sol2.val)
+
+    sol3 = sol.detectCycle(head3)
+    print(sol3)
