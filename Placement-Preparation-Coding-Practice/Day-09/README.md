@@ -1,6 +1,8 @@
 # Leetcode Questions Solved on Day 9 Placement Training:
 
 1. **Flatten a Multilevel Doubly Linked List**
+2. **Linked List Cycle II**
+3. **Score of Parentheses**
 
 ## 01. Flatten a Multilevel Doubly Linked List
 
@@ -358,6 +360,108 @@ This problem requires us to detect the starting node of a cycle in a linked list
 | ---------------- | ------ | ---------------------------------------------- |
 | Time Complexity  | $O(n)$ | Each pointer traverses the list at most twice. |
 | Space Complexity | $O(1)$ | No extra space is used except pointers.        |
+
+---
+
+---
+
+## 03. Score of Parentheses
+
+[LeetCode Problem URL](https://leetcode.com/problems/score-of-parentheses/)
+
+Given a balanced parentheses string `s`, return the score of the string.
+
+The score of a balanced parentheses string is based on the following rule:
+
+- `"()"` has score `1`.
+- `AB` has score `A + B`, where `A` and `B` are balanced parentheses strings.
+- `(A)` has score `2 * A`, where `A` is a balanced parentheses string.
+
+```bash
+Example 1:
+
+Input: s = "()"
+Output: 1
+```
+
+```bash
+Example 2:
+
+Input: s = "(())"
+Output: 2
+```
+
+```bash
+Example 3:
+
+Input: s = "()()"
+Output: 2
+```
+
+#### Explanation
+
+This problem requires us to compute the score of a balanced parentheses string based on specific rules. The challenge is to handle nested structures and ensure that scores are aggregated correctly.
+
+#### Approach Explanation
+
+1. Why This Approach?
+
+   This solution uses a **stack** to simulate the structure of the parentheses. The stack helps:
+
+   - Keep track of nested structures.
+   - Aggregate scores from child expressions efficiently.
+   - Ensure linear time traversal without recursion or complicated parsing.
+
+2. Pattern Used
+
+   - **Stack-Based Parsing**
+   - This is not traditional parsing, but a simulation technique based on the nesting of parentheses using a **LIFO** structure.
+
+3. Why It’s Efficient
+
+   Compared to building expression trees or recursion (which may lead to stack overflow or redundant computation), this approach:
+
+   - Requires **only one pass** through the string.
+   - Uses **constant time operations** per character.
+   - Requires only **O(n)** space at most.
+
+#### Step-by-Step Walkthrough (With Table)
+
+1. Let’s use the string: `s = "()(())"`
+
+1. Simulation Table
+
+   | Step | Character | Stack Before | Operation                                  | Stack After |
+   | ---- | --------- | ------------ | ------------------------------------------ | ----------- |
+   | 1    | `(`       | `[0]`        | Push `0` (new frame)                       | `[0, 0]`    |
+   | 2    | `)`       | `[0, 0]`     | Pop `0`, max(2×0, 1) = 1 → add to previous | `[1]`       |
+   | 3    | `(`       | `[1]`        | Push `0`                                   | `[1, 0]`    |
+   | 4    | `(`       | `[1, 0]`     | Push `0`                                   | `[1, 0, 0]` |
+   | 5    | `)`       | `[1, 0, 0]`  | Pop `0`, max(2×0, 1) = 1 → add to previous | `[1, 1]`    |
+   | 6    | `)`       | `[1, 1]`     | Pop `1`, max(2×1, 1) = 2 → add to previous | `[3]`       |
+
+1. **Final Score = 3**
+
+#### Key Decision Logic:
+
+- If top is `0`, then it's a simple `()`, and we push `1`.
+- If not, it's a nested structure. Multiply the accumulated score by 2.
+- The `max(2 * inner_score, 1)` handles both cases:
+  - For `()`, it returns `1`.
+  - For nested structures, it doubles the score.
+
+#### Time and Space Complexity
+
+| Complexity Type | Value  | Explanation                                                 |
+| --------------- | ------ | ----------------------------------------------------------- |
+| Time            | $O(n)$ | We process each character in the input string exactly once. |
+| Space           | $O(n)$ | Stack can grow to size proportional to input depth (n).     |
+
+#### Summary
+
+- This is a **stack-based parsing simulation** problem.
+- The score accumulates based on structure nesting.
+- `max(2 * inner_score, 1)` elegantly handles both basic and nested cases.
 
 ---
 
