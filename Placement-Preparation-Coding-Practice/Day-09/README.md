@@ -3,6 +3,7 @@
 1. **Flatten a Multilevel Doubly Linked List**
 2. **Linked List Cycle II**
 3. **Score of Parentheses**
+4. **Stack Infix to Postfix**
 
 ## 01. Flatten a Multilevel Doubly Linked List
 
@@ -462,6 +463,119 @@ This problem requires us to compute the score of a balanced parentheses string b
 - This is a **stack-based parsing simulation** problem.
 - The score accumulates based on structure nesting.
 - `max(2 * inner_score, 1)` elegantly handles both basic and nested cases.
+
+---
+
+---
+
+## 04. Stack Infix to Postfix and Prefix
+
+Given an infix expression, convert it to postfix and prefix expressions using a stack-based approach.
+
+Rule of operator precedence:
+
+`Precedence:   ^ > * = / > + = -`
+`Associativity: Left to Right for +, -, *, /; Right to Left for ^`
+
+Rule of postfix and prefix:
+
+`Postfix:  Operands followed by operators (e.g., ab+)`
+`Prefix:   Operators followed by operands (e.g., +ab)`
+
+```bash
+Example 1:
+
+Input Infix Expression: (a+b)*(c+e)
+Output:
+Postfix Expression: ab+ce+*
+Prefix Expression: *+ab+ce
+```
+
+```bash
+Example 2:
+
+Input Infix Expression: (a+b)*(c+e)/(d+f)
+Output:
+Postfix Expression: ab+ce+d+f/*
+Prefix Expression: /*+ab+ce+d+f
+```
+
+```bash
+Example 3:
+
+Input Infix Expression: a+b*c-d/e
+Output:
+Postfix Expression: abc*+de/-
+Prefix Expression: -+a*b/cd
+```
+
+### Explanation
+
+This problem requires converting infix expressions to postfix and prefix formats using a stack-based approach. The key is to handle operator precedence and associativity correctly while processing the expression.
+
+#### Approach Explanation
+
+1. Why This Approach?
+
+   We use **stacks** to process operators based on precedence and associativity rules. Stack-based parsing avoids recursion and efficiently handles nested parentheses.
+
+1. Patterns Used
+
+   - Stack-based evaluation
+   - Operator precedence and associativity rules
+   - Expression reversal (for prefix conversion)
+
+1. Efficiency
+
+   - Handles expressions in **linear time**
+   - No recursion, just clean iterative control using a stack
+
+#### Infix to Postfix: Step-by-Step Walkthrough
+
+1. Let’s walk through this expression:
+
+2. **Input:** `(a + b) * (c + e)`
+
+3. Step-wise Table:
+
+   | Step | Character | Stack           | Postfix Output |
+   | ---- | --------- | --------------- | -------------- |
+   | 1    | `(`       | (`(`)           |                |
+   | 2    | `a`       | (`(`)           | `a`            |
+   | 3    | `+`       | (`(`, `+`)      | `a`            |
+   | 4    | `b`       | (`(`, `+`)      | `ab`           |
+   | 5    | `)`       | (`(`, `+`)      | `ab+`          |
+   | 6    | `*`       | (`*`)           | `ab+`          |
+   | 7    | `(`       | (`*`, `(`)      | `ab+`          |
+   | 8    | `c`       | (`*`, `(`)      | `ab+c`         |
+   | 9    | `+`       | (`*`, `(`, `+`) | `ab+c`         |
+   | 10   | `e`       | (`*`, `(`, `+`) | `ab+ce`        |
+   | 11   | `)`       | (`*`, `(`, `+`) | `ab+ce+`       |
+   | 12   | End       |                 | `ab+ce+*`      |
+
+4. Final Postfix: `ab+ce+*`
+
+#### Infix to Prefix: Step-by-Step Walkthrough
+
+1. We use 3 steps:
+
+2. **Reverse** the expression and swap brackets
+   `(a + b) * (c + e)` → `(e + c) * (b + a)`
+
+3. **Convert to Postfix** using same method
+   Postfix of modified expression = `ec+ba+*`
+
+4. **Reverse Postfix** to get Prefix
+   Reverse of `ec+ba+*` = `*+ab+ce`
+
+5. Final Prefix: `*+ab+ce`
+
+#### Time & Space Complexity
+
+| Metric           | Complexity | Explanation                                         |
+| ---------------- | ---------- | --------------------------------------------------- |
+| Time Complexity  | **O(n)**   | Every character is processed once                   |
+| Space Complexity | **O(n)**   | Stack and result strings store up to `n` characters |
 
 ---
 
