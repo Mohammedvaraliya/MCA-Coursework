@@ -3,7 +3,7 @@
 1. **Flatten a Multilevel Doubly Linked List**
 2. **Linked List Cycle II**
 3. **Score of Parentheses**
-4. **Stack Infix to Postfix**
+4. **Stack Infix to Postfix and Prefix**
 
 ## 01. Flatten a Multilevel Doubly Linked List
 
