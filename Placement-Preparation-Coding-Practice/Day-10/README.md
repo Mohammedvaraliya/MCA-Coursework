@@ -183,3 +183,175 @@ This implementation of a circular queue provides an efficient way to manage a fi
 ---
 
 ---
+
+## 03. Binary Tree All Traversals
+
+A **Binary Tree** is a hierarchical data structure in which each node has at most two children, referred to as the left child and the right child. This structure is widely used in computer science for various applications, including searching, sorting, and representing hierarchical data.
+
+```bash
+Example 1:
+
+Input:
+        1
+      /   \
+     2      3
+    /  \   / \
+   4    5 6   7
+Output:
+In-order Traversal: 4 2 5 1 6 3 7
+Pre-order Traversal: 1 2 4 5 3 6 7
+Post-order Traversal: 4 5 2 6 7 3 1
+```
+
+```bash
+Example 2:
+
+Input:
+        10
+       /  \
+      5    15
+     / \     \
+    3   7     20
+Output:
+In-order Traversal: 3 5 7 10 15 20
+Pre-order Traversal: 10 5 3 7 15 20
+Post-order Traversal: 3 7 5 20 15 10
+```
+
+### Explanation:
+
+1. **Node Structure**: Each node contains a value and pointers to its left and right children.
+2. **Traversal Methods**: The tree can be traversed in different orders:
+   - **In-order**: Left, Root, Right
+   - **Pre-order**: Root, Left, Right
+   - **Post-order**: Left, Right, Root
+3. **Height**: The height of a binary tree is the length of the longest path from the root to a leaf node.
+4. **Balanced vs Unbalanced**: A balanced binary tree has heights of left and right subtrees differing by at most one, while an unbalanced tree can have significant height differences.
+
+#### Approach Explanation
+
+1. Why This Approach?
+
+   We implemented both recursive and iterative versions of tree traversals:
+
+   - Recursive traversal leverages the natural recursive structure of trees.
+   - Iterative traversal demonstrates traversal without stack overflow and with controlled memory usage.
+
+2. Problem-Solving Pattern
+
+   - **Divide and Conquer**: Each traversal recursively (or iteratively) divides the tree into subtrees and processes them in order.
+   - **Stack-based Iteration**: Iterative approaches mimic recursion using explicit stacks.
+   - **Queue for Level-order**: Breadth-first traversal uses a queue to explore level by level.
+
+3. Efficiency and Elegance
+
+   - Recursive methods are elegant and intuitive.
+   - Iterative methods offer better control over space (no deep recursion stack) and are suitable for larger trees.
+
+#### Step-by-Step Walkthrough
+
+1. We’ll use the following binary tree:
+
+   ```
+        1
+      /   \
+     2     3
+    / \   / \
+   4   5 6   7
+   ```
+
+2. Example Node Connections
+
+   ```python
+   tree = BinaryTree(1)
+   tree.root.left = Node(2)
+   tree.root.right = Node(3)
+   tree.root.left.left = Node(4)
+   tree.root.left.right = Node(5)
+   tree.root.right.left = Node(6)
+   tree.root.right.right = Node(7)
+   ```
+
+3. In-order Traversal (Left, Root, Right)
+
+   1. **Recursive:**
+
+      ```text
+      Traverse left of 1 → left of 2 → left of 4 → print 4 → back to 2 → print 2 → right of 2 → print 5 → back to 1 → print 1 → right of 1 → print 6 → print 3 → print 7
+      ```
+
+   2. **Result:** `4 2 5 1 6 3 7`
+
+   3. **Iterative Table:**
+
+      | Step | Stack (Top → Bottom) | Current Node | Output        |
+      | ---- | -------------------- | ------------ | ------------- |
+      | 1    |                      | 1            |               |
+      | 2    | 1                    | 2            |               |
+      | 3    | 1, 2                 | 4            |               |
+      | 4    | 1, 2, 4              | None         |               |
+      | 5    | 1, 2                 | 4            | 4             |
+      | 6    | 1, 2                 | None         | 4             |
+      | 7    | 1                    | 2            | 4, 2          |
+      | 8    | 1                    | 5            | 4, 2          |
+      | 9    | 1, 5                 | None         | 4, 2          |
+      | 10   | 1                    | 5            | 4, 2, 5       |
+      | 11   |                      | 1            | 4, 2, 5, 1    |
+      | 12   |                      | 3            | 4, 2, 5, 1    |
+      | ...  |                      | ...          | ...           |
+      | End  |                      |              | 4 2 5 1 6 3 7 |
+
+4. Pre-order Traversal (Root, Left, Right)
+
+   1. **Recursive Result:** `1 2 4 5 3 6 7`
+
+   2. **Iterative Table:**
+
+      | Step | Stack      | Visited Node | Output        |
+      | ---- | ---------- | ------------ | ------------- |
+      | 1    | \[1]       | 1            | 1             |
+      | 2    | \[3, 2]    | 2            | 1 2           |
+      | 3    | \[3, 5, 4] | 4            | 1 2 4         |
+      | 4    | \[3, 5]    | 5            | 1 2 4 5       |
+      | 5    | \[3]       | 3            | 1 2 4 5 3     |
+      | 6    | \[7, 6]    | 6            | 1 2 4 5 3 6   |
+      | 7    | \[7]       | 7            | 1 2 4 5 3 6 7 |
+
+5. Post-order Traversal (Left, Right, Root)
+
+   1. **Recursive Result:** `4 5 2 6 7 3 1`
+
+   2. **Iterative (2 Stack) Table:**
+
+   | Step | Stack1        | Stack2           | Output        |
+   | ---- | ------------- | ---------------- | ------------- |
+   | 1    | \[1]          | \[]              |               |
+   | 2    | \[2, 3]       | \[1]             |               |
+   | 3    | \[4, 5, 6, 7] | \[1, 3, 2]       |               |
+   | ...  | \[]           | \[1, 3, 2, 5...] | 4 5 2 6 7 3 1 |
+
+6. Level-order Traversal (Breadth-First)
+
+   1. **Result:** `1 2 3 4 5 6 7`
+
+   2. **Queue Table:**
+
+      | Step | Queue         | Output        |
+      | ---- | ------------- | ------------- |
+      | 1    | \[1]          |               |
+      | 2    | \[2, 3]       | 1             |
+      | 3    | \[4, 5, 6, 7] | 1 2 3         |
+      | 4    | \[]           | 1 2 3 4 5 6 7 |
+
+#### Time and Space Complexity Analysis
+
+| Traversal Type         | Time Complexity | Space Complexity | Explanation                               |
+| ---------------------- | --------------- | ---------------- | ----------------------------------------- |
+| In-order (Recursive)   | $O(n)$          | $O(h)$           | h = height of tree due to recursion stack |
+| Pre-order (Iterative)  | $O(n)$          | $O(n)$           | Stack holds nodes temporarily             |
+| Post-order (Iterative) | $O(n)$          | $O(n)$           | Uses two stacks to reverse traversal      |
+| Level-order            | $O(n)$          | $O(n)$           | Queue stores all nodes at each level      |
+
+---
+
+---
