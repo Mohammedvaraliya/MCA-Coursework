@@ -1,0 +1,38 @@
+[
+  {
+    "id": "kb-001",
+    "title": "Undergraduate Admissions Deadlines",
+    "audience": ["student", "visitor"],
+    "content": "Fall Term: Early Action due Nov 1; Regular Decision due Jan 15. Spring Term: Rolling admissions closes Oct 15. Applications require transcripts, test-optional ACT/SAT, personal statement, and one recommendation."
+  },
+  {
+    "id": "kb-002",
+    "title": "Scholarships & Financial Aid Overview",
+    "audience": ["student"],
+    "content": "Merit scholarships are automatically considered with application; need-based aid requires FAFSA and institutional profile by Feb 1. Renewal requires maintaining a 3.0 GPA and full-time enrollment."
+  },
+  {
+    "id": "kb-003",
+    "title": "Academic Calendar Highlights",
+    "audience": "all",
+    "content": "Fall semester runs late Aug–Dec; Spring runs Jan–May. Midterms in Oct and Mar. Final exam weeks are Dec and May. Official holidays: Labor Day, Thanksgiving, Winter Break, Spring Break."
+  },
+  {
+    "id": "kb-004",
+    "title": "Faculty Research Support",
+    "audience": ["faculty"],
+    "content": "Seed grants up to $25,000 available each Fall; IRB required for human-subjects research. Grant development workshops held monthly; internal deadlines are two weeks before sponsor due dates."
+  },
+  {
+    "id": "kb-005",
+    "title": "Staff HR Policies (Leave & Benefits)",
+    "audience": ["staff"],
+    "content": "Full-time staff accrue 1.25 days PTO per month. Health, dental, and vision become active after 30 days. Remote work up to 2 days/week with supervisor approval."
+  },
+  {
+    "id": "kb-006",
+    "title": "Campus Tours & Visitor Info",
+    "audience": ["visitor", "student"],
+    "content": "Campus tours run Mon–Fri at 10am and 2pm; Saturday at 11am. Register online at /visit. Visitor parking available in Garage A; validation at Welcome Center."
+  }
+]
