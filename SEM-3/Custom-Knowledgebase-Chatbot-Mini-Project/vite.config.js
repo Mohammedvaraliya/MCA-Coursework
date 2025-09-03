@@ -13,7 +13,6 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      // Proxy API to Express server during dev
       "/api": "http://localhost:8787",
     },
   },
