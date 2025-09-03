@@ -3,6 +3,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const fs = require("fs");
 const path = require("path");
+const axios = require("axios");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 dotenv.config();
@@ -148,7 +149,28 @@ app.post("/api/chat", async (req, res) => {
 
 app.get("/api/health", (_, res) => res.json({ ok: true }));
 
+app.get("/api/keep-alive", (_, res) => {
+  const currentTime = new Date().toISOString();
+  res.status(200).json({
+    status: "alive",
+    message: "Server is awake",
+    timestamp: currentTime,
+  });
+});
+
 app.listen(PORT, async () => {
   console.log(`[server] listening on http://localhost:${PORT}`);
   await loadKb();
+
+  // 🔁 Start the keep-alive ping loop
+  const SELF_URL = process.env.API_END_POINT || `http://localhost:${PORT}`;
+
+  setInterval(async () => {
+    try {
+      console.log("⏰ Pinging keep-alive endpoint to keep server active...");
+      await axios.get(`${SELF_URL}/api/keep-alive`);
+    } catch (e) {
+      console.error("[Keep-Alive Ping Error]", e.message);
+    }
+  }, 3 * 60 * 1000);
 });
