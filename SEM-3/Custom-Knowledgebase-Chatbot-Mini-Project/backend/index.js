@@ -1,15 +1,11 @@
-import express from "express";
-import cors from "cors";
-import dotenv from "dotenv";
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+const express = require("express");
+const cors = require("cors");
+const dotenv = require("dotenv");
+const fs = require("fs");
+const path = require("path");
+const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 dotenv.config();
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const PORT = process.env.PORT || 8787;
 const app = express();
@@ -21,9 +17,11 @@ if (!process.env.GOOGLE_GENERATIVE_AI_API_KEY) {
     "[server] GOOGLE_GENERATIVE_AI_API_KEY is missing. Set it in .env"
   );
 }
+
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GENERATIVE_AI_API_KEY);
 
-const kbPath = path.join(__dirname, "..", "data", "kb.json");
+const kbPath = path.join(__dirname, "data", "kb.json");
+
 let KB = [];
 let KB_WITH_EMBEDS = [];
 let EMBED_DIM = 0;

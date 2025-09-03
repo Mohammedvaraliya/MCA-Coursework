@@ -27,7 +27,7 @@ export async function getOrBuildEmbeddings() {
 
   const items = getKB()
 
-  const model = google.embedding(EMBEDDING_MODEL) // ✅ Use the embedding model API
+  const model = google.embedding(EMBEDDING_MODEL)
 
   const embeddings: KBEmbedding[] = []
   for (const it of items) {
@@ -45,7 +45,7 @@ export async function getOrBuildEmbeddings() {
 export async function retrieveRelevant(query: string, audience: Audience, k = 4) {
   const { items, embeddings } = await getOrBuildEmbeddings()
 
-  const model = google.embedding(EMBEDDING_MODEL) // ✅ Use the embedding model API
+  const model = google.embedding(EMBEDDING_MODEL)
   const { embedding: q } = await embed({ model, value: query })
 
   const scored = embeddings

@@ -1,4 +1,4 @@
-import kb from "@/data/kb.json"
+import kb from "../data/kb.json"
 import type { KBItem } from "./types"
 
 export function getKB(): KBItem[] {
